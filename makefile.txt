@@ -1,0 +1,73 @@
+NAME = cubed3D
+
+# Directories
+LIBRARIES_DIR = ./libraries
+MLX_DIR = $(LIBRARIES_DIR)/MLX42
+LIBFT_DIR = $(LIBRARIES_DIR)/libft
+SRC_DIR = ./sources
+OBJ_DIR = $(SRC_DIR)/objects
+
+# Source and object files
+SOURCES = main.c \
+          cube_errors.c \
+          cube_hooks.c
+
+SRCS = $(addprefix $(SRC_DIR)/, $(SOURCES))
+OBJS = $(patsubst %.c, $(OBJ_DIR)/%.o, $(notdir $(SRCS)))
+
+# Headers
+HEADERS = -I ./include -I $(MLX_DIR)/include
+
+# Libraries
+LIBFT = $(LIBFT_DIR)/libft.a
+LIBFT_FLAGS = -L $(LIBFT_DIR) -lft
+
+MLXLIB = $(MLX_DIR)/build/libmlx42.a
+MLXLIB_FLAGS = $(MLXLIB) -ldl -lglfw -lm -lpthread
+
+CC = cc
+CFLAGS = -Wall -Wextra -Werror
+RM = rm -rf
+
+# Compile libft
+createlibft:
+	@echo "Building LIBFT"
+	@make -C $(LIBFT_DIR)
+
+# Compile MLX42 (clone if necessary)
+$(MLXLIB):
+	@mkdir -p $(LIBRARIES_DIR)
+	@if [ ! -d "$(MLX_DIR)" ]; then \
+		echo "Cloning MLX42..."; \
+		git clone https://github.com/codam-coding-college/MLX42.git $(MLX_DIR); \
+	fi
+	@cmake $(MLX_DIR) -B $(MLX_DIR)/build
+	@make -C $(MLX_DIR)/build -j4
+
+# Compile project
+all: createlibft $(MLXLIB) $(NAME)
+
+$(NAME): $(OBJS) $(LIBFT)
+	$(CC) $(OBJS) $(LIBFT) $(MLXLIB_FLAGS) $(HEADERS) -o $@
+	@echo "$(NAME) compiled successfully"
+
+# Compile object files
+$(OBJ_DIR)/%.o: $(SRC_DIR)/%.c | $(OBJ_DIR)
+	@$(CC) $(CFLAGS) $(HEADERS) -c $< -o $@
+
+$(OBJ_DIR):
+	mkdir -p $(OBJ_DIR)
+
+# Cleanup
+clean:
+	@$(RM) $(OBJ_DIR)
+	@$(RM) $(MLX_DIR)/build
+
+fclean: clean
+	@$(RM) $(NAME)
+	@$(RM) $(MLX_DIR)
+
+re: fclean all
+
+.PHONY: all clean fclean re
+
