@@ -3,15 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   cube_validation.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nmeintje <nmeintje@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: mdahlstr <mdahlstr@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/06 17:05:50 by nmeintje          #+#    #+#             */
-/*   Updated: 2025/03/06 17:08:51 by nmeintje         ###   ########.fr       */
+/*   Updated: 2025/04/02 11:54:05 by mdahlstr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cubed3D.h"
 
+// parsing map file
 void	ft_file_type(char *input)
 {
 	if (ft_strrchr(input, '.') == NULL ||
