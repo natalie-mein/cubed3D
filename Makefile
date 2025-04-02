@@ -3,14 +3,14 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: nmeintje <nmeintje@student.hive.fi>        +#+  +:+       +#+         #
+#    By: mdahlstr <mdahlstr@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/03/03 11:27:05 by nmeintje          #+#    #+#              #
-#    Updated: 2025/03/04 15:00:57 by nmeintje         ###   ########.fr        #
+#    Updated: 2025/04/02 13:30:38 by mdahlstr         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = cubed3D
+NAME = cub3D
 
 #directories
 MLX_DIR = ./libraries/MLX42
@@ -24,6 +24,7 @@ OBJ_DIR = $(SRC_DIR)/objects
 SOURCES = main.c \
 	  cube_errors.c \
 	  cube_hooks.c \
+	  cube_validation.c
 
 ###BONUS = ./_bonus.c \
 

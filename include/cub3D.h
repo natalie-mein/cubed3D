@@ -6,12 +6,12 @@
 /*   By: mdahlstr <mdahlstr@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/03 15:42:09 by nmeintje          #+#    #+#             */
-/*   Updated: 2025/04/02 12:07:59 by mdahlstr         ###   ########.fr       */
+/*   Updated: 2025/04/02 13:30:51 by mdahlstr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef CUBED3D_H
-# define CUBED3D_H
+#ifndef CUB3D_H
+# define CUB3D_H
 
 # include <unistd.h> //open close read write
 # include <stdlib.h> //malloc free etc
