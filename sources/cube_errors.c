@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   cube_errors.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nmeintje <nmeintje@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: mdahlstr <mdahlstr@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/03 15:56:21 by nmeintje          #+#    #+#             */
-/*   Updated: 2025/03/04 15:13:02 by nmeintje         ###   ########.fr       */
+/*   Updated: 2025/04/02 14:08:45 by mdahlstr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cubed3D.h"
+#include "cub3D.h"
 
 void    help_msg(void)
 {

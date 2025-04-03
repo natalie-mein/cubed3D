@@ -6,7 +6,7 @@
 #    By: mdahlstr <mdahlstr@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/03/03 11:27:05 by nmeintje          #+#    #+#              #
-#    Updated: 2025/04/02 13:30:38 by mdahlstr         ###   ########.fr        #
+#    Updated: 2025/04/02 15:11:34 by mdahlstr         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,7 +24,8 @@ OBJ_DIR = $(SRC_DIR)/objects
 SOURCES = main.c \
 	  cube_errors.c \
 	  cube_hooks.c \
-	  cube_validation.c
+	  cube_validation.c \
+	  parsing.c
 
 ###BONUS = ./_bonus.c \
 
