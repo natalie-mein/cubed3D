@@ -6,34 +6,92 @@
 /*   By: mdahlstr <mdahlstr@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/02 14:59:28 by mdahlstr          #+#    #+#             */
-/*   Updated: 2025/04/02 16:48:10 by mdahlstr         ###   ########.fr       */
+/*   Updated: 2025/04/03 14:32:57 by mdahlstr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h"
+#include <fcntl.h>   // For open() and O_RDONLY // No idea why it's not compiling without this here :(
+#include "parsing.h"
 
-static void	initialise_game(t_game *game)
+// initialise every field in game with zeros
+static void	initialise_game(t_game **game)
 {
-	game = ft_calloc(1, sizeof(t_game));
-	if (!game)
+	*game = ft_calloc(1, sizeof(t_game));
+	if (!*game)
 	{
-		ft_putendl_fd("Error\n", 2); // improve ////////////////////////////////// TO DO
+		ft_putendl_fd("Error", 2); // improve ////////////////////////////////// TO DO
+		ft_putendl_fd("Memory allocation failure for game struct", 2);
 		exit(EXIT_FAILURE);
 	}
+}
+
+static int get_fd(char *file_name)
+{
+	int	fd;
+
+	(void)file_name;
+	fd = open("maps/simple_map.cub", O_RDONLY);
+	if (fd == -1)
+		perror("Error opening file");
+	return (fd);
+}
+
+static void get_map(t_game *game, char *file_name)
+{
+	int		fd;
+	size_t	i;
+	char	*line;
+
+	(void)file_name;
+	//line = NULL;
+	fd = get_fd(file_name);
+	if (fd == -1)
+	{
+		free_game(game);
+		exit(EXIT_FAILURE);
+	}
+	#if DEBUG
+	printf("Success: FD = %d\n", fd);
+	#endif
+	// Allocate memory for game->map (assuming a max number of lines)
+	game->map = malloc(sizeof(char *) * MAX_LINES);
+	if (!game->map)
+	{
+		perror("Memory allocation failed");
+		close(fd);
+		exit(EXIT_FAILURE);
+	}
+	// read and store lines
+	i = 0;
+	while ((line = get_next_line(fd)) != NULL)
+	{
+		#if DEBUG
+		printf("Line %zu: %s", i, line);
+		#endif
+		if (i >= MAX_LINES - 1)
+		{
+			perror("Map file has too many lines");
+			break ;
+		}
+		game->map[i] = ft_strdup(line);
+		free(line);
+		i++;
+	}
+	
+	game->map[i] = NULL;
+	close(fd);
 }
 
 // 1. initialises the game struct
 // 2. get map configuration
 // 3. get map structure
-void  parse_map(char *file_name, t_game *game)
+void	parse_map(char *file_name, t_game *game)
 {
 	(void)file_name;
-	
-	initialise_game(game);
-	// open map file (close fd on error)
-	// use get next line to extract information
-	
-	//close fd
+
+	initialise_game(&game);
+	get_map(game, file_name);
 }
 
 /*

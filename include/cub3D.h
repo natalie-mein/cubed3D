@@ -6,7 +6,7 @@
 /*   By: mdahlstr <mdahlstr@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/03 15:42:09 by nmeintje          #+#    #+#             */
-/*   Updated: 2025/04/03 10:25:22 by mdahlstr         ###   ########.fr       */
+/*   Updated: 2025/04/03 13:35:36 by mdahlstr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define CUB3D_H
 
 # include "parsing.h"
+//# include <fcntl.h>
 # include <unistd.h> //open close read write
 # include <stdlib.h> //malloc free etc
 # include <stdio.h> //printf
@@ -37,13 +38,15 @@ typedef struct s_game
 } t_game;
 
 /*   errors */
-void    help_msg(void);
+void	help_msg(void);
 void	ft_error(void);
 
 /*   hooks   */
 void	ft_hook(void* param);
 
 /*   map parsing   */
-void		parse_map(char *file_name, t_game *game);
+void	parse_map(char *file_name, t_game *game);
 
+/*   memory management   */
+void	free_game(t_game *game);
 #endif

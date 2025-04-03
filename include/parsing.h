@@ -6,7 +6,7 @@
 /*   By: mdahlstr <mdahlstr@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/02 15:15:42 by mdahlstr          #+#    #+#             */
-/*   Updated: 2025/04/03 10:25:35 by mdahlstr         ###   ########.fr       */
+/*   Updated: 2025/04/03 14:14:23 by mdahlstr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,11 @@
 # include "../libraries/MLX42/include/MLX42/MLX42.h"
 # include "../libraries/libft/libft.h"
 
+# define DEBUG 1
+# define MAX_LINES 50
+
 /*   input validation   */
-void		validate_input(int argc, char *map_file_name);
+void		validate_input(int argc, char *file_name);
 
 /*   map parsing   */
 //void		parse_map(char *file_name, t_game *game);
