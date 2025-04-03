@@ -6,7 +6,7 @@
 /*   By: mdahlstr <mdahlstr@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/02 14:59:28 by mdahlstr          #+#    #+#             */
-/*   Updated: 2025/04/03 14:32:57 by mdahlstr         ###   ########.fr       */
+/*   Updated: 2025/04/03 15:13:50 by mdahlstr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ static void get_map(t_game *game, char *file_name)
 	while ((line = get_next_line(fd)) != NULL)
 	{
 		#if DEBUG
-		printf("Line %zu: %s", i, line);
+		printf("  %s", line);
 		#endif
 		if (i >= MAX_LINES - 1)
 		{
