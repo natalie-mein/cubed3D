@@ -10,13 +10,13 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "raycasting.h"
+#include "../include/raycasting.h"
 
 void	calculate_differential(t_ray *ray)
 {
 	// perform DDA algorithm
 	ray->hit = 0;
-	while (hit == 0)
+	while (ray->hit == 0)
 	{
 		// jump tp next map square, or in a x or y direction
 		if (ray->side_x < ray->side_y)
@@ -40,7 +40,7 @@ void	calculate_differential(t_ray *ray)
 void	ray_direction(t_ray *ray)
 {
 	// calculate which direction  to step and initialize side distances
-	if (ray->ray_dir_x < 0)
+	if (ray->r_dir_x < 0)
 	{
 		ray->step_x = -1;
 		ray->side_x = (ray->r_pos_x - (int)ray->r_pos_x) * ray->delta_x;
@@ -50,7 +50,7 @@ void	ray_direction(t_ray *ray)
 		ray->step_x = 1;
 		ray->side_x = ((int) ray->r_pos_x + 1.0 - ray->r_pos_x) * ray->delta_x;
 	}
-	if (ray->ray_dir_y < 0)
+	if (ray->r_dir_y < 0)
 	{
 		ray->step_y = -1;
 		ray->side_y = (ray->r_pos_y - (int)ray->r_pos_y) * ray->delta_y;
@@ -62,7 +62,7 @@ void	ray_direction(t_ray *ray)
 	}
 }
 
-void	ray_position(t_player *player, t_ray *ray)
+void	ray_position(t_player *player, t_ray *ray, int x)
 {
 	// calculate ray position and direction
 	ray->camera_x = 2 * x / ray->screen_width - 1; // x- coordinate in camera space
@@ -75,7 +75,7 @@ void	ray_position(t_player *player, t_ray *ray)
 
 	// calcuate step and side distances
 	ray->delta_x = fabs(1 / ray->r_dir_x);
-	ray->delta_y = fabs(1 / ray->r_dir_x);
+	ray->delta_y = fabs(1 / ray->r_dir_y);
 }
 
 void raycast(t_player *player, t_ray *ray) 
@@ -85,7 +85,7 @@ void raycast(t_player *player, t_ray *ray)
 	x = 0;
 	while (x < ray->screen_width)
 	{
-		ray_position(player, ray);
+		ray_position(player, ray, x);
 		ray_direction(ray);
 		calculate_differential(ray);
 		
@@ -97,4 +97,8 @@ void raycast(t_player *player, t_ray *ray)
 
 		x++;
 	}
+	printf("Column: %d | Distance: %f | Wall side: %s\n", 
+		x, 
+		ray->perp_wall_dist, 
+		ray->side == 0 ? "X (East/West)" : "Y (North/South)");
 }

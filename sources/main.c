@@ -10,9 +10,10 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cubed3D.h"
+//#include "../include/cubed3D.h"
+#include "../include/raycasting.h"
 
-int	main(int argc, char **argv)
+/*int	main(int argc, char **argv)
 {
 	(void)argv;
 
@@ -24,8 +25,6 @@ int	main(int argc, char **argv)
 	mlx_t* mlx = mlx_init(WIDTH, HEIGHT, "42Balls", true);
 	if (!mlx)
 		ft_error();
-
-	/* Do stuff */
 
 	// Create and display the image.
 	mlx_image_t* img = mlx_new_image(mlx, 256, 256);
@@ -40,5 +39,40 @@ int	main(int argc, char **argv)
 //	mlx_loop_hook(mlx, ft_hook, mlx);
 	mlx_loop(mlx);
 	mlx_terminate(mlx);
+	return (0);
+}*/
+
+int map[MAP_HEIGHT][MAP_WIDTH] = 
+{
+	{1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
+	{1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
+	{1, 0, 1, 1, 1, 0, 0, 1, 1, 0, 0, 1, 1, 1, 0, 1, 0, 0, 0, 1, 0, 1, 0, 1},
+	{1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
+	{1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
+	{1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
+	{1, 1, 1, 0, 0, 1, 1, 0, 0, 1, 1, 1, 0, 1, 0, 0, 0, 1, 1, 0, 0, 0, 0, 1},
+	{1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
+	{1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
+	{1, 0, 0, 0, 1, 1, 0, 0, 1, 1, 0, 0, 1, 1, 1, 0, 1, 0, 0, 0, 1, 0, 0, 1},
+	{1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
+	{1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1}
+};
+
+int	main(void)
+{
+	t_player player = {
+		.pos_x = 12,
+		.pos_y = 6,
+		.dir_x = -1,
+		.dir_y = 0,
+		.plane_x = 0,
+		.plane_y = 0.66
+	};
+
+	t_ray ray = {
+		.screen_width = 80.0
+	};
+
+	raycast(&player, &ray);
 	return (0);
 }
