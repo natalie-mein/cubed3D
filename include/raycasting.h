@@ -20,6 +20,7 @@
 // can delete later
 # define MAP_WIDTH 24
 # define MAP_HEIGHT 12
+# define TILE_SIZE 32
 
 extern int map[MAP_HEIGHT][MAP_WIDTH];
 
@@ -52,7 +53,22 @@ typedef struct s_ray
 	double	perp_wall_dist;
 }   t_ray;
 
+typedef struct s_game
+{
+	char	**map;
+} t_game;
+
+//possible pointer for mlx etc
+typedef struct s_data
+{
+	mlx_t		*mlx; // MLX pointer
+	mlx_image_t	*image; // MLX window pointer
+	void		*textures[5]; // MLX image pointers (on the stack)
+	t_game		*map; // Map pointer (contains map details - preferably kept on the stack)
+}	t_data;
+
 void	ray_direction(t_ray *ray);
 void raycast(t_player *player, t_ray *ray);
+void draw_map(t_data *data, char **map);
 
 #endif

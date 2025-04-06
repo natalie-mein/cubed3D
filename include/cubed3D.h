@@ -18,7 +18,7 @@
 # include <stdio.h> //printf
 # include <sys/time.h> //gettimeofday
 # include <string.h> //strerror
-# include <error.h> //perror
+//# include <error.h> //perror
 # include <math.h> //math library
 # include "../libraries/MLX42/include/MLX42/MLX42.h"
 # include "../libraries/libft/libft.h"

@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "../include/raycasting.h"
+//#include "../include/cube3D.h"
 
 void	calculate_differential(t_ray *ray)
 {

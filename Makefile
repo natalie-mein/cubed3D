@@ -24,6 +24,8 @@ OBJ_DIR = $(SRC_DIR)/objects
 SOURCES = main.c \
 	  cube_errors.c \
 	  cube_hooks.c \
+	  cube_raycasting.c \
+	  cube_draw.c
 
 ###BONUS = ./_bonus.c \
 
@@ -41,11 +43,12 @@ LIBFT = $(LIBFT_DIR)/libft.a
 
 # MLX42 dependencies - dl dynamically loaded lib, glfw graphics library framework m math library
 
-MLXLIB_FLAGS = $(MLX_DIR)/build/libmlx42.a -ldl -lglfw -lm
+# MLXLIB_FLAGS = $(MLX_DIR)/build/libmlx42.a -ldl -lglfw -lm
+MLXLIB_FLAGS = $(MLX_DIR)/build/libmlx42.a -lglfw -framework Cocoa -framework OpenGL -framework IOKit
 LIBFT_FLAGS = -L $(LIBFT_DIR) -lft
 
 CC = cc
-CFLAGS = -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror -g 
 
 RM = rm -rf
 
