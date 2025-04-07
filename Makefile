@@ -25,7 +25,11 @@ SOURCES = main.c \
 	  cube_errors.c \
 	  cube_hooks.c \
 	  cube_raycasting.c \
-	  cube_draw.c
+	  cube_draw.c \
+	  cube_player.c \
+	  cube_movement.c \
+	  cube_init.c \
+	  cube_rotation.c
 
 ###BONUS = ./_bonus.c \
 
@@ -43,8 +47,8 @@ LIBFT = $(LIBFT_DIR)/libft.a
 
 # MLX42 dependencies - dl dynamically loaded lib, glfw graphics library framework m math library
 
-# MLXLIB_FLAGS = $(MLX_DIR)/build/libmlx42.a -ldl -lglfw -lm
-MLXLIB_FLAGS = $(MLX_DIR)/build/libmlx42.a -lglfw -framework Cocoa -framework OpenGL -framework IOKit
+MLXLIB_FLAGS = $(MLX_DIR)/build/libmlx42.a -ldl -lglfw -lm
+# MLXLIB_FLAGS = $(MLX_DIR)/build/libmlx42.a -lglfw -framework Cocoa -framework OpenGL -framework IOKit
 LIBFT_FLAGS = -L $(LIBFT_DIR) -lft
 
 CC = cc

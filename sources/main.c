@@ -65,31 +65,15 @@
 int	main(void)
 {
 	t_data *data = malloc(sizeof(t_data));
+	if (!data)
+		return (1);
+	data->player = malloc(sizeof(t_player));
+	if (!data->player)
+		return (1);
 
-	data->mlx = mlx_init(800, 600, "Test Window", false);
+	data->mlx = mlx_init(WIDTH, HEIGHT, "Test Window", false);
 	if (!data->mlx)
 		return (1);
-	int map_width = 25;
-	int map_height = 0;
-	while (map[map_height])
-		map_height++;
-		
-	data->image = mlx_new_image(data->mlx, map_width * 32, map_height * 32);
-
-	//data->image = mlx_new_image(data->mlx, 100, 100);
-	if (!data->image)
-		return (1);
-
-	//for (int y = 0; y < 100; y++)
-	//	for (int x = 0; x < 100; x++)
-	//		mlx_put_pixel(img, x, y, 0xFF0000FF); // red block
-	/*char *map[] = {
-		"1111111",
-		"1000001",
-		"1000001",
-		"1111111",
-		NULL
-	};*/
 
 	char *map[] = {
 		"111111111111111111111111",
@@ -106,23 +90,25 @@ int	main(void)
 		"111111111111111111111111",
 		NULL
 	};
-			
-	for (int y = 0; map[y]; y++)
-	{
-		for (int x = 0; map[y][x]; x++)
-		{
-			uint32_t color = (map[y][x] == '1') ? 0xFFFFFFFF : 0x222222FF;
-			for (int dy = 0; dy < 32; dy++)
-				for (int dx = 0; dx < 32; dx++)
-					mlx_put_pixel(data->image, x * 32 + dx, y * 32 + dy, color);
-		}
-	};
 
-	//draw_map(data, map);
+	data->map = malloc(sizeof(t_game));
+	if (!data->map)
+		return (1);
+	data->map->matrix = map;
+	data->player->move = malloc(sizeof(t_move));
+	if (!data->player->move)
+		return (1);
+	ft_memset(data->player->move, 0, sizeof(t_move));
 
-	mlx_image_to_window(data->mlx, data->image, 0, 0);
+	draw_map(data, data->map->matrix);
+	init_player(data->player, 5, 5, 'N');
+	draw_player(data);
+	mlx_loop_hook(data->mlx, &render_loop, data);
+	mlx_key_hook(data->mlx, &key_hooks, data);
 	mlx_loop(data->mlx);
 	mlx_terminate(data->mlx);
+	free(data->player);
+	free(data);
 	return (0);
 }
 

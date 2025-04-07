@@ -21,8 +21,20 @@
 # define MAP_WIDTH 24
 # define MAP_HEIGHT 12
 # define TILE_SIZE 32
+# define MOVE_SPEED 0.05
 
 extern int map[MAP_HEIGHT][MAP_WIDTH];
+
+typedef struct s_move
+{
+	bool	left;
+	bool	right;
+	bool	back;
+	bool	forward;
+	bool	rotate_l;
+	bool	rotate_r;
+}	t_move;
+
 
 typedef struct s_player
 {
@@ -32,6 +44,7 @@ typedef struct s_player
 	double  dir_y;  // y component of player direction
 	double  plane_x; //camera plane - perpendicular to direction vector
 	double  plane_y;
+	t_move	*move;
 }   t_player;
 
 typedef struct s_ray
@@ -55,20 +68,33 @@ typedef struct s_ray
 
 typedef struct s_game
 {
-	char	**map;
+	char	**matrix;
 } t_game;
 
-//possible pointer for mlx etc
 typedef struct s_data
 {
 	mlx_t		*mlx; // MLX pointer
 	mlx_image_t	*image; // MLX window pointer
 	void		*textures[5]; // MLX image pointers (on the stack)
 	t_game		*map; // Map pointer (contains map details - preferably kept on the stack)
+	t_player	*player;
+	t_ray		*ray;
 }	t_data;
 
 void	ray_direction(t_ray *ray);
-void raycast(t_player *player, t_ray *ray);
-void draw_map(t_data *data, char **map);
+void	raycast(t_player *player, t_ray *ray);
+void	draw_map(t_data *data, char **map);
+void    draw_player(t_data *data);
+void    init_player(t_player *player, int start_x, int start_y, char dir);
+void	key_hooks(mlx_key_data_t keydata, void *param);
+void	no_key_hook(mlx_key_data_t keydata, t_data *data);
+
+void    move_forward(t_data *data);
+void    move_back(t_data *data);
+void	move_left(t_data *data);
+void	move_right(t_data *data);
+void    rotate_left(t_data *data);
+void    rotate_right(t_data *data);
+void    render_loop(void *param);
 
 #endif

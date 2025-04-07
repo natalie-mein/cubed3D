@@ -1,5 +1,5 @@
 
-#include "raycasting.h"
+#include "../include/raycasting.h"
 
 void draw_tile(t_data *data, int x, int y, uint32_t color)
 {
@@ -49,7 +49,8 @@ void draw_map(t_data *data, char **map)
 				color = 0x222222FF; // dark floor
 			else
 				color = 0xFF0000FF; // red for unknown
-				draw_tile(data, x * TILE_SIZE, y * TILE_SIZE, color);
+			draw_tile(data, x * TILE_SIZE, y * TILE_SIZE, color);
+			x++;
 		}
 		y++;
 	}

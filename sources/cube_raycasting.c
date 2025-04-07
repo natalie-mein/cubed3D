@@ -10,16 +10,17 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/raycasting.h"
+#include "raycasting.h"
 //#include "../include/cube3D.h"
 
+// update all to use t_data instead of ray and player
 void	calculate_differential(t_ray *ray)
 {
 	// perform DDA algorithm
 	ray->hit = 0;
 	while (ray->hit == 0)
 	{
-		// jump tp next map square, or in a x or y direction
+		// jump to next map square, or in a x or y direction
 		if (ray->side_x < ray->side_y)
 		{
 			ray->side_x += ray->delta_x;
@@ -98,8 +99,4 @@ void raycast(t_player *player, t_ray *ray)
 
 		x++;
 	}
-	printf("Column: %d | Distance: %f | Wall side: %s\n", 
-		x, 
-		ray->perp_wall_dist, 
-		ray->side == 0 ? "X (East/West)" : "Y (North/South)");
 }

@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cubed3D.h"
+#include "raycasting.h"
 
 void ft_hook(void* param)
 {
@@ -25,3 +25,99 @@ void ft_hook(void* param)
 
 	printf("WIDTH: %d | HEIGHT: %d\n", width, height);
 }
+
+void	no_key_hook(mlx_key_data_t keydata, t_data *data)
+{
+	if (keydata.action == MLX_RELEASE)
+	{
+		data->player->move->left = false;
+		data->player->move->right = false;
+		data->player->move->back = false;
+		data->player->move->forward = false;
+		data->player->move->rotate_l = false;
+		data->player->move->rotate_r = false;
+	}
+}
+
+void	key_hooks(mlx_key_data_t keydata, void *param)
+{
+	t_data	*data;
+
+	data = (t_data *)param;
+	if (keydata.key == MLX_KEY_ESCAPE && keydata.action == MLX_PRESS)
+		mlx_close_window(data->mlx);
+	if (keydata.action == MLX_PRESS || keydata.action == MLX_REPEAT)
+	{
+		if (keydata.key == MLX_KEY_A)
+			data->player->move->left = true;
+		else if (keydata.key == MLX_KEY_D)
+			data->player->move->right = true;
+		else if (keydata.key == MLX_KEY_S)
+			data->player->move->back = true;
+		else if (keydata.key == MLX_KEY_W)
+			data->player->move->forward = true;
+		else if (keydata.key == MLX_KEY_LEFT)
+			data->player->move->rotate_l = true;
+		else if (keydata.key == MLX_KEY_RIGHT)
+			data->player->move->rotate_r = true;
+		//else if (keydata.key == MLX_KEY_UP)
+		// maybe color change floor and ceiling?
+		//else if (keydata.key == MLX_KEY_DOWN)
+		//do some other thing
+	}
+	no_key_hook(keydata, data);
+}
+
+void move_player(t_data *data)
+{
+	if (data->player->move->left)
+		move_left(data);
+	else if (data->player->move->right)
+		move_right(data);
+	else if (data->player->move->back)
+		move_back(data);
+	else if (data->player->move->forward)
+		move_forward(data);
+	else if (data->player->move->rotate_l)
+		rotate_left(data);
+	else if (data->player->move->rotate_r)
+		rotate_right(data);
+}
+
+void    render_loop(void *param)
+{
+    t_data *data;
+
+    data = (t_data *)param;
+    move_player(data);
+
+	// Optional: clear image if you're using the same one
+	//mlx_delete_image(data->mlx, data->image);
+	//data->image = mlx_new_image(data->mlx, WIDTH, HEIGHT);
+	//mlx_image_to_window(data->mlx, data->image, 0, 0);
+
+	draw_map(data, data->map->matrix); // assuming you saved the map
+	draw_player(data);
+}
+
+/*Render function that includes raycasting
+void render_loop(void *param)
+{
+	t_data *data = (t_data *)param;
+
+	// Clear previous frame
+	mlx_delete_image(data->mlx, data->image);
+	data->image = mlx_new_image(data->mlx, WIDTH, HEIGHT);
+	mlx_image_to_window(data->mlx, data->image, 0, 0);
+
+	move_player(data); // handle movement based on key input
+
+	t_ray ray;
+	ray.screen_width = WIDTH; // set screen width for raycast
+
+	raycast(data, &ray); // this will draw the 3D walls
+
+	// Optional: draw 2D map or player on top
+	// draw_map(data, data->map->matrix);
+	// draw_player(data);
+}*/
