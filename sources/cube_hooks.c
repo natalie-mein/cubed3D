@@ -84,7 +84,7 @@ void move_player(t_data *data)
 		rotate_right(data);
 }
 
-void    render_loop(void *param)
+/*void    render_loop(void *param)
 {
     t_data *data;
 
@@ -98,26 +98,32 @@ void    render_loop(void *param)
 
 	draw_map(data, data->map->matrix); // assuming you saved the map
 	draw_player(data);
-}
+}*/
 
-/*Render function that includes raycasting
+//Render function that includes raycasting
 void render_loop(void *param)
 {
 	t_data *data = (t_data *)param;
 
-	// Clear previous frame
-	mlx_delete_image(data->mlx, data->image);
-	data->image = mlx_new_image(data->mlx, WIDTH, HEIGHT);
-	mlx_image_to_window(data->mlx, data->image, 0, 0);
+	//mlx_delete_image(data->mlx, data->image);
+	//data->image = mlx_new_image(data->mlx, WIDTH, HEIGHT);
+	//mlx_image_to_window(data->mlx, data->image, 0, 0);
 
 	move_player(data); // handle movement based on key input
 
-	t_ray ray;
-	ray.screen_width = WIDTH; // set screen width for raycast
+	data->ray = malloc(sizeof(t_ray));
+	if (!data->ray)
+		return ;
+	data->ray->screen_width = WIDTH; // set screen width for raycast
 
-	raycast(data, &ray); // this will draw the 3D walls
-
+	raycast(data); // this will draw the 3D walls
+	data->image = mlx_new_image(data->mlx, WIDTH, HEIGHT);
+	if (!data->image)
+	{
+    	printf("Failed to create ray image!\n");
+    	return;
+	}
 	// Optional: draw 2D map or player on top
-	// draw_map(data, data->map->matrix);
-	// draw_player(data);
-}*/
+	draw_map(data, data->map->matrix);
+	draw_player(data);
+}

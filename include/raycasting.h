@@ -18,10 +18,10 @@
 
 //error.h is not a library. Must delete in the main later.
 // can delete later
-# define MAP_WIDTH 24
-# define MAP_HEIGHT 12
-# define TILE_SIZE 32
-# define MOVE_SPEED 0.05
+# define MAP_WIDTH 1000
+# define MAP_HEIGHT 600
+# define TILE_SIZE 50
+# define MOVE_SPEED 0.1
 
 extern int map[MAP_HEIGHT][MAP_WIDTH];
 
@@ -44,6 +44,7 @@ typedef struct s_player
 	double  dir_y;  // y component of player direction
 	double  plane_x; //camera plane - perpendicular to direction vector
 	double  plane_y;
+	char	start_dir;
 	t_move	*move;
 }   t_player;
 
@@ -76,13 +77,15 @@ typedef struct s_data
 	mlx_t		*mlx; // MLX pointer
 	mlx_image_t	*image; // MLX window pointer
 	void		*textures[5]; // MLX image pointers (on the stack)
+	int			player_x; //starting position of player
+	int			player_y;
+	char		player_dir; // cardinal direction of player start 'N', 'S', 'E', 'W'
 	t_game		*map; // Map pointer (contains map details - preferably kept on the stack)
 	t_player	*player;
 	t_ray		*ray;
 }	t_data;
 
-void	ray_direction(t_ray *ray);
-void	raycast(t_player *player, t_ray *ray);
+void	raycast(t_data *data);
 void	draw_map(t_data *data, char **map);
 void    draw_player(t_data *data);
 void    init_player(t_player *player, int start_x, int start_y, char dir);
@@ -96,5 +99,9 @@ void	move_right(t_data *data);
 void    rotate_left(t_data *data);
 void    rotate_right(t_data *data);
 void    render_loop(void *param);
+
+int		init_data(t_data *data);
+int		init_game(t_data *data);
+void    exit_game(t_data *data);
 
 #endif

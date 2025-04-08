@@ -47,6 +47,16 @@ void    init_player(t_player *player, int start_x, int start_y, char dir)
     }
 }
 
+void    player_direction(t_data *data)
+{
+    data->player->pos_x = data->player_x + 0.5; // center in the tile
+    data->player->pos_y = data->player_y + 0.5;
+    if (data->player_dir == 'N')
+    else if (data->player_dir == 'S')
+    else if (data->player_dir == 'E')
+    else if (data->player_dir == 'W')
+}
+
 void    draw_player(t_data *data)
 {
     int pixel_x;

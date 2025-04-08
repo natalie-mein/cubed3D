@@ -29,7 +29,9 @@ SOURCES = main.c \
 	  cube_player.c \
 	  cube_movement.c \
 	  cube_init.c \
-	  cube_rotation.c
+	  cube_rotation.c \
+	  cube_init.c \
+	  cube_exit.c
 
 ###BONUS = ./_bonus.c \
 

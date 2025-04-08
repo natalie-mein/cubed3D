@@ -14,89 +14,109 @@
 //#include "../include/cube3D.h"
 
 // update all to use t_data instead of ray and player
-void	calculate_differential(t_ray *ray)
+void	calculate_differential(t_data *data)
 {
 	// perform DDA algorithm
-	ray->hit = 0;
-	while (ray->hit == 0)
+	data->ray->hit = 0;
+	while (data->ray->hit == 0)
 	{
 		// jump to next map square, or in a x or y direction
-		if (ray->side_x < ray->side_y)
+		if (data->ray->side_x < data->ray->side_y)
 		{
-			ray->side_x += ray->delta_x;
-			ray->r_pos_x += ray->step_x;
-			ray->side = 0;
+			data->ray->side_x += data->ray->delta_x;
+			data->ray->r_pos_x += data->ray->step_x;
+			data->ray->side = 0;
 		}
 		else
 		{
-			ray->side_x += ray->delta_y;
-			ray->r_pos_y += ray->step_y;
-			ray->side = 1;
+			data->ray->side_x += data->ray->delta_y;
+			data->ray->r_pos_y += data->ray->step_y;
+			data->ray->side = 1;
 		}
 		// check if ray has hit a wall
-		if (map[(int)ray->r_pos_y][(int)ray->r_pos_x] == 1)
-			ray->hit = 1;
+		if (map[(int)data->ray->r_pos_y][(int)data->ray->r_pos_x] == 1)
+			data->ray->hit = 1;
 	}
 }
 
-void	ray_direction(t_ray *ray)
+void	ray_direction(t_data *data)
 {
 	// calculate which direction  to step and initialize side distances
-	if (ray->r_dir_x < 0)
+	if (data->ray->r_dir_x < 0)
 	{
-		ray->step_x = -1;
-		ray->side_x = (ray->r_pos_x - (int)ray->r_pos_x) * ray->delta_x;
+		data->ray->step_x = -1;
+		data->ray->side_x = (data->ray->r_pos_x - (int)data->ray->r_pos_x)
+			* data->ray->delta_x;
 	}
 	else
 	{
-		ray->step_x = 1;
-		ray->side_x = ((int) ray->r_pos_x + 1.0 - ray->r_pos_x) * ray->delta_x;
+		data->ray->step_x = 1;
+		data->ray->side_x = ((int) data->ray->r_pos_x + 1.0 - data->ray->r_pos_x)
+			* data->ray->delta_x;
 	}
-	if (ray->r_dir_y < 0)
+	if (data->ray->r_dir_y < 0)
 	{
-		ray->step_y = -1;
-		ray->side_y = (ray->r_pos_y - (int)ray->r_pos_y) * ray->delta_y;
+		data->ray->step_y = -1;
+		data->ray->side_y = (data->ray->r_pos_y - (int)data->ray->r_pos_y) *
+			data->ray->delta_y;
 	}
 	else
 	{
-		ray->step_y = 1;
-		ray->side_y = ((int) ray->r_pos_y + 1.0 - ray->r_pos_y) * ray->delta_y;
+		data->ray->step_y = 1;
+		data->ray->side_y = ((int)data->ray->r_pos_y + 1.0 - data->ray->r_pos_y)
+			* data->ray->delta_y;
 	}
 }
 
-void	ray_position(t_player *player, t_ray *ray, int x)
+void	ray_position(t_data *data, int x)
 {
 	// calculate ray position and direction
-	ray->camera_x = 2 * x / ray->screen_width - 1; // x- coordinate in camera space
-	ray->r_dir_x = player->dir_x + player->plane_x * ray->camera_x;
-	ray->r_dir_y = player->dir_y + player->plane_y * ray->camera_x;
+	data->ray->camera_x = 2 * x / data->ray->screen_width - 1; // x- coordinate in camera space
+	data->ray->r_dir_x = data->player->dir_x + data->player->plane_x 
+		* data->ray->camera_x;
+	data->ray->r_dir_y = data->player->dir_y + data->player->plane_y 
+		* data->ray->camera_x;
 
 	//initialize ray position and direction in world space
-	ray->r_pos_x = player->pos_x;
-	ray->r_pos_y = player->pos_y;
+	data->ray->r_pos_x = data->player->pos_x;
+	data->ray->r_pos_y = data->player->pos_y;
 
 	// calcuate step and side distances
-	ray->delta_x = fabs(1 / ray->r_dir_x);
-	ray->delta_y = fabs(1 / ray->r_dir_y);
+	data->ray->delta_x = fabs(1 / data->ray->r_dir_x);
+	data->ray->delta_y = fabs(1 / data->ray->r_dir_y);
 }
 
-void raycast(t_player *player, t_ray *ray) 
+void raycast(t_data *data) 
 {
 	int		x;
 	
 	x = 0;
-	while (x < ray->screen_width)
+	while (x < data->ray->screen_width)
 	{
-		ray_position(player, ray, x);
-		ray_direction(ray);
-		calculate_differential(ray);
 		
+		ray_position(data, x);
+		ray_direction(data);
+		calculate_differential(data);
 		// compute distance of the ray and store it for rendering
-		if (ray->side == 0)
-			ray->perp_wall_dist = (ray->r_pos_x - player->pos_x + (1 - ray->step_x) / 2) / ray->r_dir_x;
+		if (data->ray->side == 0)
+			data->ray->perp_wall_dist = (data->ray->r_pos_x - data->player->pos_x
+				+ (1 - data->ray->step_x) / 2) / data->ray->r_dir_x;
 		else
-			ray->perp_wall_dist = (ray->r_pos_y - player->pos_y + (1 - ray->step_y) / 2) / ray->r_dir_y;
+			data->ray->perp_wall_dist = (data->ray->r_pos_y - data->player->pos_y 
+				+ (1 - data->ray->step_y) / 2) / data->ray->r_dir_y;
+		int line_height = (int)(MAP_HEIGHT / data->ray->perp_wall_dist);
+		int draw_start = -line_height / 2 + MAP_HEIGHT / 2;
+		int draw_end = line_height / 2 + MAP_HEIGHT / 2;
 
+		if (draw_start < 0)
+    		draw_start = 0;
+		if (draw_end >= MAP_HEIGHT)
+    		draw_end = MAP_HEIGHT - 1;
+
+		// draw vertical line on the image buffer
+		for (int y = draw_start; y <= draw_end; y++) {
+    		mlx_put_pixel(data->image, x, y, 0xFFFFFFFF); // white wall pixel
+		}
 		x++;
 	}
 }

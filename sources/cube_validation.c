@@ -15,7 +15,7 @@
 void	ft_file_type(char *input)
 {
 	if (ft_strrchr(input, '.') == NULL ||
-		ft_strncmp(ft_strrchr(argv[1], '.'), ".cub", 5) != 0)
+		ft_strncmp(ft_strrchr(input[1], '.'), ".cub", 5) != 0)
 		printf("Wrong file type:\nMake sure you use *.cub files.");
 	else
 		printf("You got the right file type!");

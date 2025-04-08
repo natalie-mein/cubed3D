@@ -11,7 +11,20 @@
 /* ************************************************************************** */
 
 //#include "../include/cubed3D.h"
-#include "../include/raycasting.h"
+#include "raycasting.h"
+
+int	main(void)
+{
+	t_data data;
+
+	if (init_data(&data) == 0)
+		return (EXIT_FAILURE);
+	if (init_game(&data) == 0)
+		return (EXIT_FAILURE);
+	mlx_loop(data.mlx);
+	exit_game(&data);
+	return (0);
+}
 
 /*int	main(int argc, char **argv)
 {
@@ -62,71 +75,6 @@
 	return (0);
 }*/
 
-int	main(void)
-{
-	t_data *data = malloc(sizeof(t_data));
-	if (!data)
-		return (1);
-	data->player = malloc(sizeof(t_player));
-	if (!data->player)
-		return (1);
-
-	data->mlx = mlx_init(WIDTH, HEIGHT, "Test Window", false);
-	if (!data->mlx)
-		return (1);
-
-	char *map[] = {
-		"111111111111111111111111",
-		"100000000000000000000001",
-		"101110011001110100010101",
-		"100000000000000000000001",
-		"100000000000000000000001",
-		"100000000000000000000001",
-		"111001100111010001100001",
-		"100000000000000000000001",
-		"100000000000000000000001",
-		"100011001100111010001001",
-		"100000000000000000000001",
-		"111111111111111111111111",
-		NULL
-	};
-
-	data->map = malloc(sizeof(t_game));
-	if (!data->map)
-		return (1);
-	data->map->matrix = map;
-	data->player->move = malloc(sizeof(t_move));
-	if (!data->player->move)
-		return (1);
-	ft_memset(data->player->move, 0, sizeof(t_move));
-
-	draw_map(data, data->map->matrix);
-	init_player(data->player, 5, 5, 'N');
-	draw_player(data);
-	mlx_loop_hook(data->mlx, &render_loop, data);
-	mlx_key_hook(data->mlx, &key_hooks, data);
-	mlx_loop(data->mlx);
-	mlx_terminate(data->mlx);
-	free(data->player);
-	free(data);
-	return (0);
-}
-
-int map[MAP_HEIGHT][MAP_WIDTH] = 
-{
-	{1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
-	{1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
-	{1, 0, 1, 1, 1, 0, 0, 1, 1, 0, 0, 1, 1, 1, 0, 1, 0, 0, 0, 1, 0, 1, 0, 1},
-	{1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
-	{1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
-	{1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
-	{1, 1, 1, 0, 0, 1, 1, 0, 0, 1, 1, 1, 0, 1, 0, 0, 0, 1, 1, 0, 0, 0, 0, 1},
-	{1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
-	{1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
-	{1, 0, 0, 0, 1, 1, 0, 0, 1, 1, 0, 0, 1, 1, 1, 0, 1, 0, 0, 0, 1, 0, 0, 1},
-	{1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
-	{1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1}
-};
 
 /*int	main(void)
 {
@@ -146,3 +94,4 @@ int map[MAP_HEIGHT][MAP_WIDTH] =
 	raycast(&player, &ray);
 	return (0);
 }*/
+
