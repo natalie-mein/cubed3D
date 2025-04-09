@@ -24,11 +24,9 @@ OBJ_DIR = $(SRC_DIR)/objects
 SOURCES = main.c \
 	  cube_errors.c \
 	  cube_hooks.c \
-	  cube_raycasting.c \
 	  cube_draw.c \
 	  cube_player.c \
 	  cube_movement.c \
-	  cube_init.c \
 	  cube_rotation.c \
 	  cube_init.c \
 	  cube_exit.c

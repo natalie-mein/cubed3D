@@ -14,9 +14,6 @@
 
 int init_data(t_data *data)
 {
-    data = malloc(sizeof(t_data));
-	if (!data)
-		return (0);
 	data->player = malloc(sizeof(t_player));
 	if (!data->player)
 		return (0);
@@ -28,7 +25,10 @@ int init_data(t_data *data)
 		return (0);
 	ft_memset(data->player->move, 0, sizeof(t_move));
     data->image = NULL;
-
+	data->ray = malloc(sizeof(t_ray));
+	if (!data->ray)
+		return (0);
+	data->ray->screen_width = WIDTH; // set screen width for raycast
     return (1);
 }
 
@@ -52,12 +52,13 @@ int init_game(t_data *data)
 		"111111111111111111111111",
 		NULL
 	};
+
 	data->map->matrix = map;
 	draw_map(data, data->map->matrix);
-	init_player(data->player, 5, 5, 'N');
+	init_player(data->player, 5, 5, 'N'); // this function is temporary until we merge
 	draw_player(data);
-	mlx_loop_hook(data->mlx, &render_loop, data);
 	mlx_key_hook(data->mlx, &key_hooks, data);
+	mlx_loop_hook(data->mlx, &render_game, data);
     return (1);
 }
 

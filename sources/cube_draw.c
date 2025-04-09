@@ -32,8 +32,9 @@ void draw_map(t_data *data, char **map)
 	x = 0;
 	y = 0;
 	map_width = ft_strlen(map[0]);
-	while (map[map_height])
+	while (map[map_height] != NULL)
 		map_height++;
+	printf("Map height: %d\n", map_height);
 	data->image = mlx_new_image(data->mlx, map_width * TILE_SIZE, map_height * TILE_SIZE);
 	if (!data->image)
 		return;
@@ -54,6 +55,26 @@ void draw_map(t_data *data, char **map)
 		}
 		y++;
 	}
+	mlx_image_to_window(data->mlx, data->image, 0, 0);
+}
+
+//Render function that includes raycasting
+void render_game(void *param)
+{
+	t_data *data = (t_data *)param;
+
+	if (data->image)
+		mlx_delete_image(data->mlx, data->image);
+	
+	data->image = mlx_new_image(data->mlx, WIDTH, HEIGHT);
+	if (!data->image)
+	{
+		printf("Failed to create image!\n");
+		return;
+	}
+	//draw_map(data, data->map->matrix);
+	move_player(data);
+	draw_player(data);
 	mlx_image_to_window(data->mlx, data->image, 0, 0);
 }
 

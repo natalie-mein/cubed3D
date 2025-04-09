@@ -30,8 +30,8 @@ void    free_data(t_data *data)
         i++;
     }
     
-    if (data)
-    	free(data);
+   // if (data)
+    //	free(data);
 }
 
 void    exit_game(t_data *data)

@@ -34,7 +34,7 @@ void	calculate_differential(t_data *data)
 			data->ray->side = 1;
 		}
 		// check if ray has hit a wall
-		if (map[(int)data->ray->r_pos_y][(int)data->ray->r_pos_x] == 1)
+		if (data->map[(int)data->ray->r_pos_y][(int)data->ray->r_pos_x] == 1)
 			data->ray->hit = 1;
 	}
 }

@@ -12,6 +12,63 @@
 
 #include "raycasting.h"
 
+/*void face_north(t_player *player)
+{
+	player->dir_x = 0;
+	player->dir_y = -1;
+	player->plane_x = 0.66;
+	player->plane_y = 0;
+}
+
+void	face_south(t_player *player)
+{
+	player->dir_x = 0;
+	player->dir_y = 1;
+	player->plane_x = -0.66;
+	player->plane_y = 0;
+}
+void	face_east(t_player *player)
+{
+	player->dir_x = 1;
+	player->dir_y = 0;
+	player->plane_x = 0;
+	player->plane_y = 0.66;
+}
+void	face_west(t_player *player)
+{
+	player->dir_x = -1;
+	player->dir_y = 0;
+	player->plane_x = 0;
+	player->plane_y = -0.66;
+}
+
+void    player_direction(t_data *data)
+{
+	data->player->pos_x = data->player_x + 0.5; // center in the tile
+	data->player->pos_y = data->player_y + 0.5;
+	if (data->player_dir == 'N')
+	{
+		data->player->start_dir = NORTH;
+		face_north(data->player);
+	}
+	else if (data->player_dir == 'S')
+	{
+		data->player->start_dir = SOUTH;
+		face_south(data->player);
+	}
+	else if (data->player_dir == 'E')
+	{
+		data->player->start_dir = EAST;
+		face_east(data->player);
+	}   
+	else if (data->player_dir == 'W')
+	{
+		data->player->start_dir = WEST;
+		face_west(data->player);
+	}
+		
+}*/
+
 void    init_player(t_player *player, int start_x, int start_y, char dir)
 {
     player->pos_x = start_x + 0.5; // center in the tile
@@ -47,36 +104,27 @@ void    init_player(t_player *player, int start_x, int start_y, char dir)
     }
 }
 
-void    player_direction(t_data *data)
-{
-    data->player->pos_x = data->player_x + 0.5; // center in the tile
-    data->player->pos_y = data->player_y + 0.5;
-    if (data->player_dir == 'N')
-    else if (data->player_dir == 'S')
-    else if (data->player_dir == 'E')
-    else if (data->player_dir == 'W')
-}
-
 void    draw_player(t_data *data)
 {
-    int pixel_x;
-    int pixel_y;
-    int x;
-    int y;
-    int size;
+	int pixel_x;
+	int pixel_y;
+	int x;
+	int y;
+	int size;
 
-    pixel_x = data->player->pos_x * TILE_SIZE;
-    pixel_y = data->player->pos_y * TILE_SIZE;
-    size = 6;
-    x = -size / 2;
-    y = -size / 2;
-    while (y < size)
-    {
-        while (x < size)
-        {
-            mlx_put_pixel(data->image, pixel_x + x, pixel_y + y, 0xFFFF00FF);
-            x++;
-        }
-        y++;
-    } 
+	pixel_x = data->player->pos_x * TILE_SIZE;
+	pixel_y = data->player->pos_y * TILE_SIZE;
+	size = 6;
+	x = -size / 2;
+	y = -size / 2;
+	while (y < size)
+	{
+		x = -size / 2;
+		while (x < size)
+		{
+			mlx_put_pixel(data->image, pixel_x + x, pixel_y + y, 0xFFFF00FF);
+			x++;
+		}
+		y++;
+	} 
 }

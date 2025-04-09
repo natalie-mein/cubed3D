@@ -21,9 +21,18 @@
 # define MAP_WIDTH 1000
 # define MAP_HEIGHT 600
 # define TILE_SIZE 50
-# define MOVE_SPEED 0.1
+# define MOVE_SPEED 0.05
 
 extern int map[MAP_HEIGHT][MAP_WIDTH];
+
+typedef enum s_dir
+{
+	NORTH,
+	SOUTH,
+	EAST,
+	WEST,
+}	t_dir;
+
 
 typedef struct s_move
 {
@@ -44,7 +53,7 @@ typedef struct s_player
 	double  dir_y;  // y component of player direction
 	double  plane_x; //camera plane - perpendicular to direction vector
 	double  plane_y;
-	char	start_dir;
+	int		start_dir;
 	t_move	*move;
 }   t_player;
 
@@ -92,13 +101,14 @@ void    init_player(t_player *player, int start_x, int start_y, char dir);
 void	key_hooks(mlx_key_data_t keydata, void *param);
 void	no_key_hook(mlx_key_data_t keydata, t_data *data);
 
+void	move_player(t_data *data);
 void    move_forward(t_data *data);
 void    move_back(t_data *data);
 void	move_left(t_data *data);
 void	move_right(t_data *data);
 void    rotate_left(t_data *data);
 void    rotate_right(t_data *data);
-void    render_loop(void *param);
+void    render_game(void *param);
 
 int		init_data(t_data *data);
 int		init_game(t_data *data);
