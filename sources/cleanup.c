@@ -6,24 +6,28 @@
 /*   By: mdahlstr <mdahlstr@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/03 13:25:34 by mdahlstr          #+#    #+#             */
-/*   Updated: 2025/04/03 14:42:24 by mdahlstr         ###   ########.fr       */
+/*   Updated: 2025/04/10 13:28:26 by mdahlstr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h"
 
-void	free_game(t_game *game)
+void	free_file_data(t_file_data *file_data)
 {
 	int	i;
 
-	if (!game || !game->map)
+	if (!file_data || !file_data->file)
 		return ;
 	i = 0;
-	while (game->map[i] != NULL)
+	while (file_data->file[i] != NULL)
 	{
-		free(game->map[i]);
+		free(file_data->file[i]);
 		i++;
 	}
-	free(game->map);
-	free(game);
+	free(file_data->file);
+	free(file_data->north_texture);
+	free(file_data->south_texture);
+	free(file_data->west_texture);
+	free(file_data->east_texture);
+	free(file_data);
 }

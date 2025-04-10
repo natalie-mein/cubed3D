@@ -6,7 +6,7 @@
 /*   By: mdahlstr <mdahlstr@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/03 15:42:09 by nmeintje          #+#    #+#             */
-/*   Updated: 2025/04/03 13:35:36 by mdahlstr         ###   ########.fr       */
+/*   Updated: 2025/04/10 13:25:29 by mdahlstr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,11 +31,22 @@
 # define SUCCESS 0
 # define ERROR 1
 
-// main struct:
-typedef struct s_game
+// file:
+// 1 - textures
+// 2 - colours
+// 3 - map
+typedef struct s_file_data
 {
+	char	**file;
 	char	**map;
-} t_game;
+	int		file_lines;
+	char	*north_texture;
+	char	*south_texture;
+	char	*west_texture;
+	char	*east_texture;
+	char	*ceiling_colour;
+	char	*floor_colour;
+} t_file_data;
 
 /*   errors */
 void	help_msg(void);
@@ -45,8 +56,8 @@ void	ft_error(void);
 void	ft_hook(void* param);
 
 /*   map parsing   */
-void	parse_map(char *file_name, t_game *game);
+void	parse_file(char *file_name, t_file_data *file_data);
 
 /*   memory management   */
-void	free_game(t_game *game);
+void	free_file_data(t_file_data *file_data);
 #endif

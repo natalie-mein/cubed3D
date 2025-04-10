@@ -6,7 +6,7 @@
 /*   By: mdahlstr <mdahlstr@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/03 15:48:34 by nmeintje          #+#    #+#             */
-/*   Updated: 2025/04/03 14:14:08 by mdahlstr         ###   ########.fr       */
+/*   Updated: 2025/04/10 13:29:23 by mdahlstr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,14 +16,14 @@
 // so the program might stop at void functions
 int	main(int argc, char **argv)
 {
-	t_game	*game;
-	char	*file_name;
+	t_file_data	*file_data;
+	char		*file_name;
 
 	(void)argc;
-	game = NULL;
+	file_data = NULL;
 	file_name = argv[1];
 	//validate_input(argc, argv[1]); // no memory freeing necessary on error.
-	parse_map(file_name, game);
+	parse_file(file_name, file_data);
 	//	mlx_set_setting(MLX_MAXIMIZED, true);
 	
 	mlx_t* mlx = mlx_init(WIDTH, HEIGHT, "~ CUB3D ~", true);
@@ -45,6 +45,6 @@ int	main(int argc, char **argv)
 	//	mlx_loop_hook(mlx, ft_hook, mlx);
 	mlx_loop(mlx);
 	mlx_terminate(mlx);
-	free_game(game); // free the game struct.
+	free_file_data(file_data); // free the file_data struct.
 	return (SUCCESS);
 }
