@@ -37,7 +37,7 @@ int init_game(t_data *data)
     data->mlx = mlx_init(WIDTH, HEIGHT, "Test Window", true);
 	if (!data->mlx)
 		return (0);
-    char *map[] = {
+    static char *map[] = {
 		"111111111111111111111111",
 		"100000000000000000000001",
 		"101110011001110100010101",
@@ -54,11 +54,11 @@ int init_game(t_data *data)
 	};
 
 	data->map->matrix = map;
-	draw_map(data, data->map->matrix);
-	init_player(data->player, 5, 5, 'N'); // this function is temporary until we merge
-	draw_player(data);
-	mlx_key_hook(data->mlx, &key_hooks, data);
+	//draw_map(data, data->map->matrix);
 	mlx_loop_hook(data->mlx, &render_game, data);
+	init_player(data->player, 5, 5, 'N'); // this function is temporary until we merge
+	//draw_player(data);
+	mlx_key_hook(data->mlx, &key_hooks, data);
     return (1);
 }
 

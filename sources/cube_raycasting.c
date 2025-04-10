@@ -29,13 +29,16 @@ void	calculate_differential(t_data *data)
 		}
 		else
 		{
-			data->ray->side_x += data->ray->delta_y;
+			data->ray->side_y += data->ray->delta_y;
 			data->ray->r_pos_y += data->ray->step_y;
 			data->ray->side = 1;
 		}
 		// check if ray has hit a wall
-		if (data->map[(int)data->ray->r_pos_y][(int)data->ray->r_pos_x] == 1)
+		if (data->map->matrix[(int)data->ray->r_pos_y][(int)data->ray->r_pos_x] == '1')
+		{
 			data->ray->hit = 1;
+			break ;
+		}
 	}
 }
 

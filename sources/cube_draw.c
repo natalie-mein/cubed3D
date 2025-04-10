@@ -1,5 +1,5 @@
 
-#include "../include/raycasting.h"
+#include "raycasting.h"
 
 void draw_tile(t_data *data, int x, int y, uint32_t color)
 {
@@ -21,27 +21,21 @@ void draw_tile(t_data *data, int x, int y, uint32_t color)
 
 void draw_map(t_data *data, char **map)
 {
-	int map_height;
-	int map_width; // Assuming all rows same length
 	int y;
 	int x;
 	char    tile;
 	uint32_t color;
 
-	map_height = 0;
+	data->map->map_h = 0;
 	x = 0;
 	y = 0;
-	map_width = ft_strlen(map[0]);
-	while (map[map_height] != NULL)
-		map_height++;
-	printf("Map height: %d\n", map_height);
-	data->image = mlx_new_image(data->mlx, map_width * TILE_SIZE, map_height * TILE_SIZE);
-	if (!data->image)
-		return;
-	while (y < map_height)
+	data->map->map_w = ft_strlen(map[0]);
+	while (map[data->map->map_h] != NULL)
+		data->map->map_h++;
+	while (y < data->map->map_h)
 	{
 		x = 0;
-		while (x < map_width)
+		while (x < data->map->map_w)
 		{
 			tile = map[y][x];
 			if (tile == '1')
@@ -72,10 +66,11 @@ void render_game(void *param)
 		printf("Failed to create image!\n");
 		return;
 	}
-	//draw_map(data, data->map->matrix);
+	draw_map(data, data->map->matrix);
 	move_player(data);
 	draw_player(data);
-	mlx_image_to_window(data->mlx, data->image, 0, 0);
+	raycast(data);
+	//mlx_image_to_window(data->mlx, data->image, 0, 0);
 }
 
 

@@ -20,8 +20,9 @@
 // can delete later
 # define MAP_WIDTH 1000
 # define MAP_HEIGHT 600
-# define TILE_SIZE 50
+# define TILE_SIZE 25
 # define MOVE_SPEED 0.05
+# define PADDING 0.1
 
 extern int map[MAP_HEIGHT][MAP_WIDTH];
 
@@ -79,6 +80,8 @@ typedef struct s_ray
 typedef struct s_game
 {
 	char	**matrix;
+	int		map_w;
+	int		map_h;
 } t_game;
 
 typedef struct s_data

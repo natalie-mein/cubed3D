@@ -29,9 +29,10 @@ SOURCES = main.c \
 	  cube_movement.c \
 	  cube_rotation.c \
 	  cube_init.c \
-	  cube_exit.c
+	  cube_exit.c \
+	  cube_raycasting.c 
 
-###BONUS = ./_bonus.c \
+###BONUS = ./_bonus.c 
 
 SRCS = $(addprefix $(SRC_DIR)/,$(SOURCES))
 ###BONUS_SRC = $(addprefix $(BONUS_DIR)/,$(BONUS))

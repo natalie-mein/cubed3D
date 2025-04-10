@@ -55,10 +55,7 @@ void	key_hooks(mlx_key_data_t keydata, void *param)
 		else if (keydata.key == MLX_KEY_S)
 			data->player->move->back = true;
 		else if (keydata.key == MLX_KEY_W)
-		{
-			printf("W pressed\n");
 			data->player->move->forward = true;
-		}
 		else if (keydata.key == MLX_KEY_LEFT)
 			data->player->move->rotate_l = true;
 		else if (keydata.key == MLX_KEY_RIGHT)

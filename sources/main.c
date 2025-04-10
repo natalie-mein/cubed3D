@@ -21,9 +21,9 @@ int	main(void)
 		return (EXIT_FAILURE);
 	if (init_game(&data) == 0)
 		return (EXIT_FAILURE);
-	printf("Before mlx loop\n");
+	//printf("Before mlx loop\n");
 	mlx_loop(data.mlx);
-	printf("after mlx_loop\n");
+	//printf("after mlx_loop\n");
 	exit_game(&data);
 	return (0);
 }
