@@ -6,7 +6,7 @@
 /*   By: mdahlstr <mdahlstr@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/02 14:59:28 by mdahlstr          #+#    #+#             */
-/*   Updated: 2025/04/10 18:38:06 by mdahlstr         ###   ########.fr       */
+/*   Updated: 2025/04/10 19:04:01 by mdahlstr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -234,14 +234,18 @@ static void	get_config(t_file_data *file_data)
 	#endif
 }
 
+// Copy map WITHOUT checking for errors till the end of the file.
+// One the first line starting with 1 is found, all next lines are copied
 void	get_map(t_file_data	*file_data)
 {
 	int		y;
 	int		x;
 	char	*line;
 	//int		map_line_count;
+	int		in_map;
 
 	y = 0;
+	in_map = 0;
 	#if DEBUG
 	printf("\n\n-----------EXTRACTED MAP--------------------------\n\n");
 	#endif
@@ -254,12 +258,13 @@ void	get_map(t_file_data	*file_data)
 		line = file_data->file[y];
 		while (ft_iswhitespace(line[x]))
 			x++;
-		if (line[x] == '1')
+		if (line[x] == '1' || in_map == 1)
 		{
+			in_map = 1;
 			file_data->map[y] = ft_strdup(line);
 			file_data->map_line_count++;
 		}
-			#if DEBUG
+		#if DEBUG
 		if (file_data->map[y])
 			printf("%s", file_data->map[y]);
 		#endif
@@ -279,12 +284,12 @@ void	parse_file(char *file_name, t_file_data *file_data)
 	(void)file_name;
 
 	initialise_file_data(&file_data);
-	count_file_lines(file_data, file_name);
-	get_file(file_data, file_name); // fd is closed here
+	count_file_lines(file_data, file_name); // fd is opened and closed here
+	get_file(file_data, file_name); // fd is opened and closed here
 	get_config(file_data);
 	// parse configuration
 	get_map(file_data);
-	// parse map
+	//parse_map(file_data->map);
 }
 
 /*
