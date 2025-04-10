@@ -27,8 +27,15 @@ SOURCES = main.c \
 	  validate_input.c \
 	  parsing.c \
 	  cleanup.c
+	  cube_draw.c \
+	  cube_player.c \
+	  cube_movement.c \
+	  cube_rotation.c \
+	  cube_init.c \
+	  cube_exit.c \
+	  cube_raycasting.c 
 
-###BONUS = ./_bonus.c \
+###BONUS = ./_bonus.c 
 
 SRCS = $(addprefix $(SRC_DIR)/,$(SOURCES))
 ###BONUS_SRC = $(addprefix $(BONUS_DIR)/,$(BONUS))
@@ -45,10 +52,11 @@ LIBFT = $(LIBFT_DIR)/libft.a
 # MLX42 dependencies - dl dynamically loaded lib, glfw graphics library framework m math library
 
 MLXLIB_FLAGS = $(MLX_DIR)/build/libmlx42.a -ldl -lglfw -lm
+# MLXLIB_FLAGS = $(MLX_DIR)/build/libmlx42.a -lglfw -framework Cocoa -framework OpenGL -framework IOKit
 LIBFT_FLAGS = -L $(LIBFT_DIR) -lft
 
 CC = cc
-CFLAGS = -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror -g 
 
 RM = rm -rf
 
