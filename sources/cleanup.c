@@ -6,7 +6,7 @@
 /*   By: mdahlstr <mdahlstr@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/03 13:25:34 by mdahlstr          #+#    #+#             */
-/*   Updated: 2025/04/10 13:28:26 by mdahlstr         ###   ########.fr       */
+/*   Updated: 2025/04/10 17:50:11 by mdahlstr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,3 +31,5 @@ void	free_file_data(t_file_data *file_data)
 	free(file_data->east_texture);
 	free(file_data);
 }
+
+// free2darray

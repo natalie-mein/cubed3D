@@ -6,13 +6,53 @@
 /*   By: mdahlstr <mdahlstr@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/02 14:59:28 by mdahlstr          #+#    #+#             */
-/*   Updated: 2025/04/10 14:56:40 by mdahlstr         ###   ########.fr       */
+/*   Updated: 2025/04/10 18:38:06 by mdahlstr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h"
 #include <fcntl.h>   // For open() and O_RDONLY // No idea why it's not compiling without this here :(
 #include "parsing.h"
+
+static int get_fd(char *file_name)
+{
+	int	fd;
+
+	(void)file_name;
+	//fd = open("maps/simple_map.cub", O_RDONLY);
+	fd = open("maps/valid_maps/test.cub", O_RDONLY);
+	if (fd == -1)
+		perror("Error opening file");
+	return (fd);
+}
+
+void	count_file_lines(t_file_data *file_data, char *file_name)
+{
+	int		fd;
+	int		i;
+	char	*line;
+	
+	fd = get_fd(file_name);
+	if (fd == -1)
+	{
+		free_file_data(file_data);
+		exit(EXIT_FAILURE);
+	}
+	i = 0;
+	while ((line = get_next_line(fd)) != NULL)
+	{
+		if (i >= MAX_LINES - 1)
+		{
+			perror("Map file has too many lines");
+			break ;
+		}
+		free(line);
+		i++;
+	}
+	file_data->file_line_count = i;
+	close(fd);
+}
+
 
 // initialise every field in file_data with zeros
 static void	initialise_file_data(t_file_data **file_data)
@@ -26,21 +66,13 @@ static void	initialise_file_data(t_file_data **file_data)
 	}
 }
 
-static int get_fd(char *file_name)
-{
-	int	fd;
+// HERE IS WHERE THE FILE NAME IS TEMPORARILY HARDCODED ////////////////////////////////////
 
-	(void)file_name;
-	fd = open("maps/simple_map.cub", O_RDONLY);
-	if (fd == -1)
-		perror("Error opening file");
-	return (fd);
-}
 
 static void get_file(t_file_data *file_data, char *file_name)
 {
 	int		fd;
-	size_t	i;
+	int		i;
 	char	*line;
 
 	(void)file_name;
@@ -52,7 +84,7 @@ static void get_file(t_file_data *file_data, char *file_name)
 		exit(EXIT_FAILURE);
 	}
 	#if DEBUG
-	printf("Success: FD = %d\n", fd);
+	printf("Success. File opened. FD = %d\n\n", fd);
 	#endif
 	// Allocate memory for file_data->map (assuming a max number of lines) // COUNT LINES FIRST?
 	file_data->file = malloc(sizeof(char *) * MAX_LINES);
@@ -65,26 +97,24 @@ static void get_file(t_file_data *file_data, char *file_name)
 	// read and store lines
 	i = 0;
 	// copy_file_content(file_data->file, fd)
-	while ((line = get_next_line(fd)) != NULL)
+	#if DEBUG
+	printf("\n\n---------FILE CONTENTS--------------------------\n\n");
+	#endif
+	while (i < file_data->file_line_count)
 	{
+		line = get_next_line(fd);
 		#if DEBUG
-		printf("  %s", line);
+		printf("%s", line);
 		#endif
-		if (i >= MAX_LINES - 1)
-		{
-			perror("Map file has too many lines");
-			break ;
-		}
 		file_data->file[i] = ft_strdup(line);
 		free(line);
 		i++;
 	}
 	#if DEBUG
-	printf("--------------------------------------------------------------\n\n");
-	printf("Lines in file: %ld\n", i);
+	printf("\n\n---------PARSED DATA----------------------------\n\n");
+	printf("\nFile line count: %d\n", i);
 	#endif
 	file_data->file[i] = NULL;
-	file_data->file_lines = i;
 	close(fd);
 }
 
@@ -110,7 +140,7 @@ int get_next_number(const char *line, int *index)
 	while (line[*index] >= '0' && line[*index] <= '9')
 		(*index)++;
 	num = ft_atoi(&line[start]);
-	while (line[*index] == ' ' || line[*index] == '\n') // SHOULD THIS BE CHECKED???? ////////////////////////////
+	while (line[*index] == ' ' || line[*index] == '\n')
 		(*index)++;
 	if (line[*index] != ',' && line[*index] != '\0')
 		return (ERROR);
@@ -121,20 +151,21 @@ int get_next_number(const char *line, int *index)
 
 // checks for numbers smaller than 0 and larger than 255
 // checks if there are other characters after the last number
-int	parse_rgb(char *trimmed_line, int *r, int *g, int *b)
+int	parse_rgb(char *trimmed_line, t_colour *colour_s)
 {
 	int	i;
 
 	i = 0;
-	*r = get_next_number(trimmed_line, &i);
-	if (*r < 0 || *r > 255)
+	colour_s->r = get_next_number(trimmed_line, &i);
+	colour_s->g = get_next_number(trimmed_line, &i);
+	colour_s->b = get_next_number(trimmed_line, &i);
+	if (colour_s->r < 0 || colour_s->r > 255
+		|| colour_s->g < 0 || colour_s->g > 255
+		|| colour_s->b < 0 || colour_s->b > 255)
+	{
+		ft_putendl_fd("Error\nRGB values must be between 0 and 255", 2);
 		return (0);
-	*g = get_next_number(trimmed_line, &i);
-	if (*g < 0 || *g > 255)
-		return (0);
-	*b = get_next_number(trimmed_line, &i);
-	if (*b < 0 || *b > 255)
-		return (0);
+	}
 	while (trimmed_line[i] == ' ')
 		i++;
 	if (trimmed_line[i] != '\0')
@@ -142,26 +173,27 @@ int	parse_rgb(char *trimmed_line, int *r, int *g, int *b)
 	return (1);
 }
 
-// get RGB values and converts them to hex colour.
-char	*get_colour(char *line)
+int	create_rgb(t_colour *colour_s)
 {
-	char	*trimmed_line;
-	//char	*hex_colour;
-	int		r;
-	int		g;
-	int		b;
+	return (0xFFFFFF & (colour_s->r << 16 | colour_s->g << 8 | colour_s->b));
+}
 
+// get RGB values and converts them to hex colour.
+// through bitwise shift operations
+int	get_colour(char *line)
+{
+	char		*trimmed_line;
+	t_colour	colour_s;
+
+	ft_bzero(&colour_s, sizeof(t_colour));
 	line = line + 1;
 	trimmed_line = ft_strtrim(line, " \n");
-	if (!parse_rgb(trimmed_line, &r, &g, &b))
+	if (!parse_rgb(trimmed_line, &colour_s))
 		printf("RGB parsing error\n");
-	//hex_colour = get_hex(r, g, b);
-	#if DEBUG
-	printf("R=%d, G=%d, B=%d\n", r, g, b);
-	#endif
-	return (trimmed_line);
-	//return (hex_colour);
+	colour_s.colour = create_rgb(&colour_s);
+	return (colour_s.colour);
 }
+
 
 
 // get map configuration:
@@ -172,7 +204,7 @@ static void	get_config(t_file_data *file_data)
 	char	*line;
 
 	y = 0;
-	while (y < file_data->file_lines)
+	while (y < file_data->file_line_count)
 	{
 		line = file_data->file[y];
 		while (ft_iswhitespace(*line)) // skip leading spaces
@@ -189,15 +221,53 @@ static void	get_config(t_file_data *file_data)
 			file_data->ceiling_colour = get_colour(line);
 		if (ft_strncmp(line, "F ", 2) == 0)
 			file_data->floor_colour = get_colour(line);
+		//free(line);
 		y++;
 	}
 	#if DEBUG
-	printf("'NO' texture      --> [%s]\n", file_data->north_texture);
-	printf("'SO' texture      --> [%s]\n", file_data->south_texture);
-	printf("'WE' texture      --> [%s]\n", file_data->west_texture);
-	printf("'EA' texture      --> [%s]\n", file_data->east_texture);
-	printf("Floor colour      --> [%s]\n", file_data->floor_colour );
-	printf("Ceiling colour    --> [%s]\n", file_data->ceiling_colour);
+	printf("NO texture      --> [%s]\n", file_data->north_texture);
+	printf("SO texture      --> [%s]\n", file_data->south_texture);
+	printf("WE texture      --> [%s]\n", file_data->west_texture);
+	printf("EA texture      --> [%s]\n", file_data->east_texture);
+	printf("Floor colour    --> [0x%08X]\n", file_data->floor_colour);
+	printf("Ceiling colour  --> [0x%08X]\n", file_data->ceiling_colour);
+	#endif
+}
+
+void	get_map(t_file_data	*file_data)
+{
+	int		y;
+	int		x;
+	char	*line;
+	//int		map_line_count;
+
+	y = 0;
+	#if DEBUG
+	printf("\n\n-----------EXTRACTED MAP--------------------------\n\n");
+	#endif
+	file_data->map = malloc(sizeof(char *) * (file_data->file_line_count + 1));
+	if (!file_data->map)
+		return ; // or handle the error properly // TO DO /////////////////////////////////////
+	while (y < file_data->file_line_count)
+	{
+		x = 0;
+		line = file_data->file[y];
+		while (ft_iswhitespace(line[x]))
+			x++;
+		if (line[x] == '1')
+		{
+			file_data->map[y] = ft_strdup(line);
+			file_data->map_line_count++;
+		}
+			#if DEBUG
+		if (file_data->map[y])
+			printf("%s", file_data->map[y]);
+		#endif
+		y++;
+	}
+	file_data->map[file_data->map_line_count] = NULL;
+	#if DEBUG
+	printf("\nMap line count: %d\n", file_data->map_line_count);
 	#endif
 }
 
@@ -209,10 +279,11 @@ void	parse_file(char *file_name, t_file_data *file_data)
 	(void)file_name;
 
 	initialise_file_data(&file_data);
+	count_file_lines(file_data, file_name);
 	get_file(file_data, file_name); // fd is closed here
 	get_config(file_data);
 	// parse configuration
-	//get_map(file_data);
+	get_map(file_data);
 	// parse map
 }
 

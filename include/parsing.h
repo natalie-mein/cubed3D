@@ -6,7 +6,7 @@
 /*   By: mdahlstr <mdahlstr@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/02 15:15:42 by mdahlstr          #+#    #+#             */
-/*   Updated: 2025/04/10 14:51:16 by mdahlstr         ###   ########.fr       */
+/*   Updated: 2025/04/10 16:47:53 by mdahlstr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,13 @@
 
 # define DEBUG 1
 # define MAX_LINES 50
+
+typedef struct s_colour {
+	int				r;
+	int				g;
+	int				b;
+	int				colour;
+}				t_colour;
 
 /*   input validation   */
 void		validate_input(int argc, char *file_name);

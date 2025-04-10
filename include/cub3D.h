@@ -6,7 +6,7 @@
 /*   By: mdahlstr <mdahlstr@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/03 15:42:09 by nmeintje          #+#    #+#             */
-/*   Updated: 2025/04/10 13:25:29 by mdahlstr         ###   ########.fr       */
+/*   Updated: 2025/04/10 18:06:39 by mdahlstr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,14 +38,15 @@
 typedef struct s_file_data
 {
 	char	**file;
+	int		file_line_count;
 	char	**map;
-	int		file_lines;
+	int		map_line_count;
 	char	*north_texture;
 	char	*south_texture;
 	char	*west_texture;
 	char	*east_texture;
-	char	*ceiling_colour;
-	char	*floor_colour;
+	int		ceiling_colour;
+	int		floor_colour;
 } t_file_data;
 
 /*   errors */
