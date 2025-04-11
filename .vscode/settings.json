@@ -1,6 +1,10 @@
 {
     "cmake.sourceDirectory": "/home/mdahlstr/Documents/cubed/libraries/MLX42",
     "files.associations": {
-        "random": "c"
+        "random": "c",
+        "array": "c",
+        "string": "c",
+        "string_view": "c",
+        "span": "c"
     }
 }

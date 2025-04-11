@@ -6,23 +6,12 @@
 /*   By: mdahlstr <mdahlstr@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/02 15:15:42 by mdahlstr          #+#    #+#             */
-/*   Updated: 2025/04/10 16:47:53 by mdahlstr         ###   ########.fr       */
+/*   Updated: 2025/04/11 17:54:09 by mdahlstr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PARSING_H
 # define PARSING_H
-
-# include "cub3D.h"
-# include <unistd.h> //open close read write
-# include <stdlib.h> //malloc free etc
-# include <stdio.h> //printf
-# include <sys/time.h> //gettimeofday
-# include <string.h> //strerror
-# include <error.h> //perror
-# include <math.h> //math library
-# include "../libraries/MLX42/include/MLX42/MLX42.h"
-# include "../libraries/libft/libft.h"
 
 # define DEBUG 1
 # define MAX_LINES 50
@@ -34,8 +23,18 @@ typedef struct s_colour {
 	int				colour;
 }				t_colour;
 
-/*   input validation   */
-void		validate_input(int argc, char *file_name);
+/*
+typedef struct s_file_data
+{
+	char	**file;
+	int		n_lines;
+	//char	**map; // data->map->matrix
+	int		map_n_lines;
+
+} t_file_data;
+*/
+
+
 
 /*   map parsing   */
 //void		parse_map(char *file_name, t_game *game);

@@ -6,7 +6,7 @@
 #    By: mdahlstr <mdahlstr@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/03/03 11:27:05 by nmeintje          #+#    #+#              #
-#    Updated: 2025/04/03 13:32:47 by mdahlstr         ###   ########.fr        #
+#    Updated: 2025/04/11 14:54:13 by mdahlstr         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,18 +22,17 @@ OBJ_DIR = $(SRC_DIR)/objects
 
 #source and object files
 SOURCES = main.c \
-	  cube_errors.c \
-	  cube_hooks.c \
-	  validate_input.c \
-	  parsing.c \
-	  cleanup.c
-	  cube_draw.c \
-	  cube_player.c \
-	  cube_movement.c \
-	  cube_rotation.c \
-	  cube_init.c \
-	  cube_exit.c \
-	  cube_raycasting.c 
+	cube_errors.c \
+	cube_hooks.c \
+	validate_input.c \
+	parsing.c \
+	cube_draw.c \
+	cube_player.c \
+	cube_movement.c \
+	cube_rotation.c \
+	cube_init.c \
+	cube_exit.c \
+	cube_raycasting.c
 
 ###BONUS = ./_bonus.c 
 
@@ -94,13 +93,13 @@ clean:
 ###	@$(RM) $(BONUS_OBJ_DIR)
 	@$(RM) $(MLX_DIR)/build
 	@make -C $(LIBFT_DIR) clean
-        
+		
 fclean: clean
 	@$(RM) $(NAME)
 ###     @$(RM) $(NAME)_bonus
 	@$(RM) $(MLX_DIR)
 	@make -C $(LIBFT_DIR) fclean
-                
+				
 re:	fclean all
 
 .PHONY: all clean fclean re

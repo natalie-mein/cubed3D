@@ -6,7 +6,7 @@
 /*   By: mdahlstr <mdahlstr@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/03 15:48:34 by nmeintje          #+#    #+#             */
-/*   Updated: 2025/04/10 13:29:23 by mdahlstr         ###   ########.fr       */
+/*   Updated: 2025/04/11 17:29:57 by mdahlstr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,11 @@
 
 // exit() is allowed in the project
 // so the program might stop at void functions
+/*
 int	main(int argc, char **argv)
 {
 	t_file_data	*file_data;
+	t_data		data;
 	char		*file_name;
 
 	(void)argc;
@@ -30,12 +32,10 @@ int	main(int argc, char **argv)
 	if (!mlx)
 		ft_error();
 
-	/* Do stuff */
-
 	// Create and display the image.
-	mlx_image_t* img = mlx_new_image(mlx, 256, 256);
-	if (!img || (mlx_image_to_window(mlx, img, 0, 0) < 0))
-		ft_error();
+	//mlx_image_t* img = mlx_new_image(mlx, 256, 256);
+	//if (!img || (mlx_image_to_window(mlx, img, 0, 0) < 0))
+	//	ft_error();
 
 	// Even after the image is being displayed, we can still modify the buffer.
 	mlx_put_pixel(img, 0, 0, 0xFF0000FF);
@@ -48,15 +48,22 @@ int	main(int argc, char **argv)
 	free_file_data(file_data); // free the file_data struct.
 	return (SUCCESS);
 }
-/* // Natalie Main
-#include "raycasting.h"
+*/
 
-int	main(void)
+// Natalie Main
+
+int	main(int argc, char **argv)
 {
-	t_data data;
+	t_data		data;
+	char		*filename;
 
-	if (init_data(&data) == 0)
+	(void)argc; // this should be
+	//validate_input(argc, argv[1]); // no memory freeing necessary on error.
+	filename = argv[1];
+	// initialise map data only.
+	if (init_data(&data) == 0) 
 		return (EXIT_FAILURE);
+	parse_file(filename, &data); // this function closes the fd // frees data and exits in case of error
 	if (init_game(&data) == 0)
 		return (EXIT_FAILURE);
 	//printf("Before mlx loop\n");
@@ -64,4 +71,4 @@ int	main(void)
 	//printf("after mlx_loop\n");
 	exit_game(&data);
 	return (0);
-} */
+} 

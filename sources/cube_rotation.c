@@ -3,14 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   cube_rotation.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nmeintje <nmeintje@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: mdahlstr <mdahlstr@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/07 12:05:17 by nmeintje          #+#    #+#             */
-/*   Updated: 2025/04/07 12:05:19 by nmeintje         ###   ########.fr       */
+/*   Updated: 2025/04/11 17:45:36 by mdahlstr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "raycasting.h"
+#include "cub3D.h"
 
 void    rotate_left(t_data *data)
 {

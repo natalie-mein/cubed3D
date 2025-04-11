@@ -3,18 +3,22 @@
 /*                                                        :::      ::::::::   */
 /*   raycasting.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nmeintje <nmeintje@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: mdahlstr <mdahlstr@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/02 15:16:04 by nmeintje          #+#    #+#             */
-/*   Updated: 2025/04/02 15:16:06 by nmeintje         ###   ########.fr       */
+/*   Updated: 2025/04/11 17:57:39 by mdahlstr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef RAYCASTING_H
 # define RAYCASTING_H
 
-# include "cubed3D.h"
 //# include <math.h>
+# include <stdbool.h>
+# include "../MLX42/include/MLX42/MLX42.h"
+# include "parsing.h"
+# include "cub3D.h" /// NOT VERY GOOD I KNOW
+# include <stdio.h> ////////////////////////////////////////////////////////////////
 
 //error.h is not a library. Must delete in the main later.
 // can delete later
@@ -33,7 +37,6 @@ typedef enum s_dir
 	EAST,
 	WEST,
 }	t_dir;
-
 
 typedef struct s_move
 {
@@ -83,19 +86,6 @@ typedef struct s_game
 	int		map_w;
 	int		map_h;
 } t_game;
-
-typedef struct s_data
-{
-	mlx_t		*mlx; // MLX pointer
-	mlx_image_t	*image; // MLX window pointer
-	void		*textures[5]; // MLX image pointers (on the stack)
-	int			player_x; //starting position of player
-	int			player_y;
-	char		player_dir; // cardinal direction of player start 'N', 'S', 'E', 'W'
-	t_game		*map; // Map pointer (contains map details - preferably kept on the stack)
-	t_player	*player;
-	t_ray		*ray;
-}	t_data;
 
 void	raycast(t_data *data);
 void	draw_map(t_data *data, char **map);

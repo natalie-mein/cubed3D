@@ -1,5 +1,17 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   cube_draw.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mdahlstr <mdahlstr@student.hive.fi>        +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/04/11 17:43:56 by mdahlstr          #+#    #+#             */
+/*   Updated: 2025/04/11 17:44:30 by mdahlstr         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "raycasting.h"
+#include "cub3D.h"
 
 void draw_tile(t_data *data, int x, int y, uint32_t color)
 {
@@ -26,16 +38,16 @@ void draw_map(t_data *data, char **map)
 	char    tile;
 	uint32_t color;
 
-	data->map->map_h = 0;
+	data->map_data->map_h = 0;
 	x = 0;
 	y = 0;
-	data->map->map_w = ft_strlen(map[0]);
-	while (map[data->map->map_h] != NULL)
-		data->map->map_h++;
-	while (y < data->map->map_h)
+	data->map_data->map_w = ft_strlen(map[0]);
+	while (map[data->map_data->map_h] != NULL)
+		data->map_data->map_h++;
+	while (y < data->map_data->map_h)
 	{
 		x = 0;
-		while (x < data->map->map_w)
+		while (x < data->map_data->map_w)
 		{
 			tile = map[y][x];
 			if (tile == '1')
@@ -66,7 +78,7 @@ void render_game(void *param)
 		printf("Failed to create image!\n");
 		return;
 	}
-	draw_map(data, data->map->matrix);
+	draw_map(data, data->map_data->map_grid);
 	move_player(data);
 	draw_player(data);
 	raycast(data);

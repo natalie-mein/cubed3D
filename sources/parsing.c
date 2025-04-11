@@ -6,116 +6,72 @@
 /*   By: mdahlstr <mdahlstr@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/02 14:59:28 by mdahlstr          #+#    #+#             */
-/*   Updated: 2025/04/10 19:04:01 by mdahlstr         ###   ########.fr       */
+/*   Updated: 2025/04/11 17:50:11 by mdahlstr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3D.h"
-#include <fcntl.h>   // For open() and O_RDONLY // No idea why it's not compiling without this here :(
-#include "parsing.h"
+#include "../include/cub3D.h"
+#include "../include/parsing.h"
 
 static int get_fd(char *file_name)
 {
 	int	fd;
 
 	(void)file_name;
-	//fd = open("maps/simple_map.cub", O_RDONLY);
-	fd = open("maps/valid_maps/test.cub", O_RDONLY);
+	fd = open("maps/simple_map.cub", O_RDONLY); /////////////////////////////////////////
+	//fd = open("maps/valid_maps/test.cub", O_RDONLY);
 	if (fd == -1)
 		perror("Error opening file");
 	return (fd);
 }
 
-void	count_file_lines(t_file_data *file_data, char *file_name)
+void	count_file_lines(char *filename, t_data *data)
 {
-	int		fd;
 	int		i;
 	char	*line;
+	int		fd;
 	
-	fd = get_fd(file_name);
-	if (fd == -1)
-	{
-		free_file_data(file_data);
-		exit(EXIT_FAILURE);
-	}
+	fd = get_fd(filename);
+	// handle fd error
 	i = 0;
 	while ((line = get_next_line(fd)) != NULL)
 	{
 		if (i >= MAX_LINES - 1)
 		{
 			perror("Map file has too many lines");
+			if (line)
+				free(line);
+			line = NULL;
+			close(fd);
 			break ;
 		}
 		free(line);
 		i++;
 	}
-	file_data->file_line_count = i;
-	close(fd);
+	data->map_data->map_len = i;
 }
 
 
-// initialise every field in file_data with zeros
-static void	initialise_file_data(t_file_data **file_data)
+// initialise every field in map_data with zeros
+void	initialise_map_data(t_data *data)
 {
-	*file_data = ft_calloc(1, sizeof(t_file_data));
-	if (!*file_data)
+	data->map_data = ft_calloc(1, sizeof(t_map_data));
+	if (!data->map_data)
 	{
 		ft_putendl_fd("Error", 2); // improve ////////////////////////////////// TO DO
-		ft_putendl_fd("Memory allocation failure for file_data struct", 2);
+		ft_putendl_fd("Memory allocation failure for map_data struct", 2);
+		// free stuff
 		exit(EXIT_FAILURE);
 	}
 }
 
-// HERE IS WHERE THE FILE NAME IS TEMPORARILY HARDCODED ////////////////////////////////////
-
-
-static void get_file(t_file_data *file_data, char *file_name)
+void	parse_line(t_data *data, char *line)
 {
-	int		fd;
-	int		i;
-	char	*line;
-
-	(void)file_name;
-	//line = NULL;
-	fd = get_fd(file_name);
-	if (fd == -1)
+	if (!data || !line)
 	{
-		free_file_data(file_data);
-		exit(EXIT_FAILURE);
-	}
-	#if DEBUG
-	printf("Success. File opened. FD = %d\n\n", fd);
-	#endif
-	// Allocate memory for file_data->map (assuming a max number of lines) // COUNT LINES FIRST?
-	file_data->file = malloc(sizeof(char *) * MAX_LINES);
-	if (!file_data->file)
-	{
-		perror("Memory allocation failed");
-		close(fd);
-		exit(EXIT_FAILURE);
-	}
-	// read and store lines
-	i = 0;
-	// copy_file_content(file_data->file, fd)
-	#if DEBUG
-	printf("\n\n---------FILE CONTENTS--------------------------\n\n");
-	#endif
-	while (i < file_data->file_line_count)
-	{
-		line = get_next_line(fd);
-		#if DEBUG
-		printf("%s", line);
-		#endif
-		file_data->file[i] = ft_strdup(line);
-		free(line);
-		i++;
-	}
-	#if DEBUG
-	printf("\n\n---------PARSED DATA----------------------------\n\n");
-	printf("\nFile line count: %d\n", i);
-	#endif
-	file_data->file[i] = NULL;
-	close(fd);
+		// do anything else here?
+		return ;
+	}	
 }
 
 char	*get_texture_path(char *line)
@@ -198,98 +154,103 @@ int	get_colour(char *line)
 
 // get map configuration:
 // colours and character position
-static void	get_config(t_file_data *file_data)
+static void	get_config(char *filename, t_data *data)
 {
 	int		y;
 	char	*line;
+	int		fd;
 
 	y = 0;
-	while (y < file_data->file_line_count)
+	fd = get_fd(filename);
+	// handle fd error
+	while (y < data->map_data->file_len)
 	{
-		line = file_data->file[y];
+		//line = data->map_data->file[y]; //
+		line = get_next_line(fd);
 		while (ft_iswhitespace(*line)) // skip leading spaces
 			line++;
 		if (ft_strncmp(line, "NO", 2) == 0)
-			file_data->north_texture = get_texture_path(line);
+			data->map_data->no_texture = get_texture_path(line);
 		if (ft_strncmp(line, "SO ", 3) == 0)
-			file_data->south_texture = get_texture_path(line);
+			data->map_data->so_texture = get_texture_path(line);
 		if (ft_strncmp(line, "WE ", 3) == 0)
-			file_data->west_texture = get_texture_path(line);
+			data->map_data->we_texture = get_texture_path(line);
 		if (ft_strncmp(line, "EA ", 3) == 0)
-			file_data->east_texture = get_texture_path(line);
+			data->map_data->ea_texture = get_texture_path(line);
 		if (ft_strncmp(line, "C ", 2) == 0)
-			file_data->ceiling_colour = get_colour(line);
+			data->map_data->ceiling_colour = get_colour(line);
 		if (ft_strncmp(line, "F ", 2) == 0)
-			file_data->floor_colour = get_colour(line);
-		//free(line);
+			data->map_data->floor_colour = get_colour(line);
+		free(line);
 		y++;
 	}
 	#if DEBUG
-	printf("NO texture      --> [%s]\n", file_data->north_texture);
-	printf("SO texture      --> [%s]\n", file_data->south_texture);
-	printf("WE texture      --> [%s]\n", file_data->west_texture);
-	printf("EA texture      --> [%s]\n", file_data->east_texture);
-	printf("Floor colour    --> [0x%08X]\n", file_data->floor_colour);
-	printf("Ceiling colour  --> [0x%08X]\n", file_data->ceiling_colour);
+	printf("NO texture      --> [%s]\n", data->map_data->no_texture);
+	printf("SO texture      --> [%s]\n", data->map_data->so_texture);
+	printf("WE texture      --> [%s]\n", data->map_data->we_texture);
+	printf("EA texture      --> [%s]\n", data->map_data->ea_texture);
+	printf("Floor colour    --> [0x%08X]\n", data->map_data->floor_colour);
+	printf("Ceiling colour  --> [0x%08X]\n", data->map_data->ceiling_colour);
 	#endif
+	close (fd);
 }
 
 // Copy map WITHOUT checking for errors till the end of the file.
 // One the first line starting with 1 is found, all next lines are copied
-void	get_map(t_file_data	*file_data)
+void	get_map(char *filename, t_data *data)
 {
 	int		y;
 	int		x;
 	char	*line;
-	//int		map_line_count;
 	int		in_map;
+	int		fd;
 
-	y = 0;
 	in_map = 0;
 	#if DEBUG
 	printf("\n\n-----------EXTRACTED MAP--------------------------\n\n");
 	#endif
-	file_data->map = malloc(sizeof(char *) * (file_data->file_line_count + 1));
-	if (!file_data->map)
+	data->map_data->map_grid = malloc(sizeof(char *) * (data->map_data->map_len + 1));
+	if (!data->map_data->map_grid)
 		return ; // or handle the error properly // TO DO /////////////////////////////////////
-	while (y < file_data->file_line_count)
+	fd = get_fd(filename);
+	y = 0;
+		while (y < data->map_data->map_len)
 	{
 		x = 0;
-		line = file_data->file[y];
+		line = get_next_line(fd);
 		while (ft_iswhitespace(line[x]))
 			x++;
 		if (line[x] == '1' || in_map == 1)
 		{
 			in_map = 1;
-			file_data->map[y] = ft_strdup(line);
-			file_data->map_line_count++;
+			data->map_data->map_grid[y] = ft_strdup(line);
+			data->map_data->map_len++;
 		}
 		#if DEBUG
-		if (file_data->map[y])
-			printf("%s", file_data->map[y]);
+		if (data->map_data->map_grid[y])
+			printf("%s", data->map_data->map_grid[y]);
 		#endif
+		free(line);
 		y++;
 	}
-	file_data->map[file_data->map_line_count] = NULL;
+	data->map_data->map_grid[data->map_data->map_len] = NULL;
 	#if DEBUG
-	printf("\nMap line count: %d\n", file_data->map_line_count);
+	printf("\nMap line count: %d\n", data->map_data->map_len);
 	#endif
+	close(fd);
 }
 
-// 1. initialises the file_data struct
+// 1. initialises the map_data struct
 // 2. get map configuration
 // 3. get map structure
-void	parse_file(char *file_name, t_file_data *file_data)
+void	parse_file(char *filename, t_data *data)
 {
-	(void)file_name;
-
-	initialise_file_data(&file_data);
-	count_file_lines(file_data, file_name); // fd is opened and closed here
-	get_file(file_data, file_name); // fd is opened and closed here
-	get_config(file_data);
-	// parse configuration
-	get_map(file_data);
-	//parse_map(file_data->map);
+	count_file_lines(filename, data); // fd closed here in case of error
+	get_config(filename, data); // fd closed here in case of error
+	// parse configuration(data) // if any error occurs, free all memory and exit
+	get_map(filename, data); // fd closed here in case of error
+	//parse_map(data); // if any error occurs, free all memory and exit
+	//close(fd); // fd is open and closed as needed
 }
 
 /*
@@ -345,7 +306,7 @@ Exactly One Player Position
 The map should contain only one of N, S, E, or W.
 
 5. Convert and Store the Map
-The validated map is stored in the file_data’s data structure (e.g., char **map).
+The validated map is stored in the map_data’s data structure (e.g., char **map).
 
 The player’s starting position is extracted and stored separately for initialization.
 

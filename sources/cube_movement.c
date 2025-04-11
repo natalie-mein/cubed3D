@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cube_movement.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nmeintje <nmeintje@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: mdahlstr <mdahlstr@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/07 11:44:37 by nmeintje          #+#    #+#             */
-/*   Updated: 2025/04/07 11:44:38 by nmeintje         ###   ########.fr       */
+/*   Updated: 2025/04/11 17:45:02 by mdahlstr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,19 +19,19 @@ int	is_wall(t_data *data, double new_x, double new_y)
 
 	map_x = (int)(new_x + PADDING);
 	map_y = (int)(new_y + PADDING);
-	if (data->map->matrix[map_y][map_x] == '1')
+	if (data->map_data->map_grid[map_y][map_x] == '1')
 		return (1);
 	map_x = (int)(new_x - PADDING);
 	map_y = (int)(new_y + PADDING);
-	if (data->map->matrix[map_y][map_x] == '1')
+	if (data->map_data->map_grid[map_y][map_x] == '1')
 		return (1);
 	map_x = (int)(new_x + PADDING);
 	map_y = (int)(new_y - PADDING);
-	if (data->map->matrix[map_y][map_x] == '1')
+	if (data->map_data->map_grid[map_y][map_x] == '1')
 		return (1);
 	map_x = (int)(new_x - PADDING);
 	map_y = (int)(new_y - PADDING);
-	if (data->map->matrix[map_y][map_x] == '1')
+	if (data->map_data->map_grid[map_y][map_x] == '1')
 		return (1);
 	return (0);
 }

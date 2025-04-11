@@ -3,14 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   cube_raycasting.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nmeintje <nmeintje@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: mdahlstr <mdahlstr@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/02 12:05:43 by nmeintje          #+#    #+#             */
-/*   Updated: 2025/04/02 12:05:45 by nmeintje         ###   ########.fr       */
+/*   Updated: 2025/04/11 17:47:16 by mdahlstr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "raycasting.h"
+#include "../include/raycasting.h"
+#include <math.h>
 //#include "../include/cube3D.h"
 
 // update all to use t_data instead of ray and player
@@ -34,7 +35,7 @@ void	calculate_differential(t_data *data)
 			data->ray->side = 1;
 		}
 		// check if ray has hit a wall
-		if (data->map->matrix[(int)data->ray->r_pos_y][(int)data->ray->r_pos_x] == '1')
+		if (data->map_data->map_grid[(int)data->ray->r_pos_y][(int)data->ray->r_pos_x] == '1')
 		{
 			data->ray->hit = 1;
 			break ;
