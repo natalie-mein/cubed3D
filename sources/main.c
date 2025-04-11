@@ -48,3 +48,20 @@ int	main(int argc, char **argv)
 	free_file_data(file_data); // free the file_data struct.
 	return (SUCCESS);
 }
+/* // Natalie Main
+#include "raycasting.h"
+
+int	main(void)
+{
+	t_data data;
+
+	if (init_data(&data) == 0)
+		return (EXIT_FAILURE);
+	if (init_game(&data) == 0)
+		return (EXIT_FAILURE);
+	//printf("Before mlx loop\n");
+	mlx_loop(data.mlx);
+	//printf("after mlx_loop\n");
+	exit_game(&data);
+	return (0);
+} */
