@@ -6,12 +6,12 @@
 /*   By: mdahlstr <mdahlstr@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/02 14:59:28 by mdahlstr          #+#    #+#             */
-/*   Updated: 2025/04/14 16:38:22 by mdahlstr         ###   ########.fr       */
+/*   Updated: 2025/04/14 16:51:13 by mdahlstr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/cub3D.h"
-#include "../include/parsing.h"
+#include "cub3D.h"
+#include "parsing.h"
 
 
 

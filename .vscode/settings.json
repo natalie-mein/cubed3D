@@ -10,6 +10,7 @@
         "mlx42.h": "c",
         "chrono": "c",
         "variant": "c",
-        "raycasting.h": "c"
+        "raycasting.h": "c",
+        "libft.h": "c"
     }
 }
