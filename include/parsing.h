@@ -6,7 +6,7 @@
 /*   By: mdahlstr <mdahlstr@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/02 15:15:42 by mdahlstr          #+#    #+#             */
-/*   Updated: 2025/04/11 17:54:09 by mdahlstr         ###   ########.fr       */
+/*   Updated: 2025/04/14 16:44:33 by mdahlstr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,9 @@
 
 # define DEBUG 1
 # define MAX_LINES 50
+
+# include "raycasting.h"
+# include "cub3D.h"
 
 typedef struct s_colour {
 	int				r;
@@ -34,9 +37,9 @@ typedef struct s_file_data
 } t_file_data;
 */
 
-
-
 /*   map parsing   */
 //void		parse_map(char *file_name, t_game *game);
+
+
 
 #endif

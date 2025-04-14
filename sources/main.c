@@ -6,7 +6,7 @@
 /*   By: mdahlstr <mdahlstr@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/03 15:48:34 by nmeintje          #+#    #+#             */
-/*   Updated: 2025/04/11 17:29:57 by mdahlstr         ###   ########.fr       */
+/*   Updated: 2025/04/14 16:32:07 by mdahlstr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,18 +57,15 @@ int	main(int argc, char **argv)
 	t_data		data;
 	char		*filename;
 
-	(void)argc; // this should be
+	(void)argc; // this should be 2
 	//validate_input(argc, argv[1]); // no memory freeing necessary on error.
 	filename = argv[1];
-	// initialise map data only.
-	if (init_data(&data) == 0) 
-		return (EXIT_FAILURE);
+	init_data(&data); 
 	parse_file(filename, &data); // this function closes the fd // frees data and exits in case of error
-	if (init_game(&data) == 0)
-		return (EXIT_FAILURE);
+	init_game(&data);
 	//printf("Before mlx loop\n");
 	mlx_loop(data.mlx);
 	//printf("after mlx_loop\n");
-	exit_game(&data);
-	return (0);
+	exit_game(&data, SUCCESS);
+	//return (SUCCESS);
 } 

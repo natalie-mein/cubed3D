@@ -6,7 +6,7 @@
 #    By: mdahlstr <mdahlstr@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/03/03 11:27:05 by nmeintje          #+#    #+#              #
-#    Updated: 2025/04/11 14:54:13 by mdahlstr         ###   ########.fr        #
+#    Updated: 2025/04/14 16:37:25 by mdahlstr         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,6 +26,7 @@ SOURCES = main.c \
 	cube_hooks.c \
 	validate_input.c \
 	parsing.c \
+	parsing_utils1.c \
 	cube_draw.c \
 	cube_player.c \
 	cube_movement.c \

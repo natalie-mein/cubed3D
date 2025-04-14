@@ -6,12 +6,12 @@
 /*   By: mdahlstr <mdahlstr@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/11 17:43:56 by mdahlstr          #+#    #+#             */
-/*   Updated: 2025/04/11 17:44:30 by mdahlstr         ###   ########.fr       */
+/*   Updated: 2025/04/14 12:05:45 by mdahlstr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "raycasting.h"
 #include "cub3D.h"
+#include "raycasting.h"
 
 void draw_tile(t_data *data, int x, int y, uint32_t color)
 {

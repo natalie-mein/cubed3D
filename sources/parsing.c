@@ -6,104 +6,14 @@
 /*   By: mdahlstr <mdahlstr@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/02 14:59:28 by mdahlstr          #+#    #+#             */
-/*   Updated: 2025/04/11 17:50:11 by mdahlstr         ###   ########.fr       */
+/*   Updated: 2025/04/14 16:38:22 by mdahlstr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/cub3D.h"
 #include "../include/parsing.h"
 
-static int get_fd(char *file_name)
-{
-	int	fd;
 
-	(void)file_name;
-	fd = open("maps/simple_map.cub", O_RDONLY); /////////////////////////////////////////
-	//fd = open("maps/valid_maps/test.cub", O_RDONLY);
-	if (fd == -1)
-		perror("Error opening file");
-	return (fd);
-}
-
-void	count_file_lines(char *filename, t_data *data)
-{
-	int		i;
-	char	*line;
-	int		fd;
-	
-	fd = get_fd(filename);
-	// handle fd error
-	i = 0;
-	while ((line = get_next_line(fd)) != NULL)
-	{
-		if (i >= MAX_LINES - 1)
-		{
-			perror("Map file has too many lines");
-			if (line)
-				free(line);
-			line = NULL;
-			close(fd);
-			break ;
-		}
-		free(line);
-		i++;
-	}
-	data->map_data->map_len = i;
-}
-
-
-// initialise every field in map_data with zeros
-void	initialise_map_data(t_data *data)
-{
-	data->map_data = ft_calloc(1, sizeof(t_map_data));
-	if (!data->map_data)
-	{
-		ft_putendl_fd("Error", 2); // improve ////////////////////////////////// TO DO
-		ft_putendl_fd("Memory allocation failure for map_data struct", 2);
-		// free stuff
-		exit(EXIT_FAILURE);
-	}
-}
-
-void	parse_line(t_data *data, char *line)
-{
-	if (!data || !line)
-	{
-		// do anything else here?
-		return ;
-	}	
-}
-
-char	*get_texture_path(char *line)
-{
-	char	*trimmed_line;
-
-	line = line + 2;
-	trimmed_line = ft_strtrim(line, " \n");
-	return (trimmed_line);
-}
-
-// gets numbers from a string, separated by commas
-int get_next_number(const char *line, int *index)
-{
-	int	start;
-	int	num;
-
-	start = *index;
-	num = 0;
-	if (line[*index] < '0' || line[*index] > '9')
-		return (ERROR);
-	while (line[*index] >= '0' && line[*index] <= '9')
-		(*index)++;
-	num = ft_atoi(&line[start]);
-	while (line[*index] == ' ' || line[*index] == '\n')
-		(*index)++;
-	if (line[*index] != ',' && line[*index] != '\0')
-		return (ERROR);
-	if (line[*index] == ',')
-		(*index)++;
-	return (num);
-}
 
 // checks for numbers smaller than 0 and larger than 255
 // checks if there are other characters after the last number
@@ -154,6 +64,7 @@ int	get_colour(char *line)
 
 // get map configuration:
 // colours and character position
+// Calculate map_h before map is extracted.
 static void	get_config(char *filename, t_data *data)
 {
 	int		y;
@@ -161,13 +72,13 @@ static void	get_config(char *filename, t_data *data)
 	int		fd;
 
 	y = 0;
-	fd = get_fd(filename);
-	// handle fd error
+	fd = get_fd(filename, data);
 	while (y < data->map_data->file_len)
 	{
-		//line = data->map_data->file[y]; //
 		line = get_next_line(fd);
-		while (ft_iswhitespace(*line)) // skip leading spaces
+		if (!line)
+			break ;
+		while (ft_iswhitespace(*line))
 			line++;
 		if (ft_strncmp(line, "NO", 2) == 0)
 			data->map_data->no_texture = get_texture_path(line);
@@ -181,10 +92,12 @@ static void	get_config(char *filename, t_data *data)
 			data->map_data->ceiling_colour = get_colour(line);
 		if (ft_strncmp(line, "F ", 2) == 0)
 			data->map_data->floor_colour = get_colour(line);
-		free(line);
+		else  if (line[0] == '1')
+			data->map_data->map_h++;
 		y++;
 	}
 	#if DEBUG
+	printf("Map len in get_config function: %d\n", data->map_data->map_h);
 	printf("NO texture      --> [%s]\n", data->map_data->no_texture);
 	printf("SO texture      --> [%s]\n", data->map_data->so_texture);
 	printf("WE texture      --> [%s]\n", data->map_data->we_texture);
@@ -195,6 +108,12 @@ static void	get_config(char *filename, t_data *data)
 	close (fd);
 }
 
+bool	is_map_line(const char *line) {
+	while (*line && ft_iswhitespace(*line))
+		line++;
+	return (*line == '1'); // Map lines start with '1'
+}
+
 // Copy map WITHOUT checking for errors till the end of the file.
 // One the first line starting with 1 is found, all next lines are copied
 void	get_map(char *filename, t_data *data)
@@ -202,40 +121,61 @@ void	get_map(char *filename, t_data *data)
 	int		y;
 	int		x;
 	char	*line;
-	int		in_map;
+	bool	in_map;
 	int		fd;
+	int		line_w;
 
-	in_map = 0;
-	#if DEBUG
-	printf("\n\n-----------EXTRACTED MAP--------------------------\n\n");
-	#endif
-	data->map_data->map_grid = malloc(sizeof(char *) * (data->map_data->map_len + 1));
+	in_map = false;
+	line_w = 0;
+	data->map_data->map_grid = malloc(sizeof(char *) * (data->map_data->map_h + 1)); // HERE!!
 	if (!data->map_data->map_grid)
-		return ; // or handle the error properly // TO DO /////////////////////////////////////
-	fd = get_fd(filename);
-	y = 0;
-		while (y < data->map_data->map_len)
 	{
-		x = 0;
-		line = get_next_line(fd);
-		while (ft_iswhitespace(line[x]))
-			x++;
-		if (line[x] == '1' || in_map == 1)
-		{
-			in_map = 1;
-			data->map_data->map_grid[y] = ft_strdup(line);
-			data->map_data->map_len++;
-		}
-		#if DEBUG
-		if (data->map_data->map_grid[y])
-			printf("%s", data->map_data->map_grid[y]);
-		#endif
-		free(line);
+		ft_putendl_fd("Error\nMemory allocation failure for map grid", 2);
+		return ;
+	}
+	// initialise all elements of map grid:
+	y = 0;
+	while (y <= data->map_data->map_h)
+	{
+		data->map_data->map_grid[y] = NULL;
 		y++;
 	}
-	data->map_data->map_grid[data->map_data->map_len] = NULL;
+	fd = get_fd(filename, data);
+	y = 0;
+	while ((line = get_next_line(fd)) != NULL)
+	{
+		x = 0;
+		while (ft_iswhitespace(line[x]))
+			x++;
+		if (is_map_line(line + x) || in_map)
+		{
+			in_map = true;
+			data->map_data->map_grid[y] = ft_strdup(line);
+			if (!data->map_data->map_grid[y])
+			{
+				ft_putendl_fd("Error\nMemory allocation failure for map line", 2);
+				free(line);
+				close(fd);
+				return ;
+			}
+			line_w = ft_strlen(line);
+			if (data->map_data->map_w < line_w -1)
+				data->map_data->map_w = line_w -1;
+			y++;
+			
+		}
+		free(line);
+	}
+	data->map_data->map_grid[y] = NULL;
+	//data->map_data->map_grid[data->map_data->map_h] = NULL;
 	#if DEBUG
-	printf("\nMap line count: %d\n", data->map_data->map_len);
+	printf("\n\n-----------EXTRACTED MAP--------------------------\n\n");
+	printf("\nMap heigh: %d\n", data->map_data->map_h);
+	printf("Map width: %d\n", data->map_data->map_w);
+	for (int i = 0; i < y; i++)
+	{
+		printf("%s", data->map_data->map_grid[i]);
+	}
 	#endif
 	close(fd);
 }
@@ -314,6 +254,5 @@ The player’s starting position is extracted and stored separately for initiali
 If any validation fails, an appropriate error message is printed (using perror() or strerror(errno), if applicable).
 
 The program exits gracefully, freeing any allocated memory.
-
 
 */

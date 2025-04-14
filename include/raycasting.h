@@ -6,7 +6,7 @@
 /*   By: mdahlstr <mdahlstr@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/02 15:16:04 by nmeintje          #+#    #+#             */
-/*   Updated: 2025/04/11 17:57:39 by mdahlstr         ###   ########.fr       */
+/*   Updated: 2025/04/14 16:33:11 by mdahlstr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@
 # include <stdbool.h>
 # include "../MLX42/include/MLX42/MLX42.h"
 # include "parsing.h"
-# include "cub3D.h" /// NOT VERY GOOD I KNOW
 # include <stdio.h> ////////////////////////////////////////////////////////////////
 
 //error.h is not a library. Must delete in the main later.
@@ -47,7 +46,6 @@ typedef struct s_move
 	bool	rotate_l;
 	bool	rotate_r;
 }	t_move;
-
 
 typedef struct s_player
 {
@@ -80,12 +78,41 @@ typedef struct s_ray
 	double	perp_wall_dist;
 }   t_ray;
 
+/*
 typedef struct s_game
 {
 	char	**matrix;
 	int		map_w;
 	int		map_h;
 } t_game;
+*/
+
+typedef struct s_map_data
+{
+    int     file_len;
+    char    *no_texture;
+    char    *so_texture;
+    char    *ea_texture;
+    char    *we_texture;
+    int     floor_colour;
+    int     ceiling_colour;
+    char    **map_grid;
+	//int	map_len;
+	int		map_w;
+	int		map_h;
+} t_map_data;
+
+typedef struct s_data
+{
+	t_map_data	*map_data;
+	mlx_t				*mlx; // MLX pointer
+	mlx_image_t			*image; // MLX window pointer
+	int					player_x; //starting position of player
+	int					player_y;
+	char				player_dir; // cardinal direction of player start 'N', 'S', 'E', 'W'
+	t_player			*player;
+	t_ray				*ray;
+}	t_data;
 
 void	raycast(t_data *data);
 void	draw_map(t_data *data, char **map);
@@ -103,8 +130,8 @@ void    rotate_left(t_data *data);
 void    rotate_right(t_data *data);
 void    render_game(void *param);
 
-int		init_data(t_data *data);
-int		init_game(t_data *data);
-void    exit_game(t_data *data);
+void	init_data(t_data *data);
+void	init_game(t_data *data);
+void    exit_game(t_data *data, int exit_code);
 
 #endif
