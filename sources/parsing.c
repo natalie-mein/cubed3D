@@ -6,14 +6,12 @@
 /*   By: mdahlstr <mdahlstr@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/02 14:59:28 by mdahlstr          #+#    #+#             */
-/*   Updated: 2025/04/14 16:51:13 by mdahlstr         ###   ########.fr       */
+/*   Updated: 2025/04/14 17:47:35 by mdahlstr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h"
 #include "parsing.h"
-
-
 
 // checks for numbers smaller than 0 and larger than 255
 // checks if there are other characters after the last number
@@ -55,12 +53,31 @@ int	get_colour(char *line)
 	line = line + 1;
 	trimmed_line = ft_strtrim(line, " \n");
 	if (!parse_rgb(trimmed_line, &colour_s))
-		printf("RGB parsing error\n");
+		ft_putendl_fd("RGB parsing error", 2);
 	colour_s.colour = create_rgb(&colour_s);
 	return (colour_s.colour);
 }
 
+void	process_config_line(char *line, t_data *data)
+{
 
+	while (ft_iswhitespace(*line))
+		line++;
+	if (ft_strncmp(line, "NO", 2) == 0)
+		data->map_data->no_texture = get_texture_path(line);
+	if (ft_strncmp(line, "SO ", 3) == 0)
+		data->map_data->so_texture = get_texture_path(line);
+	if (ft_strncmp(line, "WE ", 3) == 0)
+		data->map_data->we_texture = get_texture_path(line);
+	if (ft_strncmp(line, "EA ", 3) == 0)
+		data->map_data->ea_texture = get_texture_path(line);
+	if (ft_strncmp(line, "C ", 2) == 0)
+		data->map_data->ceiling_colour = get_colour(line);
+	if (ft_strncmp(line, "F ", 2) == 0)
+		data->map_data->floor_colour = get_colour(line);
+	else  if (line[0] == '1')
+		data->map_data->map_h++;
+}
 
 // get map configuration:
 // colours and character position
@@ -73,27 +90,9 @@ static void	get_config(char *filename, t_data *data)
 
 	y = 0;
 	fd = get_fd(filename, data);
-	while (y < data->map_data->file_len)
+	while (y < data->map_data->file_len  && (line = get_next_line(fd)) != NULL)
 	{
-		line = get_next_line(fd);
-		if (!line)
-			break ;
-		while (ft_iswhitespace(*line))
-			line++;
-		if (ft_strncmp(line, "NO", 2) == 0)
-			data->map_data->no_texture = get_texture_path(line);
-		if (ft_strncmp(line, "SO ", 3) == 0)
-			data->map_data->so_texture = get_texture_path(line);
-		if (ft_strncmp(line, "WE ", 3) == 0)
-			data->map_data->we_texture = get_texture_path(line);
-		if (ft_strncmp(line, "EA ", 3) == 0)
-			data->map_data->ea_texture = get_texture_path(line);
-		if (ft_strncmp(line, "C ", 2) == 0)
-			data->map_data->ceiling_colour = get_colour(line);
-		if (ft_strncmp(line, "F ", 2) == 0)
-			data->map_data->floor_colour = get_colour(line);
-		else  if (line[0] == '1')
-			data->map_data->map_h++;
+		process_config_line(line, data);
 		y++;
 	}
 	#if DEBUG
@@ -114,12 +113,69 @@ bool	is_map_line(const char *line) {
 	return (*line == '1'); // Map lines start with '1'
 }
 
+bool	allocate_map_grid(t_data *data)
+{
+	int	y;
+
+	y = 0;
+	data->map_data->map_grid = malloc(sizeof(char *) * (data->map_data->map_h + 1));
+	if (!data->map_data->map_grid)
+	{
+		ft_putendl_fd("Error\nMemory allocation failure for map grid", 2);
+		return (false);
+	}
+	y = 0;
+	while (y <= data->map_data->map_h)
+	{
+		data->map_data->map_grid[y] = NULL;
+		y++;
+	}
+	return (true);
+}
+
+int skip_whitespace(char *line)
+{
+	int x = 0;
+	while (ft_iswhitespace(line[x]))
+		x++;
+	return (x);
+}
+
+bool	parse_map_line(char *line, int *line_w, t_data *data, int y)
+{
+	data->map_data->map_grid[y] = ft_strdup(line);
+	if (!data->map_data->map_grid[y])
+	{
+		ft_putendl_fd("Error\nMemory allocation failure for map line", 2);
+		return false;
+	}
+	*line_w = ft_strlen(line);
+	if (data->map_data->map_w < *line_w - 1)
+		data->map_data->map_w = *line_w - 1;
+	return (true);
+}
+
+bool	process_line(char *line, bool *in_map, int *y, t_data *data)
+{
+	int	x;
+
+	x = skip_whitespace(line);
+	if (is_map_line(line + x) || *in_map)
+	{
+		*in_map = true;
+		if (!parse_map_line(line, &data->map_data->map_w, data, *y))
+			return false;
+		(*y)++;
+	}
+	free(line);
+	return (true);
+}
+
 // Copy map WITHOUT checking for errors till the end of the file.
 // One the first line starting with 1 is found, all next lines are copied
 void	get_map(char *filename, t_data *data)
 {
 	int		y;
-	int		x;
 	char	*line;
 	bool	in_map;
 	int		fd;
@@ -127,47 +183,19 @@ void	get_map(char *filename, t_data *data)
 
 	in_map = false;
 	line_w = 0;
-	data->map_data->map_grid = malloc(sizeof(char *) * (data->map_data->map_h + 1)); // HERE!!
-	if (!data->map_data->map_grid)
-	{
-		ft_putendl_fd("Error\nMemory allocation failure for map grid", 2);
-		return ;
-	}
-	// initialise all elements of map grid:
-	y = 0;
-	while (y <= data->map_data->map_h)
-	{
-		data->map_data->map_grid[y] = NULL;
-		y++;
-	}
+	if (!(allocate_map_grid(data)))
+		exit_game(data, EXIT_FAILURE);
 	fd = get_fd(filename, data);
 	y = 0;
 	while ((line = get_next_line(fd)) != NULL)
 	{
-		x = 0;
-		while (ft_iswhitespace(line[x]))
-			x++;
-		if (is_map_line(line + x) || in_map)
-		{
-			in_map = true;
-			data->map_data->map_grid[y] = ft_strdup(line);
-			if (!data->map_data->map_grid[y])
-			{
-				ft_putendl_fd("Error\nMemory allocation failure for map line", 2);
-				free(line);
-				close(fd);
-				return ;
-			}
-			line_w = ft_strlen(line);
-			if (data->map_data->map_w < line_w -1)
-				data->map_data->map_w = line_w -1;
-			y++;
-			
-		}
+		if (process_line(line, &in_map, &y, data))
+			continue ;
 		free(line);
+		close(fd);
+		return ;
 	}
 	data->map_data->map_grid[y] = NULL;
-	//data->map_data->map_grid[data->map_data->map_h] = NULL;
 	#if DEBUG
 	printf("\n\n-----------EXTRACTED MAP--------------------------\n\n");
 	printf("\nMap heigh: %d\n", data->map_data->map_h);
