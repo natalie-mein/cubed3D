@@ -6,56 +6,39 @@
 /*   By: mdahlstr <mdahlstr@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/02 14:59:28 by mdahlstr          #+#    #+#             */
-/*   Updated: 2025/04/14 17:47:35 by mdahlstr         ###   ########.fr       */
+/*   Updated: 2025/04/15 12:25:51 by mdahlstr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h"
 #include "parsing.h"
 
-// checks for numbers smaller than 0 and larger than 255
-// checks if there are other characters after the last number
-int	parse_rgb(char *trimmed_line, t_colour *colour_s)
+void	count_file_lines(char *filename, t_data *data)
 {
-	int	i;
-
+	int		i;
+	char	*line;
+	int		fd;
+	
+	fd = get_fd(filename, data);
 	i = 0;
-	colour_s->r = get_next_number(trimmed_line, &i);
-	colour_s->g = get_next_number(trimmed_line, &i);
-	colour_s->b = get_next_number(trimmed_line, &i);
-	if (colour_s->r < 0 || colour_s->r > 255
-		|| colour_s->g < 0 || colour_s->g > 255
-		|| colour_s->b < 0 || colour_s->b > 255)
+	while ((line = get_next_line(fd)) != NULL)
 	{
-		ft_putendl_fd("Error\nRGB values must be between 0 and 255", 2);
-		return (0);
-	}
-	while (trimmed_line[i] == ' ')
+		if (i >= MAX_LINES - 1)
+		{
+			perror("Map file has too many lines");
+			if (line)
+				free(line);
+			line = NULL;
+			close(fd);
+			break ;
+		}
+		free(line);
 		i++;
-	if (trimmed_line[i] != '\0')
-		return (0);
-	return (1);
-}
-
-int	create_rgb(t_colour *colour_s)
-{
-	return (0xFFFFFF & (colour_s->r << 16 | colour_s->g << 8 | colour_s->b));
-}
-
-// get RGB values and converts them to hex colour.
-// through bitwise shift operations
-int	get_colour(char *line)
-{
-	char		*trimmed_line;
-	t_colour	colour_s;
-
-	ft_bzero(&colour_s, sizeof(t_colour));
-	line = line + 1;
-	trimmed_line = ft_strtrim(line, " \n");
-	if (!parse_rgb(trimmed_line, &colour_s))
-		ft_putendl_fd("RGB parsing error", 2);
-	colour_s.colour = create_rgb(&colour_s);
-	return (colour_s.colour);
+	}
+	data->map_data->file_len = i;
+	#if DEBUG
+	printf("File len in count_file_lines: %d\n", data->map_data->file_len);
+	#endif
 }
 
 void	process_config_line(char *line, t_data *data)
@@ -93,6 +76,7 @@ static void	get_config(char *filename, t_data *data)
 	while (y < data->map_data->file_len  && (line = get_next_line(fd)) != NULL)
 	{
 		process_config_line(line, data);
+		free(line);
 		y++;
 	}
 	#if DEBUG
@@ -105,70 +89,6 @@ static void	get_config(char *filename, t_data *data)
 	printf("Ceiling colour  --> [0x%08X]\n", data->map_data->ceiling_colour);
 	#endif
 	close (fd);
-}
-
-bool	is_map_line(const char *line) {
-	while (*line && ft_iswhitespace(*line))
-		line++;
-	return (*line == '1'); // Map lines start with '1'
-}
-
-bool	allocate_map_grid(t_data *data)
-{
-	int	y;
-
-	y = 0;
-	data->map_data->map_grid = malloc(sizeof(char *) * (data->map_data->map_h + 1));
-	if (!data->map_data->map_grid)
-	{
-		ft_putendl_fd("Error\nMemory allocation failure for map grid", 2);
-		return (false);
-	}
-	y = 0;
-	while (y <= data->map_data->map_h)
-	{
-		data->map_data->map_grid[y] = NULL;
-		y++;
-	}
-	return (true);
-}
-
-int skip_whitespace(char *line)
-{
-	int x = 0;
-	while (ft_iswhitespace(line[x]))
-		x++;
-	return (x);
-}
-
-bool	parse_map_line(char *line, int *line_w, t_data *data, int y)
-{
-	data->map_data->map_grid[y] = ft_strdup(line);
-	if (!data->map_data->map_grid[y])
-	{
-		ft_putendl_fd("Error\nMemory allocation failure for map line", 2);
-		return false;
-	}
-	*line_w = ft_strlen(line);
-	if (data->map_data->map_w < *line_w - 1)
-		data->map_data->map_w = *line_w - 1;
-	return (true);
-}
-
-bool	process_line(char *line, bool *in_map, int *y, t_data *data)
-{
-	int	x;
-
-	x = skip_whitespace(line);
-	if (is_map_line(line + x) || *in_map)
-	{
-		*in_map = true;
-		if (!parse_map_line(line, &data->map_data->map_w, data, *y))
-			return false;
-		(*y)++;
-	}
-	free(line);
-	return (true);
 }
 
 // Copy map WITHOUT checking for errors till the end of the file.
@@ -213,10 +133,10 @@ void	get_map(char *filename, t_data *data)
 // 3. get map structure
 void	parse_file(char *filename, t_data *data)
 {
-	count_file_lines(filename, data); // fd closed here in case of error
-	get_config(filename, data); // fd closed here in case of error
+	count_file_lines(filename, data);
+	get_config(filename, data);
 	// parse configuration(data) // if any error occurs, free all memory and exit
-	get_map(filename, data); // fd closed here in case of error
+	get_map(filename, data);
 	//parse_map(data); // if any error occurs, free all memory and exit
 	//close(fd); // fd is open and closed as needed
 }

@@ -6,16 +6,37 @@
 /*   By: mdahlstr <mdahlstr@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/05 20:07:50 by nmeintje          #+#    #+#             */
-/*   Updated: 2025/04/14 16:36:51 by mdahlstr         ###   ########.fr       */
+/*   Updated: 2025/04/15 12:28:34 by mdahlstr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h"
 #include "raycasting.h"
 
+// initialise every field in map_data with zeros
+void	initialise_map_data(t_data *data)
+{
+	data->map_data = ft_calloc(1, sizeof(t_map_data));
+	if (!data->map_data)
+	{
+		ft_putendl_fd("Error", 2); // improve ////////////////////////////////// TO DO
+		ft_putendl_fd("Memory allocation failure for map_data struct", 2);
+		// free stuff
+		exit(EXIT_FAILURE);
+	}
+	data->map_data->file_len = 0;
+	data->map_data->map_h = 0;
+	data->map_data->map_grid = NULL;
+	data->map_data->no_texture = NULL;
+	data->map_data->so_texture = NULL;
+	data->map_data->we_texture = NULL;
+	data->map_data->ea_texture = NULL;
+	data->map_data->map_h = 0;
+	data->map_data->map_w = 0;
+}
+
 void	init_data(t_data *data)
 {
-	initialise_map_data(data);
 	data->player = malloc(sizeof(t_player));
 	if (!data->player)
 		exit_game(data, EXIT_FAILURE);
@@ -28,6 +49,7 @@ void	init_data(t_data *data)
 	if (!data->ray)
 		exit_game(data, EXIT_FAILURE);
 	data->ray->screen_width = WIDTH; // set screen width for raycast
+	initialise_map_data(data);
 }
 
 void init_game(t_data *data)
@@ -58,26 +80,4 @@ void init_game(t_data *data)
 	init_player(data->player, 5, 5, 'N'); // this function is temporary until we merge
 	//draw_player(data);
 	mlx_key_hook(data->mlx, &key_hooks, data);
-}
-
-// initialise every field in map_data with zeros
-void	initialise_map_data(t_data *data)
-{
-	data->map_data = ft_calloc(1, sizeof(t_map_data));
-	if (!data->map_data)
-	{
-		ft_putendl_fd("Error", 2); // improve ////////////////////////////////// TO DO
-		ft_putendl_fd("Memory allocation failure for map_data struct", 2);
-		// free stuff
-		exit(EXIT_FAILURE);
-	}
-	data->map_data->file_len = 0;
-	data->map_data->map_h = 0;
-	data->map_data->map_grid = NULL;
-	data->map_data->no_texture = NULL;
-	data->map_data->so_texture = NULL;
-	data->map_data->we_texture = NULL;
-	data->map_data->ea_texture = NULL;
-	data->map_data->map_h = 0;
-	data->map_data->map_w = 0;
 }

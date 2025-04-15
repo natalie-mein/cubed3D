@@ -6,7 +6,7 @@
 /*   By: mdahlstr <mdahlstr@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/06 17:05:50 by nmeintje          #+#    #+#             */
-/*   Updated: 2025/04/09 13:42:38 by mdahlstr         ###   ########.fr       */
+/*   Updated: 2025/04/15 11:37:07 by mdahlstr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,12 +16,12 @@ static void	validate_argc(int argc)
 {
 	if (argc < 2)
 	{
-		printf("Error\nAdd a map file.\n"); ////////////////////////// TO DO /////////
+		ft_putendl_fd("Error\nAdd a map file.", 2);
 		exit(EXIT_FAILURE);
 	}
 	if (argc > 2)
 	{
-		printf("Error\nToo many arguments.\n");  ////////////////////////// TO DO /////////
+		ft_putendl_fd("Error\nToo many arguments.", 2);
 		exit(EXIT_FAILURE);
 	}
 }
@@ -34,7 +34,7 @@ static void	validate_file_name(char *map_file_name)
 	if (map_file_name[len - 4] != '.' || map_file_name[len - 3] != 'c'
 		|| map_file_name[len - 2] != 'u' || map_file_name[len - 1] != 'b')
 	{
-		printf("Error\nWrong file extension.\n");  ////////////////////////// TO DO /////////
+		ft_putendl_fd("Error\nWrong file extension.\n", 2);
 		exit(EXIT_FAILURE);
 	}
 }

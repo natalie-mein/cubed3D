@@ -6,11 +6,18 @@
 /*   By: mdahlstr <mdahlstr@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/14 16:35:24 by mdahlstr          #+#    #+#             */
-/*   Updated: 2025/04/14 16:38:26 by mdahlstr         ###   ########.fr       */
+/*   Updated: 2025/04/15 12:03:12 by mdahlstr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/cub3D.h"
+
+bool	is_map_line(const char *line)
+{
+	while (*line && ft_iswhitespace(*line))
+		line++;
+	return (*line == '1');
+}
 
 int get_fd(char *file_name, t_data *data)
 {
@@ -27,33 +34,7 @@ int get_fd(char *file_name, t_data *data)
 	return (fd);
 }
 
-void	count_file_lines(char *filename, t_data *data)
-{
-	int		i;
-	char	*line;
-	int		fd;
-	
-	fd = get_fd(filename, data);
-	i = 0;
-	while ((line = get_next_line(fd)) != NULL)
-	{
-		if (i >= MAX_LINES - 1)
-		{
-			perror("Map file has too many lines");
-			if (line)
-				free(line);
-			line = NULL;
-			close(fd);
-			break ;
-		}
-		free(line);
-		i++;
-	}
-	data->map_data->file_len = i;
-	#if DEBUG
-	printf("File len in count_file_lines: %d\n", data->map_data->file_len);
-	#endif
-}
+
 
 char	*get_texture_path(char *line)
 {

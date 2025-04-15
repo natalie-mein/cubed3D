@@ -6,7 +6,7 @@
 /*   By: mdahlstr <mdahlstr@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/08 13:45:55 by nmeintje          #+#    #+#             */
-/*   Updated: 2025/04/14 16:29:50 by mdahlstr         ###   ########.fr       */
+/*   Updated: 2025/04/15 12:34:55 by mdahlstr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,25 +38,25 @@ void	free_map_data(t_map_data *map_data)
 
 // free2darray
 
-void    free_data(t_data *data)
+void	free_data(t_data *data)
 {
 	int i;
 
 	i = 0;
 	if (data->map_data)
 		free_map_data(data->map_data); ///////////////////// ATTENTION
+	if (data->player->move)
+		free(data->player->move);
 	if (data->player)
 		free(data->player);
-	//if (data->map_data)
-	//	free(data->map_data);
 	if (data->ray)
 		free(data->ray);
-   // if (data)
+	// if (data)
 	//	free(data);
 }
 
 // exits with exit_code or simply returns in case of success
-void    exit_game(t_data *data, int exit_code)
+void	exit_game(t_data *data, int exit_code)
 {
 	free_data(data);
 	if (data->mlx)
@@ -64,6 +64,7 @@ void    exit_game(t_data *data, int exit_code)
 		mlx_close_window(data->mlx);
 		mlx_terminate(data->mlx);
 	}
+	//free(data); // Why is this causing an Invalid Free error in Valgrind?
 	exit(exit_code);
 }
 
