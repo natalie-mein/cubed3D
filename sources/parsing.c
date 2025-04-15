@@ -6,14 +6,15 @@
 /*   By: mdahlstr <mdahlstr@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/02 14:59:28 by mdahlstr          #+#    #+#             */
-/*   Updated: 2025/04/15 12:25:51 by mdahlstr         ###   ########.fr       */
+/*   Updated: 2025/04/15 18:58:48 by mdahlstr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h"
 #include "parsing.h"
 
-void	count_file_lines(char *filename, t_data *data)
+/* Counts file lines and map lines (map_h) */
+void	count_lines(char *filename, t_data *data)
 {
 	int		i;
 	char	*line;
@@ -25,84 +26,75 @@ void	count_file_lines(char *filename, t_data *data)
 	{
 		if (i >= MAX_LINES - 1)
 		{
-			perror("Map file has too many lines");
+			error_message("File has too many lines");
 			if (line)
-				free(line);
+				free(line); // free previous allocated lines
 			line = NULL;
 			close(fd);
-			break ;
+			exit_game(data, EXIT_FAILURE);
 		}
+		if (is_map_line(line))
+			data->map_data->map_h++;
 		free(line);
 		i++;
 	}
+	close(fd);
 	data->map_data->file_len = i;
 	#if DEBUG
-	printf("File len in count_file_lines: %d\n", data->map_data->file_len);
+	printf("File line count: %d\n", data->map_data->file_len);
+	printf("Map height: %d\n", data->map_data->map_h);
 	#endif
-}
-
-void	process_config_line(char *line, t_data *data)
-{
-
-	while (ft_iswhitespace(*line))
-		line++;
-	if (ft_strncmp(line, "NO", 2) == 0)
-		data->map_data->no_texture = get_texture_path(line);
-	if (ft_strncmp(line, "SO ", 3) == 0)
-		data->map_data->so_texture = get_texture_path(line);
-	if (ft_strncmp(line, "WE ", 3) == 0)
-		data->map_data->we_texture = get_texture_path(line);
-	if (ft_strncmp(line, "EA ", 3) == 0)
-		data->map_data->ea_texture = get_texture_path(line);
-	if (ft_strncmp(line, "C ", 2) == 0)
-		data->map_data->ceiling_colour = get_colour(line);
-	if (ft_strncmp(line, "F ", 2) == 0)
-		data->map_data->floor_colour = get_colour(line);
-	else  if (line[0] == '1')
-		data->map_data->map_h++;
 }
 
 // get map configuration:
 // colours and character position
-// Calculate map_h before map is extracted.
 static void	get_config(char *filename, t_data *data)
 {
 	int		y;
 	char	*line;
 	int		fd;
-
-	y = 0;
+	//int		config_count;
+	
 	fd = get_fd(filename, data);
+	y = 0;
+	//config_count = 0;
 	while (y < data->map_data->file_len  && (line = get_next_line(fd)) != NULL)
 	{
 		process_config_line(line, data);
 		free(line);
 		y++;
 	}
-	#if DEBUG
-	printf("Map len in get_config function: %d\n", data->map_data->map_h);
-	printf("NO texture      --> [%s]\n", data->map_data->no_texture);
-	printf("SO texture      --> [%s]\n", data->map_data->so_texture);
-	printf("WE texture      --> [%s]\n", data->map_data->we_texture);
-	printf("EA texture      --> [%s]\n", data->map_data->ea_texture);
-	printf("Floor colour    --> [0x%08X]\n", data->map_data->floor_colour);
-	printf("Ceiling colour  --> [0x%08X]\n", data->map_data->ceiling_colour);
-	#endif
 	close (fd);
+	//parse_config(data);
+	#if DEBUG
+	//printf("Map len in get_config function: %d\n", data->map_data->map_h);
+	if (data->map_data->no_texture)
+		printf("NO texture      --> [%s]\n", data->map_data->no_texture);
+	if (data->map_data->so_texture)
+		printf("SO texture      --> [%s]\n", data->map_data->so_texture);
+	if (data->map_data->we_texture)
+		printf("WE texture      --> [%s]\n", data->map_data->we_texture);
+	if (data->map_data->ea_texture)
+		printf("EA texture      --> [%s]\n", data->map_data->ea_texture);
+	if (data->map_data->floor_colour > -1)
+		printf("Floor colour    --> [0x%08X]\n", data->map_data->floor_colour);
+	if (data->map_data->ceiling_colour > -1)
+		printf("Ceiling colour  --> [0x%08X]\n", data->map_data->ceiling_colour);
+	#endif
 }
 
 // Copy map WITHOUT checking for errors till the end of the file.
-// One the first line starting with 1 is found, all next lines are copied
+// Once the first line starting with 1 is found, all next lines are copied
 void	get_map(char *filename, t_data *data)
 {
 	int		y;
 	char	*line;
 	bool	in_map;
 	int		fd;
-	int		line_w;
+	//int		line_w;
 
 	in_map = false;
-	line_w = 0;
+	//line_w = 0;
 	if (!(allocate_map_grid(data)))
 		exit_game(data, EXIT_FAILURE);
 	fd = get_fd(filename, data);
@@ -116,6 +108,12 @@ void	get_map(char *filename, t_data *data)
 		return ;
 	}
 	data->map_data->map_grid[y] = NULL;
+//////////////////////////////////////////////////
+	// PAD ALL MAP LINES -- shorter lines receive extra spaces at the end following the longest length.
+//	https://chatgpt.com/share/67fe815b-7240-800b-83c8-85d7ce518b1b
+//	1. copy all lines to a raw_map at first
+//  2. and then add them to the map_grid in the struct.
+	////////////////////////////////////////////////////////
 	#if DEBUG
 	printf("\n\n-----------EXTRACTED MAP--------------------------\n\n");
 	printf("\nMap heigh: %d\n", data->map_data->map_h);
@@ -126,6 +124,7 @@ void	get_map(char *filename, t_data *data)
 	}
 	#endif
 	close(fd);
+	//parse_map(data); // if any error occurs, free all memory and exit
 }
 
 // 1. initialises the map_data struct
@@ -133,11 +132,9 @@ void	get_map(char *filename, t_data *data)
 // 3. get map structure
 void	parse_file(char *filename, t_data *data)
 {
-	count_file_lines(filename, data);
+	count_lines(filename, data);
 	get_config(filename, data);
-	// parse configuration(data) // if any error occurs, free all memory and exit
 	get_map(filename, data);
-	//parse_map(data); // if any error occurs, free all memory and exit
 	//close(fd); // fd is open and closed as needed
 }
 

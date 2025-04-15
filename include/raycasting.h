@@ -6,7 +6,7 @@
 /*   By: mdahlstr <mdahlstr@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/02 15:16:04 by nmeintje          #+#    #+#             */
-/*   Updated: 2025/04/14 16:33:11 by mdahlstr         ###   ########.fr       */
+/*   Updated: 2025/04/15 16:59:18 by mdahlstr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,8 @@
 # define PADDING 0.1
 
 extern int map[MAP_HEIGHT][MAP_WIDTH];
+
+typedef struct s_map_data t_map_data;
 
 typedef enum s_dir
 {
@@ -78,33 +80,9 @@ typedef struct s_ray
 	double	perp_wall_dist;
 }   t_ray;
 
-/*
-typedef struct s_game
-{
-	char	**matrix;
-	int		map_w;
-	int		map_h;
-} t_game;
-*/
-
-typedef struct s_map_data
-{
-    int     file_len;
-    char    *no_texture;
-    char    *so_texture;
-    char    *ea_texture;
-    char    *we_texture;
-    int     floor_colour;
-    int     ceiling_colour;
-    char    **map_grid;
-	//int	map_len;
-	int		map_w;
-	int		map_h;
-} t_map_data;
-
 typedef struct s_data
 {
-	t_map_data	*map_data;
+	t_map_data			*map_data;
 	mlx_t				*mlx; // MLX pointer
 	mlx_image_t			*image; // MLX window pointer
 	int					player_x; //starting position of player

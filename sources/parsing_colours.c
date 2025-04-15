@@ -6,7 +6,7 @@
 /*   By: mdahlstr <mdahlstr@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/15 11:56:05 by mdahlstr          #+#    #+#             */
-/*   Updated: 2025/04/15 12:20:58 by mdahlstr         ###   ########.fr       */
+/*   Updated: 2025/04/15 17:33:05 by mdahlstr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,5 +55,6 @@ int	get_colour(char *line)
 		ft_putendl_fd("RGB parsing error", 2);
 	free(trimmed_line);
 	colour_s.colour = create_rgb(&colour_s);
+	//data->map_data->config_count++;
 	return (colour_s.colour);
 }

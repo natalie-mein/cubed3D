@@ -6,7 +6,7 @@
 /*   By: mdahlstr <mdahlstr@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/11 17:43:56 by mdahlstr          #+#    #+#             */
-/*   Updated: 2025/04/15 12:17:09 by mdahlstr         ###   ########.fr       */
+/*   Updated: 2025/04/15 17:38:15 by mdahlstr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,8 +41,8 @@ void draw_map(t_data *data, char **map)
 	data->map_data->map_h = 0;
 	x = 0;
 	y = 0;
-	//data->map_data->map_w = ft_strlen(map[0]);
-	while (map[data->map_data->map_h] != NULL)
+	data->map_data->map_w = ft_strlen(map[0]);
+	while (map[data->map_data->map_h] != NULL) /// SOMETHING IS WRONG HERE.
 		data->map_data->map_h++;
 	while (y < data->map_data->map_h)
 	{
