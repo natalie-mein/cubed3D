@@ -6,7 +6,7 @@
 /*   By: mdahlstr <mdahlstr@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/02 15:15:42 by mdahlstr          #+#    #+#             */
-/*   Updated: 2025/04/15 18:43:11 by mdahlstr         ###   ########.fr       */
+/*   Updated: 2025/04/16 15:51:03 by mdahlstr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,10 @@
 
 # define DEBUG 1
 # define MAX_LINES 50 // Figure out what is too much -------------------------------------
+
+# define RED 0
+# define GREEN 1
+# define BLUE 2
 
 # include "raycasting.h"
 # include "cub3D.h"
@@ -43,18 +47,17 @@ typedef struct s_colour {
 
 void		parse_file(char *filename, t_data *data);
 void		initialise_map_data(t_data *data);
-int 		get_next_number(const char *line, int *index);
+int 		get_next_number(const char *line, int *index, int colour);
 //char		*get_texture_path(char *line, t_data *data);
 char		*get_texture_path(char *line);
 int 		get_fd(char *file_name, t_data *data);
 void		count_lines(char *filename, t_data *data);
 bool		is_map_line(const char *line);
 
-int			parse_rgb(char *trimmed_line, t_colour *colour_s);
+bool		parse_rgb(char *trimmed_line, t_colour *colour_s);
 int			create_rgb(t_colour *colour_s);
 //int			get_colour(char *line, t_data *data);
-int			get_colour(char *line);
-
+int			get_colour(char *line, t_data *data);
 
 bool		allocate_map_grid(t_data *data);
 int			skip_whitespace(char *line);
@@ -62,8 +65,9 @@ bool		parse_map_line(char *line, t_data *data, int y);
 bool		process_line(char *line, bool *in_map, int *y, t_data *data);
 void		process_config_line(char *line, t_data *data);
 
-void		error_message(char *error_message);
+int			error_message(char *error_message, int code);
 
 void		parse_config(t_data *data);
+void		get_spawn_pos(t_data *data);
 
 #endif

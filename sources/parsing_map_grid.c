@@ -6,7 +6,7 @@
 /*   By: mdahlstr <mdahlstr@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/15 12:00:03 by mdahlstr          #+#    #+#             */
-/*   Updated: 2025/04/15 18:53:27 by mdahlstr         ###   ########.fr       */
+/*   Updated: 2025/04/16 15:25:14 by mdahlstr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ bool	allocate_map_grid(t_data *data)
 	data->map_data->map_grid = malloc(sizeof(char *) * (data->map_data->map_h + 1));
 	if (!data->map_data->map_grid)
 	{
-		error_message("Memory allocation failure for map grid");
+		error_message("Memory allocation failure for map grid", 0);
 		return (false);
 	}
 	y = 0;
@@ -50,15 +50,11 @@ bool	parse_map_line(char *line, t_data *data, int y)
 	data->map_data->map_grid[y] = ft_strdup(line);
 	if (!data->map_data->map_grid[y])
 	{
-		error_message("Memory allocation failure for map line");
+		error_message("Memory allocation failure for map line", 0);
 		return false;
 	}
 	if (data->map_data->map_w < len)
 		data->map_data->map_w = len;
-	#if DEBUG
-	printf("Line width: %d\n", len);
-	printf("Map width:  %d\n", data->map_data->map_w);
-	#endif
 	return (true);
 }
 

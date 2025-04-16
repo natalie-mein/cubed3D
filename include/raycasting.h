@@ -6,7 +6,7 @@
 /*   By: mdahlstr <mdahlstr@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/02 15:16:04 by nmeintje          #+#    #+#             */
-/*   Updated: 2025/04/15 16:59:18 by mdahlstr         ###   ########.fr       */
+/*   Updated: 2025/04/16 12:19:43 by mdahlstr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,13 +51,13 @@ typedef struct s_move
 
 typedef struct s_player
 {
-	double  pos_x; // x pos of player
-	double  pos_y; // y pos of player
-	double  dir_x; // x component of player direction
-	double  dir_y;  // y component of player direction
-	double  plane_x; //camera plane - perpendicular to direction vector
-	double  plane_y;
-	int		start_dir;
+	double	pos_x; // x pos of player
+	double	pos_y; // y pos of player
+	double	dir_x; // x component of player direction
+	double	dir_y;  // y component of player direction
+	double	plane_x; //camera plane - perpendicular to direction vector
+	double	plane_y;
+	char	start_dir;
 	t_move	*move;
 }   t_player;
 

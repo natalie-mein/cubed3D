@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cube_player.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nmeintje <nmeintje@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: mdahlstr <mdahlstr@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/07 10:09:36 by nmeintje          #+#    #+#             */
-/*   Updated: 2025/04/07 10:09:38 by nmeintje         ###   ########.fr       */
+/*   Updated: 2025/04/16 14:19:22 by mdahlstr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,40 +71,40 @@ void    player_direction(t_data *data)
 
 void    init_player(t_player *player, int start_x, int start_y, char dir)
 {
-    player->pos_x = start_x + 0.5; // center in the tile
-    player->pos_y = start_y + 0.5;
+	player->pos_x = start_x + 0.5; // center in the tile
+	player->pos_y = start_y + 0.5;
 
-    if (dir == 'N')
-    {
-        player->dir_x = 0;
-        player->dir_y = -1;
-        player->plane_x = 0.66;
-        player->plane_y = 0;
-    }
-    else if (dir == 'S')
-    {
-        player->dir_x = 0;
-        player->dir_y = 1;
-        player->plane_x = -0.66;
-        player->plane_y = 0;
-    }
-    else if (dir == 'E')
-    {
-        player->dir_x = 1;
-        player->dir_y = 0;
-        player->plane_x = 0;
-        player->plane_y = 0.66;
-    }
-    else if (dir == 'W')
-    {
-        player->dir_x = -1;
-        player->dir_y = 0;
-        player->plane_x = 0;
-        player->plane_y = -0.66;
-    }
+	if (dir == 'N')
+	{
+		player->dir_x = 0;
+		player->dir_y = -1;
+		player->plane_x = 0.66;
+		player->plane_y = 0;
+	}
+	else if (dir == 'S')
+	{
+		player->dir_x = 0;
+		player->dir_y = 1;
+		player->plane_x = -0.66;
+		player->plane_y = 0;
+	}
+	else if (dir == 'E')
+	{
+		player->dir_x = 1;
+		player->dir_y = 0;
+		player->plane_x = 0;
+		player->plane_y = 0.66;
+	}
+	else if (dir == 'W')
+	{
+		player->dir_x = -1;
+		player->dir_y = 0;
+		player->plane_x = 0;
+		player->plane_y = -0.66;
+	}
 }
 
-void    draw_player(t_data *data)
+void	draw_player(t_data *data)
 {
 	int pixel_x;
 	int pixel_y;

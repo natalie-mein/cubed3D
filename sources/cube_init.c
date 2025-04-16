@@ -6,7 +6,7 @@
 /*   By: mdahlstr <mdahlstr@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/05 20:07:50 by nmeintje          #+#    #+#             */
-/*   Updated: 2025/04/15 17:26:25 by mdahlstr         ###   ########.fr       */
+/*   Updated: 2025/04/16 14:51:03 by mdahlstr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,9 @@ void	init_data(t_data *data)
 	if (!data->ray)
 		exit_game(data, EXIT_FAILURE);
 	data->ray->screen_width = WIDTH; // set screen width for raycast
+	data->player_dir = '0';
+	data->player_y = 0;
+	data->player_x = 0;
 	initialise_map_data(data);
 }
 
@@ -80,6 +83,7 @@ void init_game(t_data *data)
 	//draw_map(data, data->map->matrix);
 	mlx_loop_hook(data->mlx, &render_game, data);
 	init_player(data->player, 5, 5, 'N'); // this function is temporary until we merge
+	//player_direction(data);
 	//draw_player(data);
 	mlx_key_hook(data->mlx, &key_hooks, data);
 }

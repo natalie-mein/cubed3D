@@ -6,7 +6,7 @@
 /*   By: mdahlstr <mdahlstr@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/02 14:59:28 by mdahlstr          #+#    #+#             */
-/*   Updated: 2025/04/15 18:58:48 by mdahlstr         ###   ########.fr       */
+/*   Updated: 2025/04/16 15:25:48 by mdahlstr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void	count_lines(char *filename, t_data *data)
 	{
 		if (i >= MAX_LINES - 1)
 		{
-			error_message("File has too many lines");
+			error_message("File has too many lines", 0);
 			if (line)
 				free(line); // free previous allocated lines
 			line = NULL;
@@ -127,14 +127,48 @@ void	get_map(char *filename, t_data *data)
 	//parse_map(data); // if any error occurs, free all memory and exit
 }
 
+void	get_spawn_pos(t_data *data)
+{
+	int		y;
+	int		x;
+	char	c;
+
+	y = 0;
+	x = 0;
+	while (y < data->map_data->map_h)
+	{
+		x = 0;
+		while (x < data->map_data->map_w)
+		{
+			c = data->map_data->map_grid[y][x];
+			if (ft_strchr("NSEW", c) != NULL)
+			{
+				data->player_dir = c;
+				data->player_y = y;
+				data->player_x = x;
+				#if DEBUG
+				printf("Player first position: y=%d, x=%d, direction=%c\n", data->player_y, data->player_x, data->player_dir);  // problems here
+				#endif
+				return ;
+			}
+			x++;
+		}
+		y++;
+	}
+	
+}
+
 // 1. initialises the map_data struct
 // 2. get map configuration
 // 3. get map structure
+// 4. get initial player position and direction.
 void	parse_file(char *filename, t_data *data)
 {
 	count_lines(filename, data);
 	get_config(filename, data);
 	get_map(filename, data);
+	get_spawn_pos(data);
+	//player_position(data);
 	//close(fd); // fd is open and closed as needed
 }
 

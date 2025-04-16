@@ -6,7 +6,7 @@
 /*   By: mdahlstr <mdahlstr@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/14 16:35:24 by mdahlstr          #+#    #+#             */
-/*   Updated: 2025/04/15 18:30:41 by mdahlstr         ###   ########.fr       */
+/*   Updated: 2025/04/16 15:51:18 by mdahlstr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,9 +25,9 @@ void	process_config_line(char *line, t_data *data)
 	else if (ft_strncmp(line, "EA ", 3) == 0)
 		data->map_data->ea_texture = get_texture_path(line);
 	else if (ft_strncmp(line, "C ", 2) == 0)
-		data->map_data->ceiling_colour = get_colour(line);
+		data->map_data->ceiling_colour = get_colour(line, data);
 	else if (ft_strncmp(line, "F ", 2) == 0)
-		data->map_data->floor_colour = get_colour(line);
+		data->map_data->floor_colour = get_colour(line, data);
 }
 /*
 void	process_config_line(char *line, t_data *data)
@@ -67,9 +67,10 @@ int get_fd(char *file_name, t_data *data)
 	fd = open("maps/valid_maps/test.cub", O_RDONLY);
 	//fd = open("maps/valid_maps/test_wrong_element_num.cub", O_RDONLY);
 	//fd = open("maps/valid_maps/too_many_elements.cub", O_RDONLY);
+	//fd = open("maps/invalid_maps/rgb_error.cub", O_RDONLY);
 	if (fd == -1)
 	{
-		error_message("Failed to open file");
+		error_message("Failed to open file", 0);
 		exit_game(data, EXIT_FAILURE);
 	}
 	return (fd);
@@ -89,24 +90,4 @@ char	*get_texture_path(char *line)
 	return (trimmed_line);
 }
 
-// gets numbers from a string, separated by commas
-int get_next_number(const char *line, int *index)
-{
-	int	start;
-	int	num;
 
-	start = *index;
-	num = 0;
-	if (line[*index] < '0' || line[*index] > '9')
-		return (ERROR);
-	while (line[*index] >= '0' && line[*index] <= '9')
-		(*index)++;
-	num = ft_atoi(&line[start]);
-	while (line[*index] == ' ' || line[*index] == '\n')
-		(*index)++;
-	if (line[*index] != ',' && line[*index] != '\0')
-		return (ERROR);
-	if (line[*index] == ',')
-		(*index)++;
-	return (num);
-}
