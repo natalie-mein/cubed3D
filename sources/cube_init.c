@@ -6,7 +6,7 @@
 /*   By: mdahlstr <mdahlstr@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/05 20:07:50 by nmeintje          #+#    #+#             */
-/*   Updated: 2025/04/16 14:51:03 by mdahlstr         ###   ########.fr       */
+/*   Updated: 2025/04/16 17:11:29 by mdahlstr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,11 +18,7 @@ void	initialise_map_data(t_data *data)
 {
 	data->map_data = ft_calloc(1, sizeof(t_map_data));
 	if (!data->map_data)
-	{
-		error_message("Memory allocation failure for map_data struct");
-		// free stuff
-		exit(EXIT_FAILURE);
-	}
+		error_message_exit("Memory allocation failure for map_data struct", data);
 	data->map_data->file_len = 0;
 	data->map_data->map_grid = NULL;
 	data->map_data->no_texture = NULL;

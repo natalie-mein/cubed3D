@@ -6,7 +6,7 @@
 /*   By: mdahlstr <mdahlstr@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/15 11:56:05 by mdahlstr          #+#    #+#             */
-/*   Updated: 2025/04/16 16:26:38 by mdahlstr         ###   ########.fr       */
+/*   Updated: 2025/04/16 17:13:09 by mdahlstr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,8 +61,7 @@ bool	parse_rgb(char *trimmed_line, t_colour *colour_s)
 		|| colour_s->g < 0 || colour_s->g > 255
 		|| colour_s->b < 0 || colour_s->b > 255)
 	{
-		error_message("RGB values must be between 0 and 255", 0);
-		return (false);
+		return (error_message("RGB values must be between 0 and 255", false));
 	}
 	while (trimmed_line[i] == ' ')
 		i++;
@@ -89,7 +88,7 @@ int	get_colour(char *line, t_data *data)
 	if (!parse_rgb(trimmed_line, &colour_s))
 	{
 		free(trimmed_line);
-		//free(line);
+		free(line);
 		exit_game(data, EXIT_FAILURE);
 	}
 	free(trimmed_line);

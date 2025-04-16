@@ -6,7 +6,7 @@
 /*   By: mdahlstr <mdahlstr@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/02 14:59:28 by mdahlstr          #+#    #+#             */
-/*   Updated: 2025/04/16 15:25:48 by mdahlstr         ###   ########.fr       */
+/*   Updated: 2025/04/16 16:40:14 by mdahlstr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,7 +124,6 @@ void	get_map(char *filename, t_data *data)
 	}
 	#endif
 	close(fd);
-	//parse_map(data); // if any error occurs, free all memory and exit
 }
 
 void	get_spawn_pos(t_data *data)
@@ -167,6 +166,7 @@ void	parse_file(char *filename, t_data *data)
 	count_lines(filename, data);
 	get_config(filename, data);
 	get_map(filename, data);
+	validate_map(data);
 	get_spawn_pos(data);
 	//player_position(data);
 	//close(fd); // fd is open and closed as needed

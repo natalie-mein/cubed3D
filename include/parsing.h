@@ -6,7 +6,7 @@
 /*   By: mdahlstr <mdahlstr@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/02 15:15:42 by mdahlstr          #+#    #+#             */
-/*   Updated: 2025/04/16 15:51:03 by mdahlstr         ###   ########.fr       */
+/*   Updated: 2025/04/16 16:57:41 by mdahlstr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,13 +61,16 @@ int			get_colour(char *line, t_data *data);
 
 bool		allocate_map_grid(t_data *data);
 int			skip_whitespace(char *line);
-bool		parse_map_line(char *line, t_data *data, int y);
+bool		get_map_line(char *line, t_data *data, int y);
 bool		process_line(char *line, bool *in_map, int *y, t_data *data);
 void		process_config_line(char *line, t_data *data);
 
 int			error_message(char *error_message, int code);
+void		error_message_exit(char *error_message, t_data *data);
 
 void		parse_config(t_data *data);
 void		get_spawn_pos(t_data *data);
+
+void		validate_map(t_data *data);
 
 #endif

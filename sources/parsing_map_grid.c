@@ -6,7 +6,7 @@
 /*   By: mdahlstr <mdahlstr@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/15 12:00:03 by mdahlstr          #+#    #+#             */
-/*   Updated: 2025/04/16 15:25:14 by mdahlstr         ###   ########.fr       */
+/*   Updated: 2025/04/16 17:05:27 by mdahlstr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,7 @@ bool	allocate_map_grid(t_data *data)
 	y = 0;
 	data->map_data->map_grid = malloc(sizeof(char *) * (data->map_data->map_h + 1));
 	if (!data->map_data->map_grid)
-	{
-		error_message("Memory allocation failure for map grid", 0);
-		return (false);
-	}
+		return (error_message("Memory allocation failure for map grid", false));
 	y = 0;
 	while (y <= data->map_data->map_h)
 	{
@@ -40,7 +37,7 @@ int skip_whitespace(char *line)
 	return (x);
 }
 
-bool	parse_map_line(char *line, t_data *data, int y)
+bool	get_map_line(char *line, t_data *data, int y)
 {
 	int	len;
 
@@ -49,10 +46,7 @@ bool	parse_map_line(char *line, t_data *data, int y)
 		len--;
 	data->map_data->map_grid[y] = ft_strdup(line);
 	if (!data->map_data->map_grid[y])
-	{
-		error_message("Memory allocation failure for map line", 0);
-		return false;
-	}
+		return (error_message("Memory allocation failure for map line", false));
 	if (data->map_data->map_w < len)
 		data->map_data->map_w = len;
 	return (true);
@@ -66,8 +60,8 @@ bool	process_line(char *line, bool *in_map, int *y, t_data *data)
 	if (is_map_line(line + x) || *in_map)
 	{
 		*in_map = true;
-		if (!parse_map_line(line, data, *y))
-			return false;
+		if (!get_map_line(line, data, *y))
+			return (false);
 		(*y)++;
 	}
 	free(line);

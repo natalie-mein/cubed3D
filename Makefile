@@ -6,7 +6,7 @@
 #    By: mdahlstr <mdahlstr@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/03/03 11:27:05 by nmeintje          #+#    #+#              #
-#    Updated: 2025/04/15 16:25:03 by mdahlstr         ###   ########.fr        #
+#    Updated: 2025/04/16 16:40:29 by mdahlstr         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,6 +30,7 @@ SOURCES = main.c \
 	parsing_colours.c \
 	parsing_config.c \
 	parsing_map_grid.c \
+	parsing_map_grid2.c \
 	parsing_error.c \
 	cube_draw.c \
 	cube_player.c \
