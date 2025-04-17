@@ -78,8 +78,8 @@ void init_game(t_data *data)
 	//data->file_data->map = map;
 	//draw_map(data, data->map->matrix);
 	mlx_loop_hook(data->mlx, &render_game, data);
-	init_player(data->player, 5, 5, 'N'); // this function is temporary until we merge
-	//player_direction(data);
+	//init_player(data->player, 5, 5, 'N'); // this function is temporary until we merge
+	player_direction(data);
 	//draw_player(data);
 	mlx_key_hook(data->mlx, &key_hooks, data);
 }

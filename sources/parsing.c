@@ -140,7 +140,7 @@ void	get_spawn_pos(t_data *data)
 		while (x < data->map_data->map_w)
 		{
 			c = data->map_data->map_grid[y][x];
-			if (ft_strchr("NSEW", c) != NULL)
+			if (c == 'N' || c == 'S' || c == 'E' || c == 'W')
 			{
 				data->player_dir = c;
 				data->player_y = y;

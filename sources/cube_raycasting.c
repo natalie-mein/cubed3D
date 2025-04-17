@@ -97,23 +97,32 @@ void	calculate_wall_height(t_data *data, int x)
 	int	draw_end;
 
 	// compute distance of the ray and store it for rendering
-		if (data->ray->side == 0)
-			data->ray->perp_wall_dist = (data->ray->r_pos_x - data->player->pos_x
-				+ (1 - data->ray->step_x) / 2) / data->ray->r_dir_x;
-		else
-			data->ray->perp_wall_dist = (data->ray->r_pos_y - data->player->pos_y 
-				+ (1 - data->ray->step_y) / 2) / data->ray->r_dir_y;
-		line_height = (int)(MAP_HEIGHT / data->ray->perp_wall_dist);
-		draw_start = -line_height / 2 + MAP_HEIGHT / 2;
-		draw_end = line_height / 2 + MAP_HEIGHT / 2;
-		if (draw_start < 0)
-    		draw_start = 0;
-		if (draw_end >= MAP_HEIGHT)
-    		draw_end = MAP_HEIGHT - 1;
-		// draw vertical line on the image buffer
-		for (int y = draw_start; y <= draw_end; y++) {
-    		mlx_put_pixel(data->image, x, y, 0xFFFFFFFF); // white wall pixel
-		}
+	if (data->ray->side == 0)
+		data->ray->perp_wall_dist = (data->ray->r_pos_x - data->player->pos_x
+			+ (1 - data->ray->step_x) / 2) / data->ray->r_dir_x;
+	else
+		data->ray->perp_wall_dist = (data->ray->r_pos_y - data->player->pos_y 
+			+ (1 - data->ray->step_y) / 2) / data->ray->r_dir_y;
+	line_height = (int)(MAP_HEIGHT / data->ray->perp_wall_dist);
+	draw_start = -line_height / 2 + MAP_HEIGHT / 2;
+	draw_end = line_height / 2 + MAP_HEIGHT / 2;
+	if (draw_start < 0)
+    	draw_start = 0;
+	if (draw_end >= MAP_HEIGHT)
+    	draw_end = MAP_HEIGHT - 1;
+	// draw vertical line on the image buffer
+	//for (int y = draw_start; y <= draw_end; y++) {
+    //	mlx_put_pixel(data->image, x, y, 0xFFFFFFFF); // white wall pixel
+	//}
+	// draw ceiling
+	for (int y = 0; y < draw_start; y++)
+		mlx_put_pixel(data->image, x, y, 0xFFFF00FF); // yellow ceiling
+	// draw wall
+	for (int y = draw_start; y <= draw_end; y++)
+		mlx_put_pixel(data->image, x, y, 0xFFFFFFFF); // white wall
+		// draw floor
+	for (int y = draw_end + 1; y < MAP_HEIGHT; y++)
+		mlx_put_pixel(data->image, x, y, 0x00FFFFFF); // blue floor
 }
 
 void raycast(t_data *data) 

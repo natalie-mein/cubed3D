@@ -12,7 +12,7 @@
 
 #include "raycasting.h"
 
-/*void face_north(t_player *player)
+void face_north(t_player *player)
 {
 	player->dir_x = 0;
 	player->dir_y = -1;
@@ -67,9 +67,9 @@ void    player_direction(t_data *data)
 		face_west(data->player);
 	}
 		
-}*/
+}
 
-void    init_player(t_player *player, int start_x, int start_y, char dir)
+/*void    init_player(t_player *player, int start_x, int start_y, char dir)
 {
 	player->pos_x = start_x + 0.5; // center in the tile
 	player->pos_y = start_y + 0.5;
@@ -102,7 +102,7 @@ void    init_player(t_player *player, int start_x, int start_y, char dir)
 		player->plane_x = 0;
 		player->plane_y = -0.66;
 	}
-}
+}*/
 
 void	draw_player(t_data *data)
 {

@@ -108,6 +108,8 @@ void    rotate_left(t_data *data);
 void    rotate_right(t_data *data);
 void    render_game(void *param);
 
+void    player_direction(t_data *data);
+
 void	init_data(t_data *data);
 void	init_game(t_data *data);
 void    exit_game(t_data *data, int exit_code);
