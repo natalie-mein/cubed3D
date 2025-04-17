@@ -31,6 +31,11 @@ extern int map[MAP_HEIGHT][MAP_WIDTH];
 
 typedef struct s_map_data t_map_data;
 
+typedef struct	s_render
+{
+	uint32_t	**pixels;
+}	t_render;
+
 typedef enum s_dir
 {
 	NORTH,
@@ -88,8 +93,11 @@ typedef struct s_data
 	int					player_x; //starting position of player
 	int					player_y;
 	char				player_dir; // cardinal direction of player start 'N', 'S', 'E', 'W'
+	uint32_t			ceiling_color;
+	uint32_t			floor_color;
 	t_player			*player;
 	t_ray				*ray;
+	t_render			*render;
 }	t_data;
 
 void	raycast(t_data *data);

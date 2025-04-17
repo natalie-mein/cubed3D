@@ -30,11 +30,12 @@ void	initialise_map_data(t_data *data)
 	data->map_data->config_count = 0;
 	data->map_data->map_h = 0;
 	data->map_data->map_w = 0;
+	data->floor_color = 0xFFFF00FF;
+	data->ceiling_color = 0x00FFFFFF;
 }
 
 void	init_data(t_data *data)
 {
-	//data->mlx = NULL;
 	data->player = malloc(sizeof(t_player));
 	if (!data->player)
 		exit_game(data, EXIT_FAILURE);
@@ -50,11 +51,29 @@ void	init_data(t_data *data)
 	data->player_dir = '0';
 	data->player_y = 0;
 	data->player_x = 0;
+	data->render = malloc(sizeof(t_render));
+	if (!data->render)
+	{
+		perror("Failed to allocate render");
+		exit(EXIT_FAILURE);
+	}
+	data->render->pixels = malloc(sizeof(uint32_t *) * HEIGHT);
+	if (!data->render->pixels)
+		exit_game(data, EXIT_FAILURE);
+	int i = 0;
+	while (i < HEIGHT)
+	{
+		data->render->pixels[i] = malloc(sizeof(uint32_t) * WIDTH);
+		i++;
+	}
 	initialise_map_data(data);
 }
 
 void init_game(t_data *data)
 {
+	int	i;
+
+	i = 0;
 	data->mlx = mlx_init(WIDTH, HEIGHT, "Test Window", true);
 	if (!data->mlx)
 		exit_game(data, EXIT_FAILURE);
@@ -76,10 +95,8 @@ void init_game(t_data *data)
 	};
 	*/
 	//data->file_data->map = map;
-	//draw_map(data, data->map->matrix);
 	mlx_loop_hook(data->mlx, &render_game, data);
 	//init_player(data->player, 5, 5, 'N'); // this function is temporary until we merge
 	player_direction(data);
-	//draw_player(data);
 	mlx_key_hook(data->mlx, &key_hooks, data);
 }
