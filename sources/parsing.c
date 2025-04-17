@@ -6,7 +6,7 @@
 /*   By: mdahlstr <mdahlstr@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/02 14:59:28 by mdahlstr          #+#    #+#             */
-/*   Updated: 2025/04/16 16:40:14 by mdahlstr         ###   ########.fr       */
+/*   Updated: 2025/04/17 16:29:01 by mdahlstr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,18 +83,52 @@ static void	get_config(char *filename, t_data *data)
 	#endif
 }
 
+// Finds all lines shorter than map width and pads them with spaces.
+void	pad_map_lines(t_data *data)
+{
+	int		y;
+	char	*new_line;
+	int		max_len;
+	int		len;
+
+	y = 0;
+	max_len = data->map_data->map_w;
+	while (y < data->map_data->map_h)
+	{
+		len = ft_strlen(data->map_data->map_grid[y]);
+		if (len < max_len)
+		{
+			new_line = malloc(max_len + 1);
+			if (!new_line)
+			{	
+				/// free previous?
+				error_message_exit("Malloc failed in pad_map_lines", data);
+			}
+			ft_memcpy(new_line, data->map_data->map_grid[y], len);
+			while (len < max_len)
+				new_line[len++] = ' ';
+			new_line[max_len] = '\0';
+			free(data->map_data->map_grid[y]);
+			data->map_data->map_grid[y] = new_line;
+		}
+		else if (len > max_len)
+			error_message("Error in map padding", ERROR); // Maybe unnecessary
+		y++;
+	}
+}
+
+
 // Copy map WITHOUT checking for errors till the end of the file.
 // Once the first line starting with 1 is found, all next lines are copied
+// All lines are padded according to the longest
 void	get_map(char *filename, t_data *data)
 {
 	int		y;
 	char	*line;
 	bool	in_map;
 	int		fd;
-	//int		line_w;
 
 	in_map = false;
-	//line_w = 0;
 	if (!(allocate_map_grid(data)))
 		exit_game(data, EXIT_FAILURE);
 	fd = get_fd(filename, data);
@@ -108,19 +142,14 @@ void	get_map(char *filename, t_data *data)
 		return ;
 	}
 	data->map_data->map_grid[y] = NULL;
-//////////////////////////////////////////////////
-	// PAD ALL MAP LINES -- shorter lines receive extra spaces at the end following the longest length.
-//	https://chatgpt.com/share/67fe815b-7240-800b-83c8-85d7ce518b1b
-//	1. copy all lines to a raw_map at first
-//  2. and then add them to the map_grid in the struct.
-	////////////////////////////////////////////////////////
+	pad_map_lines(data);
 	#if DEBUG
 	printf("\n\n-----------EXTRACTED MAP--------------------------\n\n");
 	printf("\nMap heigh: %d\n", data->map_data->map_h);
 	printf("Map width: %d\n", data->map_data->map_w);
 	for (int i = 0; i < y; i++)
 	{
-		printf("%s", data->map_data->map_grid[i]);
+		printf("%s\n", data->map_data->map_grid[i]);
 	}
 	#endif
 	close(fd);
@@ -157,18 +186,35 @@ void	get_spawn_pos(t_data *data)
 	
 }
 
-// 1. initialises the map_data struct
+void print_map(t_map_data *map_data)
+{
+	int i;
+
+	i = 0;
+	printf("map in map grid:\n");
+	while (i < map_data->map_h)
+	{
+		printf("%s", map_data->map_grid[i]);
+		printf("length: %zu\n", ft_strlen(map_data->map_grid[i]));
+		i++;
+	}
+}
+
+// 1. count file and map lines
 // 2. get map configuration
 // 3. get map structure
 // 4. get initial player position and direction.
+// 5. validate map 
 void	parse_file(char *filename, t_data *data)
 {
 	count_lines(filename, data);
 	get_config(filename, data);
 	get_map(filename, data);
-	validate_map(data);
+	#if DEBUG
+	//print_map(data->map_data); // after padding the lines, all will have the same length.
+	#endif
 	get_spawn_pos(data);
-	//player_position(data);
+	validate_map(data);
 	//close(fd); // fd is open and closed as needed
 }
 

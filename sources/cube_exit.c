@@ -6,14 +6,28 @@
 /*   By: mdahlstr <mdahlstr@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/08 13:45:55 by nmeintje          #+#    #+#             */
-/*   Updated: 2025/04/15 18:45:17 by mdahlstr         ###   ########.fr       */
+/*   Updated: 2025/04/17 15:34:50 by mdahlstr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 //#include "../include/raycasting.h"
 //#include "../include/parsing.h"
 #include "cub3D.h"
-//free2darray 
+
+void	free_2d_array(char **array, int height)
+{
+	int	i;
+
+	if (!array)
+		return ;
+	i = 0;
+	while (i < height)
+	{
+		free(array[i]);
+		i++;
+	}
+	free(array);
+}
 
 void	free_if_allocated(void *ptr)
 {
@@ -21,26 +35,16 @@ void	free_if_allocated(void *ptr)
 		free(ptr);
 }
 
-void	free_map_data(t_map_data *map_data)
+void	free_map_data(t_map_data *map_data, int height)
 {
-	int	i;
-
 	if (!map_data)
 		return ;
 	free_if_allocated(map_data->no_texture);
 	free_if_allocated(map_data->so_texture);
 	free_if_allocated(map_data->we_texture);
 	free_if_allocated(map_data->ea_texture);
-	i = 0;
 	if (map_data->map_grid)
-	{
-		while (map_data->map_grid[i] != NULL)
-		{
-			free(map_data->map_grid[i]);
-			i++;
-		}
-		free(map_data->map_grid);
-	}
+		free_2d_array(map_data->map_grid, height);
 	free(map_data);
 }
 
@@ -52,7 +56,7 @@ void	free_data(t_data *data)
 
 	i = 0;
 	if (data->map_data)
-		free_map_data(data->map_data); ///////////////////// ATTENTION
+		free_map_data(data->map_data, data->map_data->map_h);
 	if (data->player->move)
 		free(data->player->move);
 	if (data->player)
@@ -64,7 +68,7 @@ void	free_data(t_data *data)
 }
 
 void	exit_game(t_data *data, int exit_code)
-{
+{	
 	free_data(data);
 	if (data->mlx)
 	{

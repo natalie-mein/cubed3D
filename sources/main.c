@@ -6,7 +6,7 @@
 /*   By: mdahlstr <mdahlstr@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/03 15:48:34 by nmeintje          #+#    #+#             */
-/*   Updated: 2025/04/14 16:32:07 by mdahlstr         ###   ########.fr       */
+/*   Updated: 2025/04/17 15:40:32 by mdahlstr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,7 @@ int	main(int argc, char **argv)
 	//printf("Before mlx loop\n");
 	mlx_loop(data.mlx);
 	//printf("after mlx_loop\n");
-	exit_game(&data, SUCCESS);
-	//return (SUCCESS);
+	//exit_game(&data, SUCCESS);
+	free_data(&data);
+	return (SUCCESS);
 } 
