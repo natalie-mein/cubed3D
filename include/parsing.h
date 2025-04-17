@@ -6,14 +6,14 @@
 /*   By: mdahlstr <mdahlstr@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/02 15:15:42 by mdahlstr          #+#    #+#             */
-/*   Updated: 2025/04/16 16:57:41 by mdahlstr         ###   ########.fr       */
+/*   Updated: 2025/04/17 17:24:22 by mdahlstr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PARSING_H
 # define PARSING_H
 
-# define DEBUG 1
+# define DEBUG 0
 # define MAX_LINES 50 // Figure out what is too much -------------------------------------
 
 # define RED 0
@@ -45,6 +45,7 @@ typedef struct s_colour {
 	int				colour;
 }				t_colour;
 
+void		validate_input(int argc, char *filename);
 void		parse_file(char *filename, t_data *data);
 void		initialise_map_data(t_data *data);
 int 		get_next_number(const char *line, int *index, int colour);
@@ -56,7 +57,7 @@ bool		is_map_line(const char *line);
 
 bool		parse_rgb(char *trimmed_line, t_colour *colour_s);
 int			create_rgb(t_colour *colour_s);
-//int			get_colour(char *line, t_data *data);
+//int		get_colour(char *line, t_data *data);
 int			get_colour(char *line, t_data *data);
 
 bool		allocate_map_grid(t_data *data);

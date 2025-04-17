@@ -6,7 +6,7 @@
 /*   By: mdahlstr <mdahlstr@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/02 14:59:28 by mdahlstr          #+#    #+#             */
-/*   Updated: 2025/04/17 16:29:01 by mdahlstr         ###   ########.fr       */
+/*   Updated: 2025/04/17 16:42:03 by mdahlstr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -142,16 +142,17 @@ void	get_map(char *filename, t_data *data)
 		return ;
 	}
 	data->map_data->map_grid[y] = NULL;
-	pad_map_lines(data);
 	#if DEBUG
 	printf("\n\n-----------EXTRACTED MAP--------------------------\n\n");
 	printf("\nMap heigh: %d\n", data->map_data->map_h);
 	printf("Map width: %d\n", data->map_data->map_w);
 	for (int i = 0; i < y; i++)
 	{
-		printf("%s\n", data->map_data->map_grid[i]);
+		printf("%s", data->map_data->map_grid[i]);
+		printf(" ----- Length: %zu\n", ft_strlen(data->map_data->map_grid[i]));
 	}
 	#endif
+	pad_map_lines(data);
 	close(fd);
 }
 
@@ -191,11 +192,11 @@ void print_map(t_map_data *map_data)
 	int i;
 
 	i = 0;
-	printf("map in map grid:\n");
+	printf("\n\nMap in map grid - after padding:\n");
 	while (i < map_data->map_h)
 	{
 		printf("%s", map_data->map_grid[i]);
-		printf("length: %zu\n", ft_strlen(map_data->map_grid[i]));
+		printf(" ---- length: %zu\n", ft_strlen(map_data->map_grid[i]));
 		i++;
 	}
 }
@@ -211,7 +212,7 @@ void	parse_file(char *filename, t_data *data)
 	get_config(filename, data);
 	get_map(filename, data);
 	#if DEBUG
-	//print_map(data->map_data); // after padding the lines, all will have the same length.
+	print_map(data->map_data); // after padding the lines, all will have the same length.
 	#endif
 	get_spawn_pos(data);
 	validate_map(data);

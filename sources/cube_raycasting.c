@@ -6,7 +6,7 @@
 /*   By: mdahlstr <mdahlstr@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/02 12:05:43 by nmeintje          #+#    #+#             */
-/*   Updated: 2025/04/11 17:47:16 by mdahlstr         ###   ########.fr       */
+/*   Updated: 2025/04/17 16:51:24 by mdahlstr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,8 +121,8 @@ void	calculate_wall_height(t_data *data, int x)
 	for (int y = draw_start; y <= draw_end; y++)
 		mlx_put_pixel(data->image, x, y, 0xFFFFFFFF); // white wall
 		// draw floor
-	for (int y = draw_end + 1; y < MAP_HEIGHT; y++)
-		mlx_put_pixel(data->image, x, y, 0x00FFFFFF); // blue floor
+	//for (int y = draw_end + 1; y < MAP_HEIGHT; y++)
+	//	mlx_put_pixel(data->image, x, y, 0x00FFFFFF); // blue floor
 }
 
 void raycast(t_data *data) 
