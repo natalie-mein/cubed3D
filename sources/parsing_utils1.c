@@ -6,7 +6,7 @@
 /*   By: mdahlstr <mdahlstr@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/14 16:35:24 by mdahlstr          #+#    #+#             */
-/*   Updated: 2025/04/16 17:22:01 by mdahlstr         ###   ########.fr       */
+/*   Updated: 2025/04/17 17:27:21 by mdahlstr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,11 +45,16 @@ int get_fd(char *file_name, t_data *data)
 	(void)file_name;
 	//fd = open("maps/simple_map.cub", O_RDONLY); /////////////////////////////////////////
 	fd = open("maps/valid_maps/test.cub", O_RDONLY);
-	//fd = open("maps/valid_maps/test_wrong_element_num.cub", O_RDONLY);
-	//fd = open("maps/valid_maps/too_many_elements.cub", O_RDONLY);
+	//fd = open("maps/valid_maps/test2.cub", O_RDONLY);
+
+	
+	//// invalid maps: /////////////////////////////////////////////////////////
+	//fd = open("maps/invalid_maps/test_wrong_element_num.cub", O_RDONLY);
+	//fd = open("maps/invalid_maps/too_many_elements.cub", O_RDONLY);
 	//fd = open("maps/invalid_maps/rgb_error.cub", O_RDONLY);
 	//fd = open("maps/invalid_maps/invalid_char.cub", O_RDONLY);
 	//fd = open("maps/invalid_maps/two_players.cub", O_RDONLY);
+	//fd = open("maps/invalid_maps/open_map.cub", O_RDONLY);
 	if (fd == -1)
 		error_message_exit("Failed to open file", data);
 	return (fd);

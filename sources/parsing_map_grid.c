@@ -6,7 +6,7 @@
 /*   By: mdahlstr <mdahlstr@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/15 12:00:03 by mdahlstr          #+#    #+#             */
-/*   Updated: 2025/04/16 17:05:27 by mdahlstr         ###   ########.fr       */
+/*   Updated: 2025/04/17 16:26:27 by mdahlstr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,12 +31,16 @@ bool	allocate_map_grid(t_data *data)
 
 int skip_whitespace(char *line)
 {
-	int x = 0;
+	int x;
+
+	x = 0;
 	while (ft_iswhitespace(line[x]))
 		x++;
 	return (x);
 }
 
+// Copy map line into 2d grid
+// Gets the longest line and sets it as map width.
 bool	get_map_line(char *line, t_data *data, int y)
 {
 	int	len;
@@ -44,7 +48,7 @@ bool	get_map_line(char *line, t_data *data, int y)
 	len = ft_strlen(line);
 	if (len > 0 && line[len - 1] == '\n')
 		len--;
-	data->map_data->map_grid[y] = ft_strdup(line);
+	data->map_data->map_grid[y] = ft_substr(line, 0, len);
 	if (!data->map_data->map_grid[y])
 		return (error_message("Memory allocation failure for map line", false));
 	if (data->map_data->map_w < len)
@@ -67,3 +71,11 @@ bool	process_line(char *line, bool *in_map, int *y, t_data *data)
 	free(line);
 	return (true);
 }
+
+
+//////////////////////////////////////////////////
+	// PAD ALL MAP LINES -- shorter lines receive extra spaces at the end following the longest length.
+//	https://chatgpt.com/share/67fe815b-7240-800b-83c8-85d7ce518b1b
+//	1. copy all lines to a raw_map at first
+//  2. and then add them to the map_grid in the struct.
+	////////////////////////////////////////////////////////

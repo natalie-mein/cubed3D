@@ -6,7 +6,7 @@
 /*   By: mdahlstr <mdahlstr@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/03 15:42:09 by nmeintje          #+#    #+#             */
-/*   Updated: 2025/04/15 16:54:17 by mdahlstr         ###   ########.fr       */
+/*   Updated: 2025/04/17 15:35:05 by mdahlstr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@
 # define HEIGHT 1024
 
 # define SUCCESS 0
-# define ERROR 1
+# define ERROR -1
 
 typedef struct s_data t_data;
 typedef struct s_map_data t_map_data;
@@ -48,7 +48,10 @@ void		ft_hook(void* param);
 void		validate_input(int argc, char *file_name);
 
 /*   memory management   */
-void	    free_map_data(t_map_data *map_data);
+void		free_data(t_data *data);
+void		free_map_data(t_map_data *map_data, int height);
 void		free_if_allocated(void *ptr);
+void		free_2d_array(char **array, int height);
+
 
 #endif
