@@ -6,7 +6,7 @@
 /*   By: mdahlstr <mdahlstr@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/15 11:56:05 by mdahlstr          #+#    #+#             */
-/*   Updated: 2025/04/16 17:13:09 by mdahlstr         ###   ########.fr       */
+/*   Updated: 2025/04/22 19:03:52 by mdahlstr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,20 +79,24 @@ int	create_rgb(t_colour *colour_s)
 // through bitwise shift operations
 int	get_colour(char *line, t_data *data)
 {
+	char		*original_line;
 	char		*trimmed_line;
 	t_colour	colour_s;
 
-	ft_bzero(&colour_s, sizeof(t_colour));
+	if (!check_duplicated_element(data, line))
+		return (-2);
+	original_line = line;
 	line = line + 1;
+	ft_bzero(&colour_s, sizeof(t_colour));
 	trimmed_line = ft_strtrim(line, " \n");
 	if (!parse_rgb(trimmed_line, &colour_s))
 	{
 		free(trimmed_line);
-		free(line);
+		free(original_line);
 		exit_game(data, EXIT_FAILURE);
 	}
 	free(trimmed_line);
 	colour_s.colour = create_rgb(&colour_s);
-	//data->map_data->config_count++;
+	data->map_data->config_count++;
 	return (colour_s.colour);
 }

@@ -6,7 +6,7 @@
 /*   By: mdahlstr <mdahlstr@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/05 20:07:50 by nmeintje          #+#    #+#             */
-/*   Updated: 2025/04/17 15:42:59 by mdahlstr         ###   ########.fr       */
+/*   Updated: 2025/04/22 16:15:12 by mdahlstr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ void	initialise_map_data(t_data *data)
 
 void	init_data(t_data *data)
 {
-	//data->mlx = NULL;
+	data->mlx = NULL;
 	data->player = malloc(sizeof(t_player));
 	if (!data->player)
 		exit_game(data, EXIT_FAILURE);
@@ -57,24 +57,7 @@ void init_game(t_data *data)
 {
 	data->mlx = mlx_init(WIDTH, HEIGHT, "Test Window", true);
 	if (!data->mlx)
-		exit_game(data, EXIT_FAILURE);
-	/*
-	static char *map[] = {
-		"111111111111111111111111",
-		"100000000000000000000001",
-		"101110011001110100010101",
-		"100000000000000000000001",
-		"100000000000000000000001",
-		"100000000000000000000001",
-		"111001100111010001100001",
-		"100000000000000000000001",
-		"100000000000000000000001",
-		"100011001100111010001001",
-		"100000000000000000000001",
-		"111111111111111111111111",
-		NULL
-	};
-	*/
+		error_message_exit("Failed to initialise MLX", data);
 	//data->file_data->map = map;
 	//draw_map(data, data->map->matrix);
 	mlx_loop_hook(data->mlx, &render_game, data);

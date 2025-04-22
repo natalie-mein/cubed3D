@@ -6,7 +6,7 @@
 /*   By: mdahlstr <mdahlstr@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/15 12:00:03 by mdahlstr          #+#    #+#             */
-/*   Updated: 2025/04/17 16:26:27 by mdahlstr         ###   ########.fr       */
+/*   Updated: 2025/04/22 18:35:39 by mdahlstr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ bool	get_map_line(char *line, t_data *data, int y)
 	return (true);
 }
 
-bool	process_line(char *line, bool *in_map, int *y, t_data *data)
+bool	process_map_line(char *line, bool *in_map, int *y, t_data *data)
 {
 	int	x;
 
@@ -72,10 +72,40 @@ bool	process_line(char *line, bool *in_map, int *y, t_data *data)
 	return (true);
 }
 
+// Copy map WITHOUT checking for errors till the end of the file.
+// Once the first line starting with 1 is found, all next lines are copied
+// All lines are padded according to the longest
+void	get_map(char *filename, t_data *data)
+{
+	int		y;
+	char	*line;
+	bool	in_map;
+	int		fd;
 
-//////////////////////////////////////////////////
-	// PAD ALL MAP LINES -- shorter lines receive extra spaces at the end following the longest length.
-//	https://chatgpt.com/share/67fe815b-7240-800b-83c8-85d7ce518b1b
-//	1. copy all lines to a raw_map at first
-//  2. and then add them to the map_grid in the struct.
-	////////////////////////////////////////////////////////
+	in_map = false;
+	if (!(allocate_map_grid(data)))
+		exit_game(data, EXIT_FAILURE);
+	fd = get_fd(filename, data);
+	y = 0;
+	while ((line = get_next_line(fd)) != NULL)
+	{
+		if (process_map_line(line, &in_map, &y, data))
+			continue ;
+		free(line);
+		close(fd);
+		return ;
+	}
+	//data->map_data->map_grid[y] = NULL;
+	#if DEBUG
+	printf("\n\n-----------EXTRACTED MAP--------------------------\n\n");
+	printf("\nMap heigh: %d\n", data->map_data->map_h);
+	printf("Map width: %d\n", data->map_data->map_w);
+	for (int i = 0; i < y; i++)
+	{
+		printf("%s", data->map_data->map_grid[i]);
+		printf(" ----- Length: %zu\n", ft_strlen(data->map_data->map_grid[i]));
+	}
+	#endif
+	pad_map_lines(data);
+	close(fd);
+}
