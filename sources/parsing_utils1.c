@@ -6,7 +6,7 @@
 /*   By: mdahlstr <mdahlstr@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/14 16:35:24 by mdahlstr          #+#    #+#             */
-/*   Updated: 2025/04/24 18:03:48 by mdahlstr         ###   ########.fr       */
+/*   Updated: 2025/04/24 18:07:15 by mdahlstr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,8 +111,8 @@ int get_fd(char *file_name, t_data *data)
 	int	fd;
 
 	(void)file_name;
-	fd = open("maps/simple_map.cub", O_RDONLY); /////////////////////////////////////////
-	//fd = open("maps/valid_maps/test.cub", O_RDONLY);
+	//fd = open("maps/simple_map.cub", O_RDONLY); /////////////////////////////////////////
+	fd = open("maps/valid_maps/test.cub", O_RDONLY);
 	//fd = open("maps/valid_maps/test2.cub", O_RDONLY);
 
 	
