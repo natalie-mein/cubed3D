@@ -38,7 +38,9 @@ SOURCES = main.c \
 	cube_rotation.c \
 	cube_init.c \
 	cube_exit.c \
-	cube_raycasting.c
+	cube_raycasting.c \
+	raycasting_utils.c \
+	cube_textures.c
 
 ###BONUS = ./_bonus.c 
 

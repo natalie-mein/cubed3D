@@ -64,7 +64,7 @@ void draw_map(t_data *data, char **map)
 	mlx_image_to_window(data->mlx, data->image, 0, 0);
 }
 
-void	render_image(t_data *data)
+/*void	render_image(t_data *data)
 {
 	uint32_t	*pixels;
 	int			x;
@@ -92,7 +92,7 @@ void	render_image(t_data *data)
 		y++;
 	}
 	mlx_image_to_window(data->mlx, data->image, 0, 0);
-}
+}*/
 
 void	clear_pixel_buffer(t_data *data)
 {
@@ -115,23 +115,25 @@ void	clear_pixel_buffer(t_data *data)
 //Render function that includes raycasting
 void render_game(void *param)
 {
-	t_data *data = (t_data *)param;
+	t_data *data; 
+	
+	data = (t_data *)param;
 
 	if (data->image)
 		mlx_delete_image(data->mlx, data->image);
-	
+	//clear_pixel_buffer(data);
+	move_player(data);
+	raycast(data);
 	data->image = mlx_new_image(data->mlx, WIDTH, HEIGHT);
 	if (!data->image)
 	{
 		printf("Failed to create image!\n");
 		return;
 	}
-	clear_pixel_buffer(data);
-	draw_map(data, data->map_data->map_grid);
-	move_player(data);
-	draw_player(data);
-	raycast(data);
-	//render_image(data);
+	//clear_pixel_buffer(data);
+	//draw_map(data, data->map_data->map_grid);
+	//draw_player(data);
+	render_image(data);
 }
 
 

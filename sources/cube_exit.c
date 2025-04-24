@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-//#include "../include/raycasting.h"
+#include "../include/raycasting.h"
 //#include "../include/parsing.h"
 #include "cub3D.h"
 //free2darray 
@@ -44,7 +44,15 @@ void	free_map_data(t_map_data *map_data)
 	free(map_data);
 }
 
-// free2darray
+/*void	free_texture(t_text *tex)
+{
+	if (tex)
+	{
+		if (tex->img)
+			mlx_delete_texture(tex->img);
+		free(tex);
+	}
+}*/
 
 void	free_data(t_data *data)
 {
@@ -59,8 +67,14 @@ void	free_data(t_data *data)
 		free(data->player);
 	if (data->ray)
 		free(data->ray);
-	// if (data)
-	//	free(data);
+	/*if (data->north)
+		free_texture(data->north);
+	if (data->south)
+		free_texture(data->south);
+	if (data->east)
+		free_texture(data->east);
+	if (data->west)
+		free_texture(data->west);*/
 }
 
 void	exit_game(t_data *data, int exit_code)
