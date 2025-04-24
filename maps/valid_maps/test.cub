@@ -3,7 +3,7 @@ SO ./textures/blue.png
 WE ./textures/grey.png
 EA ./textures/light_blue.png
 
-F 77,92,53
+F 77,92,53           
 C 163,208,230
 
         1111111111111111111111111

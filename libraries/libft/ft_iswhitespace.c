@@ -3,18 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   ft_iswhitespace.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nmeintje <nmeintje@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: mdahlstr <mdahlstr@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/25 13:03:24 by nmeintje          #+#    #+#             */
-/*   Updated: 2025/02/25 13:03:28 by nmeintje         ###   ########.fr       */
+/*   Updated: 2025/04/24 17:03:20 by mdahlstr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
-
 int ft_iswhitespace(int c)
 {
-    if (c == 32 || (c>= 9 && c <= 13))
-        return (1);
-    return (0);
+	if (c == 32 || (c >= 9 && c <= 13))
+		return (1);
+	return (0);
 }

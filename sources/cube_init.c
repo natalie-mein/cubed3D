@@ -6,7 +6,7 @@
 /*   By: mdahlstr <mdahlstr@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/05 20:07:50 by nmeintje          #+#    #+#             */
-/*   Updated: 2025/04/22 16:15:12 by mdahlstr         ###   ########.fr       */
+/*   Updated: 2025/04/24 15:54:18 by mdahlstr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,8 @@ void	initialise_map_data(t_data *data)
 	data->map_data->ea_texture = NULL;
 	data->map_data->floor_colour = -1;
 	data->map_data->ceiling_colour = -1;
+	data->map_data->floor_set = 0;
+	data->map_data->ceiling_set = 0;
 	data->map_data->config_count = 0;
 	data->map_data->map_h = 0;
 	data->map_data->map_w = 0;

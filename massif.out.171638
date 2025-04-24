@@ -1,0 +1,633 @@
+desc: (none)
+cmd: ./cub3D
+time_unit: i
+#-----------
+snapshot=0
+#-----------
+time=0
+mem_heap_B=0
+mem_heap_extra_B=0
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=1
+#-----------
+time=642388
+mem_heap_B=64
+mem_heap_extra_B=8
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=2
+#-----------
+time=646921
+mem_heap_B=329
+mem_heap_extra_B=111
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=3
+#-----------
+time=650675
+mem_heap_B=329
+mem_heap_extra_B=95
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=4
+#-----------
+time=653404
+mem_heap_B=303
+mem_heap_extra_B=97
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=5
+#-----------
+time=657473
+mem_heap_B=300
+mem_heap_extra_B=84
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=6
+#-----------
+time=660364
+mem_heap_B=294
+mem_heap_extra_B=90
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=7
+#-----------
+time=663307
+mem_heap_B=323
+mem_heap_extra_B=77
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=8
+#-----------
+time=667385
+mem_heap_B=265
+mem_heap_extra_B=119
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=9
+#-----------
+time=670850
+mem_heap_B=287
+mem_heap_extra_B=81
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=10
+#-----------
+time=673721
+mem_heap_B=278
+mem_heap_extra_B=90
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=11
+#-----------
+time=677297
+mem_heap_B=309
+mem_heap_extra_B=99
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=12
+#-----------
+time=679709
+mem_heap_B=294
+mem_heap_extra_B=90
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=13
+#-----------
+time=682822
+mem_heap_B=328
+mem_heap_extra_B=104
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=14
+#-----------
+time=687064
+mem_heap_B=300
+mem_heap_extra_B=100
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=15
+#-----------
+time=690429
+mem_heap_B=334
+mem_heap_extra_B=98
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=16
+#-----------
+time=695247
+mem_heap_B=306
+mem_heap_extra_B=110
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=17
+#-----------
+time=698462
+mem_heap_B=325
+mem_heap_extra_B=131
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=18
+#-----------
+time=703014
+mem_heap_B=326
+mem_heap_extra_B=90
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=19
+#-----------
+time=707064
+mem_heap_B=298
+mem_heap_extra_B=102
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=20
+#-----------
+time=710345
+mem_heap_B=332
+mem_heap_extra_B=100
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=21
+#-----------
+time=712620
+mem_heap_B=349
+mem_heap_extra_B=123
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=22
+#-----------
+time=716003
+mem_heap_B=318
+mem_heap_extra_B=98
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=23
+#-----------
+time=719053
+mem_heap_B=290
+mem_heap_extra_B=110
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=24
+#-----------
+time=723833
+mem_heap_B=333
+mem_heap_extra_B=91
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=25
+#-----------
+time=726804
+mem_heap_B=310
+mem_heap_extra_B=90
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=26
+#-----------
+time=729179
+mem_heap_B=293
+mem_heap_extra_B=115
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=27
+#-----------
+time=731822
+mem_heap_B=289
+mem_heap_extra_B=71
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=28
+#-----------
+time=736764
+mem_heap_B=279
+mem_heap_extra_B=81
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=29
+#-----------
+time=740263
+mem_heap_B=290
+mem_heap_extra_B=94
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=30
+#-----------
+time=745043
+mem_heap_B=333
+mem_heap_extra_B=91
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=31
+#-----------
+time=749184
+mem_heap_B=279
+mem_heap_extra_B=81
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=32
+#-----------
+time=752294
+mem_heap_B=287
+mem_heap_extra_B=73
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=33
+#-----------
+time=754856
+mem_heap_B=329
+mem_heap_extra_B=95
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=34
+#-----------
+time=757689
+mem_heap_B=308
+mem_heap_extra_B=76
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=35
+#-----------
+time=761819
+mem_heap_B=1270
+mem_heap_extra_B=66
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=36
+#-----------
+time=764571
+mem_heap_B=1271
+mem_heap_extra_B=89
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=37
+#-----------
+time=767025
+mem_heap_B=1353
+mem_heap_extra_B=119
+mem_stacks_B=0
+heap_tree=detailed
+n7: 1353 (heap allocation functions) malloc/new/new[], --alloc-fns, etc.
+ n1: 1024 0x4A33BA3: _IO_file_doallocate (filedoalloc.c:101)
+  n1: 1024 0x4A42CDF: _IO_doallocbuf (genops.c:347)
+   n1: 1024 0x4A41F5F: _IO_file_overflow@@GLIBC_2.2.5 (fileops.c:744)
+    n1: 1024 0x4A406D4: _IO_new_file_xsputn (fileops.c:1243)
+     n1: 1024 0x4A406D4: _IO_file_xsputn@@GLIBC_2.2.5 (fileops.c:1196)
+      n1: 1024 0x4A2A14C: outstring_func (vfprintf-internal.c:239)
+       n1: 1024 0x4A2A14C: __vfprintf_internal (vfprintf-internal.c:1263)
+        n1: 1024 0x4A1579E: printf (printf.c:33)
+         n1: 1024 0x402B54: count_lines (parsing.c:44)
+          n1: 1024 0x402D4C: parse_file (parsing.c:140)
+           n0: 1024 0x402497: main (main.c:64)
+ n1: 104 0x405621: init_data (cube_init.c:48)
+  n0: 104 0x40248A: main (main.c:63)
+ n1: 72 0x40647F: ft_calloc (in /home/mdahlstr/Documents/cubed/cub3D)
+  n1: 72 0x40548A: initialise_map_data (cube_init.c:19)
+   n1: 72 0x405685: init_data (cube_init.c:55)
+    n0: 72 0x40248A: main (main.c:63)
+ n1: 64 0x405591: init_data (cube_init.c:40)
+  n0: 64 0x40248A: main (main.c:63)
+ n1: 62 0x406EF9: ft_strjoin (in /home/mdahlstr/Documents/cubed/cub3D)
+  n1: 62 0x406B54: create_stash (in /home/mdahlstr/Documents/cubed/cub3D)
+   n2: 62 0x40699C: get_next_line (in /home/mdahlstr/Documents/cubed/cub3D)
+    n1: 62 0x402E00: get_config (parsing.c:61)
+     n1: 62 0x402D59: parse_file (parsing.c:141)
+      n0: 62 0x402497: main (main.c:64)
+    n0: 0 in 1 place, below massif's threshold (1.00%)
+ n2: 21 0x406961: get_next_line (in /home/mdahlstr/Documents/cubed/cub3D)
+  n1: 21 0x402E00: get_config (parsing.c:61)
+   n1: 21 0x402D59: parse_file (parsing.c:141)
+    n0: 21 0x402497: main (main.c:64)
+  n0: 0 in 1 place, below massif's threshold (1.00%)
+ n0: 6 in 4 places, all below massif's threshold (1.00%)
+#-----------
+snapshot=38
+#-----------
+time=769958
+mem_heap_B=1353
+mem_heap_extra_B=103
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=39
+#-----------
+time=772942
+mem_heap_B=1362
+mem_heap_extra_B=134
+mem_stacks_B=0
+heap_tree=detailed
+n8: 1362 (heap allocation functions) malloc/new/new[], --alloc-fns, etc.
+ n1: 1024 0x4A33BA3: _IO_file_doallocate (filedoalloc.c:101)
+  n1: 1024 0x4A42CDF: _IO_doallocbuf (genops.c:347)
+   n1: 1024 0x4A41F5F: _IO_file_overflow@@GLIBC_2.2.5 (fileops.c:744)
+    n1: 1024 0x4A406D4: _IO_new_file_xsputn (fileops.c:1243)
+     n1: 1024 0x4A406D4: _IO_file_xsputn@@GLIBC_2.2.5 (fileops.c:1196)
+      n1: 1024 0x4A2A14C: outstring_func (vfprintf-internal.c:239)
+       n1: 1024 0x4A2A14C: __vfprintf_internal (vfprintf-internal.c:1263)
+        n1: 1024 0x4A1579E: printf (printf.c:33)
+         n1: 1024 0x402B54: count_lines (parsing.c:44)
+          n1: 1024 0x402D4C: parse_file (parsing.c:140)
+           n0: 1024 0x402497: main (main.c:64)
+ n1: 104 0x405621: init_data (cube_init.c:48)
+  n0: 104 0x40248A: main (main.c:63)
+ n1: 72 0x40647F: ft_calloc (in /home/mdahlstr/Documents/cubed/cub3D)
+  n1: 72 0x40548A: initialise_map_data (cube_init.c:19)
+   n1: 72 0x405685: init_data (cube_init.c:55)
+    n0: 72 0x40248A: main (main.c:63)
+ n1: 64 0x405591: init_data (cube_init.c:40)
+  n0: 64 0x40248A: main (main.c:63)
+ n1: 33 0x406EF9: ft_strjoin (in /home/mdahlstr/Documents/cubed/cub3D)
+  n1: 33 0x406B54: create_stash (in /home/mdahlstr/Documents/cubed/cub3D)
+   n2: 33 0x40699C: get_next_line (in /home/mdahlstr/Documents/cubed/cub3D)
+    n1: 33 0x402E00: get_config (parsing.c:61)
+     n1: 33 0x402D59: parse_file (parsing.c:141)
+      n0: 33 0x402497: main (main.c:64)
+    n0: 0 in 1 place, below massif's threshold (1.00%)
+ n1: 25 0x40675A: ft_strtrim (in /home/mdahlstr/Documents/cubed/cub3D)
+  n1: 25 0x403426: get_texture_path (parsing_utils1.c:148)
+   n1: 25 0x40315E: process_config_line (parsing_utils1.c:76)
+    n1: 25 0x402E1C: get_config (parsing.c:64)
+     n1: 25 0x402D59: parse_file (parsing.c:141)
+      n0: 25 0x402497: main (main.c:64)
+ n2: 21 0x406961: get_next_line (in /home/mdahlstr/Documents/cubed/cub3D)
+  n1: 21 0x402E00: get_config (parsing.c:61)
+   n1: 21 0x402D59: parse_file (parsing.c:141)
+    n0: 21 0x402497: main (main.c:64)
+  n0: 0 in 1 place, below massif's threshold (1.00%)
+ n0: 19 in 4 places, all below massif's threshold (1.00%)
+#-----------
+snapshot=40
+#-----------
+time=775379
+mem_heap_B=1362
+mem_heap_extra_B=134
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=41
+#-----------
+time=778099
+mem_heap_B=1376
+mem_heap_extra_B=144
+mem_stacks_B=0
+heap_tree=detailed
+n8: 1376 (heap allocation functions) malloc/new/new[], --alloc-fns, etc.
+ n1: 1024 0x4A33BA3: _IO_file_doallocate (filedoalloc.c:101)
+  n1: 1024 0x4A42CDF: _IO_doallocbuf (genops.c:347)
+   n1: 1024 0x4A41F5F: _IO_file_overflow@@GLIBC_2.2.5 (fileops.c:744)
+    n1: 1024 0x4A406D4: _IO_new_file_xsputn (fileops.c:1243)
+     n1: 1024 0x4A406D4: _IO_file_xsputn@@GLIBC_2.2.5 (fileops.c:1196)
+      n1: 1024 0x4A2A14C: outstring_func (vfprintf-internal.c:239)
+       n1: 1024 0x4A2A14C: __vfprintf_internal (vfprintf-internal.c:1263)
+        n1: 1024 0x4A1579E: printf (printf.c:33)
+         n1: 1024 0x402B54: count_lines (parsing.c:44)
+          n1: 1024 0x402D4C: parse_file (parsing.c:140)
+           n0: 1024 0x402497: main (main.c:64)
+ n1: 104 0x405621: init_data (cube_init.c:48)
+  n0: 104 0x40248A: main (main.c:63)
+ n1: 72 0x40647F: ft_calloc (in /home/mdahlstr/Documents/cubed/cub3D)
+  n1: 72 0x40548A: initialise_map_data (cube_init.c:19)
+   n1: 72 0x405685: init_data (cube_init.c:55)
+    n0: 72 0x40248A: main (main.c:63)
+ n1: 64 0x405591: init_data (cube_init.c:40)
+  n0: 64 0x40248A: main (main.c:63)
+ n1: 45 0x40675A: ft_strtrim (in /home/mdahlstr/Documents/cubed/cub3D)
+  n2: 45 0x403426: get_texture_path (parsing_utils1.c:148)
+   n1: 25 0x40315E: process_config_line (parsing_utils1.c:76)
+    n1: 25 0x402E1C: get_config (parsing.c:64)
+     n1: 25 0x402D59: parse_file (parsing.c:141)
+      n0: 25 0x402497: main (main.c:64)
+   n1: 20 0x40319F: process_config_line (parsing_utils1.c:78)
+    n1: 20 0x402E1C: get_config (parsing.c:64)
+     n1: 20 0x402D59: parse_file (parsing.c:141)
+      n0: 20 0x402497: main (main.c:64)
+ n1: 30 0x406EF9: ft_strjoin (in /home/mdahlstr/Documents/cubed/cub3D)
+  n1: 30 0x406B54: create_stash (in /home/mdahlstr/Documents/cubed/cub3D)
+   n2: 30 0x40699C: get_next_line (in /home/mdahlstr/Documents/cubed/cub3D)
+    n1: 30 0x402E00: get_config (parsing.c:61)
+     n1: 30 0x402D59: parse_file (parsing.c:141)
+      n0: 30 0x402497: main (main.c:64)
+    n0: 0 in 1 place, below massif's threshold (1.00%)
+ n2: 21 0x406961: get_next_line (in /home/mdahlstr/Documents/cubed/cub3D)
+  n1: 21 0x402E00: get_config (parsing.c:61)
+   n1: 21 0x402D59: parse_file (parsing.c:141)
+    n0: 21 0x402497: main (main.c:64)
+  n0: 0 in 1 place, below massif's threshold (1.00%)
+ n0: 16 in 4 places, all below massif's threshold (1.00%)
+#-----------
+snapshot=42
+#-----------
+time=783036
+mem_heap_B=1390
+mem_heap_extra_B=170
+mem_stacks_B=0
+heap_tree=detailed
+n8: 1390 (heap allocation functions) malloc/new/new[], --alloc-fns, etc.
+ n1: 1024 0x4A33BA3: _IO_file_doallocate (filedoalloc.c:101)
+  n1: 1024 0x4A42CDF: _IO_doallocbuf (genops.c:347)
+   n1: 1024 0x4A41F5F: _IO_file_overflow@@GLIBC_2.2.5 (fileops.c:744)
+    n1: 1024 0x4A406D4: _IO_new_file_xsputn (fileops.c:1243)
+     n1: 1024 0x4A406D4: _IO_file_xsputn@@GLIBC_2.2.5 (fileops.c:1196)
+      n1: 1024 0x4A2A14C: outstring_func (vfprintf-internal.c:239)
+       n1: 1024 0x4A2A14C: __vfprintf_internal (vfprintf-internal.c:1263)
+        n1: 1024 0x4A1579E: printf (printf.c:33)
+         n1: 1024 0x402B54: count_lines (parsing.c:44)
+          n1: 1024 0x402D4C: parse_file (parsing.c:140)
+           n0: 1024 0x402497: main (main.c:64)
+ n1: 104 0x405621: init_data (cube_init.c:48)
+  n0: 104 0x40248A: main (main.c:63)
+ n1: 72 0x40647F: ft_calloc (in /home/mdahlstr/Documents/cubed/cub3D)
+  n1: 72 0x40548A: initialise_map_data (cube_init.c:19)
+   n1: 72 0x405685: init_data (cube_init.c:55)
+    n0: 72 0x40248A: main (main.c:63)
+ n1: 65 0x40675A: ft_strtrim (in /home/mdahlstr/Documents/cubed/cub3D)
+  n3: 65 0x403426: get_texture_path (parsing_utils1.c:148)
+   n1: 25 0x40315E: process_config_line (parsing_utils1.c:76)
+    n1: 25 0x402E1C: get_config (parsing.c:64)
+     n1: 25 0x402D59: parse_file (parsing.c:141)
+      n0: 25 0x402497: main (main.c:64)
+   n1: 20 0x40319F: process_config_line (parsing_utils1.c:78)
+    n1: 20 0x402E1C: get_config (parsing.c:64)
+     n1: 20 0x402D59: parse_file (parsing.c:141)
+      n0: 20 0x402497: main (main.c:64)
+   n1: 20 0x4031E0: process_config_line (parsing_utils1.c:80)
+    n1: 20 0x402E1C: get_config (parsing.c:64)
+     n1: 20 0x402D59: parse_file (parsing.c:141)
+      n0: 20 0x402497: main (main.c:64)
+ n1: 64 0x405591: init_data (cube_init.c:40)
+  n0: 64 0x40248A: main (main.c:63)
+ n1: 27 0x406EF9: ft_strjoin (in /home/mdahlstr/Documents/cubed/cub3D)
+  n1: 27 0x406B54: create_stash (in /home/mdahlstr/Documents/cubed/cub3D)
+   n2: 27 0x40699C: get_next_line (in /home/mdahlstr/Documents/cubed/cub3D)
+    n1: 27 0x402E00: get_config (parsing.c:61)
+     n1: 27 0x402D59: parse_file (parsing.c:141)
+      n0: 27 0x402497: main (main.c:64)
+    n0: 0 in 1 place, below massif's threshold (1.00%)
+ n2: 21 0x406961: get_next_line (in /home/mdahlstr/Documents/cubed/cub3D)
+  n1: 21 0x402E00: get_config (parsing.c:61)
+   n1: 21 0x402D59: parse_file (parsing.c:141)
+    n0: 21 0x402497: main (main.c:64)
+  n0: 0 in 1 place, below massif's threshold (1.00%)
+ n0: 13 in 4 places, all below massif's threshold (1.00%)
+#-----------
+snapshot=43
+#-----------
+time=785979
+mem_heap_B=1412
+mem_heap_extra_B=140
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=44
+#-----------
+time=788036
+mem_heap_B=1430
+mem_heap_extra_B=162
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=45
+#-----------
+time=790923
+mem_heap_B=1398
+mem_heap_extra_B=202
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=46
+#-----------
+time=793406
+mem_heap_B=1396
+mem_heap_extra_B=204
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=47
+#-----------
+time=796929
+mem_heap_B=1414
+mem_heap_extra_B=202
+mem_stacks_B=0
+heap_tree=peak
+n8: 1414 (heap allocation functions) malloc/new/new[], --alloc-fns, etc.
+ n1: 1024 0x4A33BA3: _IO_file_doallocate (filedoalloc.c:101)
+  n1: 1024 0x4A42CDF: _IO_doallocbuf (genops.c:347)
+   n1: 1024 0x4A41F5F: _IO_file_overflow@@GLIBC_2.2.5 (fileops.c:744)
+    n1: 1024 0x4A406D4: _IO_new_file_xsputn (fileops.c:1243)
+     n1: 1024 0x4A406D4: _IO_file_xsputn@@GLIBC_2.2.5 (fileops.c:1196)
+      n1: 1024 0x4A2A14C: outstring_func (vfprintf-internal.c:239)
+       n1: 1024 0x4A2A14C: __vfprintf_internal (vfprintf-internal.c:1263)
+        n1: 1024 0x4A1579E: printf (printf.c:33)
+         n1: 1024 0x402B54: count_lines (parsing.c:44)
+          n1: 1024 0x402D4C: parse_file (parsing.c:140)
+           n0: 1024 0x402497: main (main.c:64)
+ n1: 104 0x405621: init_data (cube_init.c:48)
+  n0: 104 0x40248A: main (main.c:63)
+ n2: 91 0x40675A: ft_strtrim (in /home/mdahlstr/Documents/cubed/cub3D)
+  n4: 91 0x403426: get_texture_path (parsing_utils1.c:148)
+   n1: 26 0x403221: process_config_line (parsing_utils1.c:82)
+    n1: 26 0x402E1C: get_config (parsing.c:64)
+     n1: 26 0x402D59: parse_file (parsing.c:141)
+      n0: 26 0x402497: main (main.c:64)
+   n1: 25 0x40315E: process_config_line (parsing_utils1.c:76)
+    n1: 25 0x402E1C: get_config (parsing.c:64)
+     n1: 25 0x402D59: parse_file (parsing.c:141)
+      n0: 25 0x402497: main (main.c:64)
+   n1: 20 0x40319F: process_config_line (parsing_utils1.c:78)
+    n1: 20 0x402E1C: get_config (parsing.c:64)
+     n1: 20 0x402D59: parse_file (parsing.c:141)
+      n0: 20 0x402497: main (main.c:64)
+   n1: 20 0x4031E0: process_config_line (parsing_utils1.c:80)
+    n1: 20 0x402E1C: get_config (parsing.c:64)
+     n1: 20 0x402D59: parse_file (parsing.c:141)
+      n0: 20 0x402497: main (main.c:64)
+  n0: 0 in 1 place, below massif's threshold (1.00%)
+ n1: 72 0x40647F: ft_calloc (in /home/mdahlstr/Documents/cubed/cub3D)
+  n1: 72 0x40548A: initialise_map_data (cube_init.c:19)
+   n1: 72 0x405685: init_data (cube_init.c:55)
+    n0: 72 0x40248A: main (main.c:63)
+ n1: 64 0x405591: init_data (cube_init.c:40)
+  n0: 64 0x40248A: main (main.c:63)
+ n1: 26 0x406EF9: ft_strjoin (in /home/mdahlstr/Documents/cubed/cub3D)
+  n1: 26 0x406B54: create_stash (in /home/mdahlstr/Documents/cubed/cub3D)
+   n2: 26 0x40699C: get_next_line (in /home/mdahlstr/Documents/cubed/cub3D)
+    n1: 26 0x402E00: get_config (parsing.c:61)
+     n1: 26 0x402D59: parse_file (parsing.c:141)
+      n0: 26 0x402497: main (main.c:64)
+    n0: 0 in 1 place, below massif's threshold (1.00%)
+ n2: 21 0x406961: get_next_line (in /home/mdahlstr/Documents/cubed/cub3D)
+  n1: 21 0x402E00: get_config (parsing.c:61)
+   n1: 21 0x402D59: parse_file (parsing.c:141)
+    n0: 21 0x402497: main (main.c:64)
+  n0: 0 in 1 place, below massif's threshold (1.00%)
+ n0: 12 in 4 places, all below massif's threshold (1.00%)
+#-----------
+snapshot=48
+#-----------
+time=801407
+mem_heap_B=1388
+mem_heap_extra_B=172
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=49
+#-----------
+time=805268
+mem_heap_B=1416
+mem_heap_extra_B=160
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=50
+#-----------
+time=808809
+mem_heap_B=1344
+mem_heap_extra_B=136
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=51
+#-----------
+time=814287
+mem_heap_B=8
+mem_heap_extra_B=16
+mem_stacks_B=0
+heap_tree=empty

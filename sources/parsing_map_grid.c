@@ -6,7 +6,7 @@
 /*   By: mdahlstr <mdahlstr@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/15 12:00:03 by mdahlstr          #+#    #+#             */
-/*   Updated: 2025/04/22 18:35:39 by mdahlstr         ###   ########.fr       */
+/*   Updated: 2025/04/23 18:38:47 by mdahlstr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,15 +87,18 @@ void	get_map(char *filename, t_data *data)
 		exit_game(data, EXIT_FAILURE);
 	fd = get_fd(filename, data);
 	y = 0;
-	while ((line = get_next_line(fd)) != NULL)
+	while (y < data->map_data->map_h)
 	{
+		line = get_next_line(fd);
+		if (!line)
+			break ;
 		if (process_map_line(line, &in_map, &y, data))
 			continue ;
 		free(line);
 		close(fd);
 		return ;
 	}
-	//data->map_data->map_grid[y] = NULL;
+	data->map_data->map_grid[data->map_data->map_h] = NULL; // ATTENTION //////////////////
 	#if DEBUG
 	printf("\n\n-----------EXTRACTED MAP--------------------------\n\n");
 	printf("\nMap heigh: %d\n", data->map_data->map_h);
