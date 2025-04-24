@@ -6,44 +6,37 @@
 /*   By: mdahlstr <mdahlstr@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/02 14:59:28 by mdahlstr          #+#    #+#             */
-/*   Updated: 2025/04/22 19:20:21 by mdahlstr         ###   ########.fr       */
+/*   Updated: 2025/04/24 17:44:20 by mdahlstr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h"
 #include "parsing.h"
 
-/* Counts file lines and map lines (map_h) */
-void	count_lines(char *filename, t_data *data)
+void	process_config_line(char **trimmed, t_data *data)
 {
-	int		i;
-	char	*line;
-	int		fd;
-	
-	fd = get_fd(filename, data);
-	i = 0;
-	while ((line = get_next_line(fd)) != NULL)
+	if (check_duplicated_element(data, *trimmed) == true)
 	{
-		if (i >= MAX_LINES - 1)
-		{
-			error_message("File has too many lines", 0);
-			if (line)
-				free(line); // free previous allocated lines
-			line = NULL;
-			close(fd);
-			exit_game(data, EXIT_FAILURE);
-		}
-		if (is_map_line(line))
-			data->map_data->map_h++;
-		free(line);
-		i++;
+		printf("DUPLICATED: [%s]\n", *trimmed);
+		free(*trimmed);
+		error_message_exit("Found duplicated elements (parsing_utils1 - process_config_line)", data);
 	}
-	close(fd);
-	data->map_data->file_len = i;
-	#if DEBUG
-	printf("File line count: %d\n", data->map_data->file_len);
-	printf("Map height: %d\n", data->map_data->map_h);
-	#endif
+	else
+	{
+		if (ft_strncmp(*trimmed, "NO ", 3) == 0)
+			data->map_data->no_texture = get_texture_path(trimmed, data);
+		else if (ft_strncmp(*trimmed, "SO ", 3) == 0)
+			data->map_data->so_texture = get_texture_path(trimmed, data);
+		else if (ft_strncmp(*trimmed, "WE ", 3) == 0)
+			data->map_data->we_texture = get_texture_path(trimmed, data);
+		else if (ft_strncmp(*trimmed, "EA ", 3) == 0)
+			data->map_data->ea_texture = get_texture_path(trimmed, data);
+		else if (ft_strncmp(*trimmed, "C ", 2) == 0)
+			data->map_data->ceiling_colour = get_colour(*trimmed, data);
+		else if (ft_strncmp(*trimmed, "F ", 2) == 0)
+			data->map_data->floor_colour = get_colour(*trimmed, data);
+		free(*trimmed);
+	}
 }
 
 // get map configuration:
@@ -52,6 +45,7 @@ static void	get_config(char *filename, t_data *data)
 {
 	int		y;
 	char	*line;
+	char	*trimmed;
 	int		fd;
 	
 	fd = get_fd(filename, data);
@@ -61,8 +55,19 @@ static void	get_config(char *filename, t_data *data)
 		line = get_next_line(fd);
 		if (line != NULL)
 		{
-			process_config_line(line, data);
+			trimmed = ft_strtrim(line, " \t\n\r");
 			free(line);
+			if (!trimmed)
+			{
+				close(fd);
+				error_message_exit("Failed trimming line from file", data);
+			}
+			process_config_line(&trimmed, data); // trimmed is freed inside. Do not free here
+		}
+		else
+		{
+			free(line);
+			line = NULL;
 		}
 		y++;
 	}
@@ -71,17 +76,17 @@ static void	get_config(char *filename, t_data *data)
 	#if DEBUG
 	//printf("Map len in get_config function: %d\n", data->map_data->map_h);
 	//if (data->map_data->no_texture)
-		printf("NO texture      --> [%s]\n", data->map_data->no_texture);
+	printf("NO texture      --> [%s]\n", data->map_data->no_texture);
 	//if (data->map_data->so_texture)
-		printf("SO texture      --> [%s]\n", data->map_data->so_texture);
+	printf("SO texture      --> [%s]\n", data->map_data->so_texture);
 	//if (data->map_data->we_texture)
-		printf("WE texture      --> [%s]\n", data->map_data->we_texture);
+	printf("WE texture      --> [%s]\n", data->map_data->we_texture);
 	//if (data->map_data->ea_texture)
-		printf("EA texture      --> [%s]\n", data->map_data->ea_texture);
+	printf("EA texture      --> [%s]\n", data->map_data->ea_texture);
 	//if (data->map_data->floor_colour > -1)
-		printf("Floor colour    --> [0x%08X]\n", data->map_data->floor_colour);
+	printf("Floor colour    --> [0x%08X]\n", data->map_data->floor_colour);
 	//if (data->map_data->ceiling_colour > -1)
-		printf("Ceiling colour  --> [0x%08X]\n", data->map_data->ceiling_colour);
+	printf("Ceiling colour  --> [0x%08X]\n", data->map_data->ceiling_colour);
 	#endif
 }
 

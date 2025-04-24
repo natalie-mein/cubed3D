@@ -6,11 +6,44 @@
 /*   By: mdahlstr <mdahlstr@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/14 16:35:24 by mdahlstr          #+#    #+#             */
-/*   Updated: 2025/04/30 13:15:18 by mdahlstr         ###   ########.fr       */
+/*   Updated: 2025/04/30 13:18:49 by mdahlstr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/cub3D.h"
+
+/* Counts file lines and map lines (map_h) */
+void	count_lines(char *filename, t_data *data)
+{
+	int		i;
+	char	*line;
+	int		fd;
+	
+	fd = get_fd(filename, data);
+	i = 0;
+	while ((line = get_next_line(fd)) != NULL)
+	{
+		if (i >= MAX_LINES - 1)
+		{
+			error_message("File has too many lines", 0);
+			if (line)
+				free(line); // free previous allocated lines
+			line = NULL;
+			close(fd);
+			exit_game(data, EXIT_FAILURE);
+		}
+		if (is_map_line(line))
+			data->map_data->map_h++;
+		free(line);
+		i++;
+	}
+	close(fd);
+	data->map_data->file_len = i;
+	#if DEBUG
+	printf("File line count: %d\n", data->map_data->file_len);
+	printf("Map height: %d\n", data->map_data->map_h);
+	#endif
+}
 
 // Turns all spaces in the map grid into zeroes
 // [ ] -> [0]
@@ -38,26 +71,24 @@ void	pad_map_lines(t_data *data)
 {
 	int		y;
 	char	*new_line;
-	int		max_len;
 	int		len;
 
 	y = 0;
-	max_len = data->map_data->map_w;
 	while (y < data->map_data->map_h)
 	{
 		len = ft_strlen(data->map_data->map_grid[y]);
-		if (len < max_len)
+		if (len < data->map_data->map_w)
 		{
-			new_line = malloc(max_len + 1);
+			new_line = malloc(data->map_data->map_w + 1);
 			if (!new_line)
 			{	
-				/// free previous?
+				free_map_grid(data->map_data->map_grid, y);
 				error_message_exit("Malloc failed in pad_map_lines", data);
 			}
 			ft_memcpy(new_line, data->map_data->map_grid[y], len);
-			while (len < max_len)
+			while (len < data->map_data->map_w)
 				new_line[len++] = ' ';
-			new_line[max_len] = '\0';
+			new_line[data->map_data->map_w] = '\0';
 			free(data->map_data->map_grid[y]);
 			data->map_data->map_grid[y] = new_line;
 		}
@@ -65,23 +96,7 @@ void	pad_map_lines(t_data *data)
 	}
 }
 
-void	process_config_line(char *line, t_data *data)
-{
-	while (ft_iswhitespace(*line))
-		line++;
-	if (ft_strncmp(line, "NO ", 3) == 0)
-		data->map_data->no_texture = get_texture_path(line, data);
-	else if (ft_strncmp(line, "SO ", 3) == 0)
-		data->map_data->so_texture = get_texture_path(line, data);
-	else if (ft_strncmp(line, "WE ", 3) == 0)
-		data->map_data->we_texture = get_texture_path(line, data);
-	else if (ft_strncmp(line, "EA ", 3) == 0)
-		data->map_data->ea_texture = get_texture_path(line, data);
-	else if (ft_strncmp(line, "C ", 2) == 0)
-		data->map_data->ceiling_colour = get_colour(line, data);
-	else if (ft_strncmp(line, "F ", 2) == 0)
-		data->map_data->floor_colour = get_colour(line, data);
-}
+
 
 // Returns true for all lines starting wwith '1'
 bool	is_map_line(const char *line)
@@ -96,7 +111,7 @@ int get_fd(char *file_name, t_data *data)
 	int	fd;
 
 	(void)file_name;
-	//fd = open("maps/simple_map.cub", O_RDONLY); /////////////////////////////////////////
+	fd = open("maps/simple_map.cub", O_RDONLY); /////////////////////////////////////////
 	//fd = open("maps/valid_maps/test.cub", O_RDONLY);
 	//fd = open("maps/valid_maps/test2.cub", O_RDONLY);
 	//// invalid maps: /////////////////////////////////////////////////////////
@@ -108,7 +123,8 @@ int get_fd(char *file_name, t_data *data)
 	//fd = open("maps/invalid_maps/too_few_textures.cub", O_RDONLY);
 	//fd = open("maps/invalid_maps/too_few_colours.cub", O_RDONLY);
 	//fd = open("maps/invalid_maps/too_many_colours.cub", O_RDONLY);
-	//fd = open("maps/invalid_maps/too_many_textures.cub", O_RDONLY);
+	fd = open("maps/invalid_maps/too_many_textures.cub", O_RDONLY);
+	//fd = open("maps/invalid_maps/rgb_error.cub", O_RDONLY);
 	//fd = open("maps/invalid_maps/invalid_char.cub", O_RDONLY);
 	//fd = open("maps/invalid_maps/two_players.cub", O_RDONLY);
 	//fd = open("maps/invalid_maps/open_map.cub", O_RDONLY);
@@ -121,37 +137,37 @@ int get_fd(char *file_name, t_data *data)
 }
 
 // check for duplicated textures or colours.
-// cleans up memory and exits in case of error
-void	check_duplicated_element(t_data *data, char *line)
+// returns TRUE if a duplicated texture or colour is detected.
+bool	check_duplicated_element(t_data *data, char *trimmed)
 {
-	int	x;
-
-	x = skip_whitespace(line);
-	if ((data->map_data->no_texture && line[x] == 'N')
-		|| (data->map_data->so_texture && line[x] == 'S')
-		|| (data->map_data->ea_texture && line[x] == 'E')
-		|| (data->map_data->we_texture && line[x] == 'W')
-		|| (data->map_data->ceiling_colour && line[x] == 'C')
-		|| (data->map_data->floor_colour && line[x] == 'F'))
+	if ((data->map_data->no_texture && trimmed[0] == 'N')
+		|| (data->map_data->so_texture && trimmed[0] == 'S')
+		|| (data->map_data->ea_texture && trimmed[0] == 'E')
+		|| (data->map_data->we_texture && trimmed[0] == 'W')
+		|| (data->map_data->ceiling_set != 0 && trimmed[0] == 'C')
+		|| (data->map_data->floor_set != 0 && trimmed[0] == 'F'))
 	{
-		free(line);
-		error_message_exit("Duplicated configuration element detected", data);
+		return (true);
 	}
+	return (false);
 }
 
-char	*get_texture_path(char *line, t_data *data)
+char	*get_texture_path(char **trimmed, t_data *data)
 {
-	char	*trimmed_line;
+	char	*only_path;
 
-	check_duplicated_element(data, line);
-	trimmed_line = ft_strtrim(line + 2, " \n");
-	if (!trimmed_line)
+	if (!trimmed || !*trimmed)
+		return (NULL);
+	only_path = ft_strdup(*trimmed + 3);
+	if (!only_path)
 	{
-		free(line);
+		free(*trimmed);
 		error_message_exit("Memory allocation failed: get_texture_path", data);
 	}
+	free(*trimmed);
+	*trimmed = NULL;
 	data->map_data->config_count++;
-	return (trimmed_line);
+	return (only_path);
 }
 
 

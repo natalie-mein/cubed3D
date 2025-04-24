@@ -6,7 +6,7 @@
 /*   By: mdahlstr <mdahlstr@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/15 11:56:05 by mdahlstr          #+#    #+#             */
-/*   Updated: 2025/04/22 19:03:52 by mdahlstr         ###   ########.fr       */
+/*   Updated: 2025/04/24 16:14:52 by mdahlstr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,21 +82,25 @@ int	get_colour(char *line, t_data *data)
 	char		*original_line;
 	char		*trimmed_line;
 	t_colour	colour_s;
-
-	if (!check_duplicated_element(data, line))
-		return (-2);
+	char		type;
+	
 	original_line = line;
+	type = line[skip_whitespace(line)];
 	line = line + 1;
 	ft_bzero(&colour_s, sizeof(t_colour));
 	trimmed_line = ft_strtrim(line, " \n");
 	if (!parse_rgb(trimmed_line, &colour_s))
 	{
-		free(trimmed_line);
 		free(original_line);
+		free(trimmed_line);
 		exit_game(data, EXIT_FAILURE);
 	}
 	free(trimmed_line);
 	colour_s.colour = create_rgb(&colour_s);
 	data->map_data->config_count++;
+	if (type == 'C')
+		data->map_data->ceiling_set = 1;
+	else if (type == 'F')
+		data->map_data->floor_set = 1;
 	return (colour_s.colour);
 }

@@ -32,6 +32,8 @@ typedef struct s_map_data
 	char	*we_texture;
 	int		floor_colour;
 	int		ceiling_colour;
+	bool	floor_set;
+	bool	ceiling_set;
 	int		config_count;
 	char	**map_grid;
 	int		map_w;
@@ -50,8 +52,8 @@ void		parse_file(char *filename, t_data *data);
 void		initialise_map_data(t_data *data);
 int 		get_next_number(const char *line, int *index, int colour);
 //char		*get_texture_path(char *line, t_data *data);
-char		*get_texture_path(char *line, t_data *data);
-void		check_duplicated_element(t_data *data, char *line);
+char		*get_texture_path(char **trimmed, t_data *data);
+bool		check_duplicated_element(t_data *data, char *trimmed);
 
 int			get_fd(char *file_name, t_data *data);
 void		count_lines(char *filename, t_data *data);
@@ -69,9 +71,10 @@ bool		process_map_line(char *line, bool *in_map, int *y, t_data *data);
 void		pad_map_lines(t_data *data);
 void		spaces_to_zeroes(t_data *data);
 
+void		free_map_grid(char **array, int up_to_index);
 
 
-void		process_config_line(char *line, t_data *data);
+void		process_config_line(char **trimmed, t_data *data);
 
 int			error_message(char *error_message, int code);
 void		error_message_exit(char *error_message, t_data *data);

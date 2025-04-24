@@ -6,7 +6,7 @@
 /*   By: mdahlstr <mdahlstr@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/15 13:38:47 by mdahlstr          #+#    #+#             */
-/*   Updated: 2025/04/16 17:10:16 by mdahlstr         ###   ########.fr       */
+/*   Updated: 2025/04/23 18:34:09 by mdahlstr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,4 +27,17 @@ void	error_message_exit(char *error_message, t_data *data)
 	ft_putendl_fd("Error", 2);
 	ft_putendl_fd(error_message, 2);
 	exit_game(data, EXIT_FAILURE);
+}
+
+void	free_map_grid(char **array, int up_to_index)
+{
+	int	i;
+
+	i = 0;
+	while (i < up_to_index)
+	{
+		free(array[i]);
+		i++;
+	}
+	free(array);
 }

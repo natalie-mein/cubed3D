@@ -6,7 +6,7 @@
 /*   By: mdahlstr <mdahlstr@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/17 14:11:25 by nmeintje          #+#    #+#             */
-/*   Updated: 2025/04/02 15:10:53 by mdahlstr         ###   ########.fr       */
+/*   Updated: 2025/04/24 17:58:39 by mdahlstr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@
 # include <stdarg.h>
 
 # ifndef BUFFER_SIZE
-#  define BUFFER_SIZE 20
+#  define BUFFER_SIZE 1
 # endif
 
 # ifndef MAX_FD
