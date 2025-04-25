@@ -1,19 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_iswhitespace.c                                  :+:      :+:    :+:   */
+/*   parsing_load_textures.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mdahlstr <mdahlstr@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/25 13:03:24 by nmeintje          #+#    #+#             */
-/*   Updated: 2025/04/25 16:49:15 by mdahlstr         ###   ########.fr       */
+/*   Created: 2025/04/25 15:50:49 by mdahlstr          #+#    #+#             */
+/*   Updated: 2025/04/25 17:53:11 by mdahlstr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-// Returns 1 if a space is found
-int ft_iswhitespace(int c)
+#include "../include/cub3D.h"
+#include "../include/parsing.h"
+
+
+// CHANGE NAMES TO -- path_to_xxxxxx for clarity
+
+// load textures
+void	parse_textures(t_data *data)
 {
-	if (c == 32 || (c >= 9 && c <= 13))
-		return (1);
-	return (0);
+	
 }
+
+
+// Textures accessed through  ---- data->text->ceiling (mlx_texture_t)
+
+/*
+mlx_texture_t struct is:
+
+
+
+*/

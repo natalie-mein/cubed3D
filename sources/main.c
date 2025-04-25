@@ -6,7 +6,7 @@
 /*   By: mdahlstr <mdahlstr@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/03 15:48:34 by nmeintje          #+#    #+#             */
-/*   Updated: 2025/04/22 17:38:21 by mdahlstr         ###   ########.fr       */
+/*   Updated: 2025/04/25 14:33:03 by mdahlstr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,23 +50,15 @@ int	main(int argc, char **argv)
 }
 */
 
-// Natalie Main
-
 int	main(int argc, char **argv)
 {
 	t_data		data;
-	char		*filename;
 
-	(void)argc; // this should be 2
-	//validate_input(argc, argv[1]); // no memory freeing necessary on error.
-	filename = argv[1];
+	validate_input(argc, argv[1]);
 	init_data(&data);
-	parse_file(filename, &data);
+	parse_file(argv[1], &data);
 	init_game(&data);
-	//printf("Before mlx loop\n");
 	mlx_loop(data.mlx);
-	//printf("after mlx_loop\n");
-	//exit_game(&data, SUCCESS);
 	free_data(&data);
 	return (SUCCESS);
 } 

@@ -6,7 +6,7 @@
 /*   By: mdahlstr <mdahlstr@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/02 14:59:28 by mdahlstr          #+#    #+#             */
-/*   Updated: 2025/04/24 17:44:20 by mdahlstr         ###   ########.fr       */
+/*   Updated: 2025/04/25 16:39:55 by mdahlstr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,9 @@ void	process_config_line(char **trimmed, t_data *data)
 {
 	if (check_duplicated_element(data, *trimmed) == true)
 	{
+		#if DEBUG
 		printf("DUPLICATED: [%s]\n", *trimmed);
+		#endif
 		free(*trimmed);
 		error_message_exit("Found duplicated elements (parsing_utils1 - process_config_line)", data);
 	}
@@ -62,30 +64,18 @@ static void	get_config(char *filename, t_data *data)
 				close(fd);
 				error_message_exit("Failed trimming line from file", data);
 			}
-			process_config_line(&trimmed, data); // trimmed is freed inside. Do not free here
-		}
-		else
-		{
-			free(line);
-			line = NULL;
+			process_config_line(&trimmed, data);
 		}
 		y++;
 	}
 	close (fd);
 	parse_config(data);
 	#if DEBUG
-	//printf("Map len in get_config function: %d\n", data->map_data->map_h);
-	//if (data->map_data->no_texture)
 	printf("NO texture      --> [%s]\n", data->map_data->no_texture);
-	//if (data->map_data->so_texture)
 	printf("SO texture      --> [%s]\n", data->map_data->so_texture);
-	//if (data->map_data->we_texture)
 	printf("WE texture      --> [%s]\n", data->map_data->we_texture);
-	//if (data->map_data->ea_texture)
 	printf("EA texture      --> [%s]\n", data->map_data->ea_texture);
-	//if (data->map_data->floor_colour > -1)
 	printf("Floor colour    --> [0x%08X]\n", data->map_data->floor_colour);
-	//if (data->map_data->ceiling_colour > -1)
 	printf("Ceiling colour  --> [0x%08X]\n", data->map_data->ceiling_colour);
 	#endif
 }
@@ -142,17 +132,17 @@ void print_map(t_map_data *map_data, char *message)
 // 5. validate map 
 void	parse_file(char *filename, t_data *data)
 {
-	count_lines(filename, data);
+	validate_and_count_lines(filename, data);
 	get_config(filename, data);
 	get_map(filename, data);
 	#if DEBUG
-	print_map(data->map_data, "after padding"); // after padding the lines, all will have the same length.
+	print_map(data->map_data, "after padding");
 	#endif
 	get_spawn_pos(data);
 	validate_map(data);
 	spaces_to_zeroes(data);
 	#if DEBUG
-	print_map(data->map_data, "after validation and turning spaces to zeroes"); // after map grid validation, all spaces are turned into zeroes
+	print_map(data->map_data, "after validation and turning spaces to zeroes");
 	#endif
 }
 

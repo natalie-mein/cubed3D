@@ -55,8 +55,11 @@ int 		get_next_number(const char *line, int *index, int colour);
 char		*get_texture_path(char **trimmed, t_data *data);
 bool		check_duplicated_element(t_data *data, char *trimmed);
 
-int			get_fd(char *file_name, t_data *data);
-void		count_lines(char *filename, t_data *data);
+void		parse_textures(t_data *data);
+
+
+int			get_fd(char *filename, t_data *data);
+void		validate_and_count_lines(char *filename, t_data *data);
 bool		is_map_line(const char *line);
 
 bool		parse_rgb(char *trimmed_line, t_colour *colour_s);
@@ -78,6 +81,8 @@ void		process_config_line(char **trimmed, t_data *data);
 
 int			error_message(char *error_message, int code);
 void		error_message_exit(char *error_message, t_data *data);
+void		error_message_exit_no_free(char *error_message);
+
 
 void		parse_config(t_data *data);
 void		get_spawn_pos(t_data *data);

@@ -6,14 +6,52 @@
 /*   By: mdahlstr <mdahlstr@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/14 16:35:24 by mdahlstr          #+#    #+#             */
-/*   Updated: 2025/04/24 18:07:15 by mdahlstr         ###   ########.fr       */
+/*   Updated: 2025/04/25 17:28:22 by mdahlstr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/cub3D.h"
 
+// Skips spaces and checks the first character of every line
+// Accepted chars: N S E W F C 1, all types of spaces, newline
+// and null terminator.
+// Returns TRUE if a character is NOT on the list above
+// Returns FALSE if the character is as expected
+bool	wrong_char_in_line(char *line)
+{
+	int	i;
+	char c;
+	
+	i = skip_whitespace(line);
+	c = line[i];
+	if (c != 'N' && c != 'S' && c != 'E' && c != 'W' && c != 'F' && c != 'C'
+		&& c != '1'&& !ft_iswhitespace(c) && c != '\n' && c != '\0')
+		return (true);
+	return (false);
+}
+
+void	validate_line(char *line, int fd, t_data *data)
+{
+	if (wrong_char_in_line(line))
+	{
+		#if DEBUG
+		printf("in line: %s\n", line);
+		#endif
+		if (line)
+			free(line);
+		line = NULL;
+		close(fd);
+		error_message_exit("Wrong character found in file.", data);
+	}
+	if (is_map_line(line))
+		data->map_data->map_h++;
+	free(line);
+}
+
+
+/* Checks the entire file for lines starting with strange characters */
 /* Counts file lines and map lines (map_h) */
-void	count_lines(char *filename, t_data *data)
+void	validate_and_count_lines(char *filename, t_data *data)
 {
 	int		i;
 	char	*line;
@@ -25,16 +63,13 @@ void	count_lines(char *filename, t_data *data)
 	{
 		if (i >= MAX_LINES - 1)
 		{
-			error_message("File has too many lines", 0);
 			if (line)
-				free(line); // free previous allocated lines
+				free(line);
 			line = NULL;
 			close(fd);
-			exit_game(data, EXIT_FAILURE);
+			error_message_exit("File has too many lines", data);
 		}
-		if (is_map_line(line))
-			data->map_data->map_h++;
-		free(line);
+		validate_line(line, fd, data);
 		i++;
 	}
 	close(fd);
@@ -96,8 +131,6 @@ void	pad_map_lines(t_data *data)
 	}
 }
 
-
-
 // Returns true for all lines starting wwith '1'
 bool	is_map_line(const char *line)
 {
@@ -106,13 +139,12 @@ bool	is_map_line(const char *line)
 	return (*line == '1');
 }
 
-int get_fd(char *file_name, t_data *data)
+int get_fd(char *filename, t_data *data)
 {
 	int	fd;
 
-	(void)file_name;
 	//fd = open("maps/simple_map.cub", O_RDONLY); /////////////////////////////////////////
-	fd = open("maps/valid_maps/test.cub", O_RDONLY);
+	//fd = open("maps/valid_maps/test.cub", O_RDONLY);
 	//fd = open("maps/valid_maps/test2.cub", O_RDONLY);
 
 	
@@ -129,6 +161,7 @@ int get_fd(char *file_name, t_data *data)
 	//fd = open("maps/invalid_maps/wrong_extension.xxx", O_RDONLY);
 	//fd = open("maps/invalid_maps/empty_line.cub", O_RDONLY);
 
+	fd = open(filename, O_RDONLY);
 	if (fd == -1)
 		error_message_exit("Failed to open file", data);
 	return (fd);

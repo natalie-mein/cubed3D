@@ -6,7 +6,7 @@
 /*   By: mdahlstr <mdahlstr@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/15 12:00:03 by mdahlstr          #+#    #+#             */
-/*   Updated: 2025/04/23 18:38:47 by mdahlstr         ###   ########.fr       */
+/*   Updated: 2025/04/25 13:38:36 by mdahlstr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,8 @@ bool	allocate_map_grid(t_data *data)
 	int	y;
 
 	y = 0;
-	data->map_data->map_grid = malloc(sizeof(char *) * (data->map_data->map_h + 1));
+	data->map_data->map_grid = malloc(sizeof(char *)
+		* (data->map_data->map_h + 1));
 	if (!data->map_data->map_grid)
 		return (error_message("Memory allocation failure for map grid", false));
 	y = 0;
@@ -29,9 +30,9 @@ bool	allocate_map_grid(t_data *data)
 	return (true);
 }
 
-int skip_whitespace(char *line)
+int	skip_whitespace(char *line)
 {
-	int x;
+	int	x;
 
 	x = 0;
 	while (ft_iswhitespace(line[x]))
@@ -98,7 +99,7 @@ void	get_map(char *filename, t_data *data)
 		close(fd);
 		return ;
 	}
-	data->map_data->map_grid[data->map_data->map_h] = NULL; // ATTENTION //////////////////
+	data->map_data->map_grid[data->map_data->map_h] = NULL;
 	#if DEBUG
 	printf("\n\n-----------EXTRACTED MAP--------------------------\n\n");
 	printf("\nMap heigh: %d\n", data->map_data->map_h);

@@ -6,7 +6,7 @@
 /*   By: mdahlstr <mdahlstr@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/16 16:37:50 by mdahlstr          #+#    #+#             */
-/*   Updated: 2025/04/22 18:27:18 by mdahlstr         ###   ########.fr       */
+/*   Updated: 2025/04/25 14:06:29 by mdahlstr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,10 +111,7 @@ bool	only_spaces(char *str)
 
 // Checks for valid characters (P, E, C, 0, 1),
 // walls (the map should be completely enclosed),
-// number of players (should be 1),
-// number of exits (should be 1).
-// collectibles (should be 1 or more),
-// valid path (collectibles and exit should be accessible).
+// number of players (should be 1).
 void	validate_map(t_data *data)
 {
 	int	x;

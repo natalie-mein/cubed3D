@@ -6,7 +6,7 @@
 /*   By: mdahlstr <mdahlstr@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/02 15:16:04 by nmeintje          #+#    #+#             */
-/*   Updated: 2025/04/17 15:44:02 by mdahlstr         ###   ########.fr       */
+/*   Updated: 2025/04/25 17:48:20 by mdahlstr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,6 +80,16 @@ typedef struct s_ray
 	double	perp_wall_dist;
 }   t_ray;
 
+typedef struct s_text
+{
+	mlx_texture_t	*north;
+	mlx_texture_t	*south;
+	mlx_texture_t	*east;
+	mlx_texture_t	*west;
+	mlx_texture_t	*floor;
+	mlx_texture_t	*ceiling;
+}	t_text;
+
 typedef struct s_data
 {
 	t_map_data			*map_data;
@@ -90,6 +100,7 @@ typedef struct s_data
 	char				player_dir; // cardinal direction of player start 'N', 'S', 'E', 'W'
 	t_player			*player;
 	t_ray				*ray;
+	t_text				*text;
 }	t_data;
 
 void	raycast(t_data *data);

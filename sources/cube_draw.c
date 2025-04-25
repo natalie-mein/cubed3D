@@ -6,7 +6,7 @@
 /*   By: mdahlstr <mdahlstr@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/11 17:43:56 by mdahlstr          #+#    #+#             */
-/*   Updated: 2025/04/15 17:38:15 by mdahlstr         ###   ########.fr       */
+/*   Updated: 2025/04/25 15:24:05 by mdahlstr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ void draw_tile(t_data *data, int x, int y, uint32_t color)
 	}
 }
 
+// the map's dimensions are already set during parsing
 void draw_map(t_data *data, char **map)
 {
 	int			y;
@@ -38,12 +39,12 @@ void draw_map(t_data *data, char **map)
 	char		tile;
 	uint32_t	color;
 
-	data->map_data->map_h = 0;
+	//data->map_data->map_h = 0;
 	x = 0;
 	y = 0;
-	data->map_data->map_w = ft_strlen(map[0]);
-	while (map[data->map_data->map_h] != NULL) /// SOMETHING IS WRONG HERE.
-		data->map_data->map_h++;
+	//data->map_data->map_w = ft_strlen(map[0]);
+	//while (map[data->map_data->map_h] != NULL) /// SOMETHING IS WRONG HERE.
+	//	data->map_data->map_h++;
 	while (y < data->map_data->map_h)
 	{
 		x = 0;
