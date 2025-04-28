@@ -121,7 +121,7 @@ void render_game(void *param)
 
 	if (data->image)
 		mlx_delete_image(data->mlx, data->image);
-	//clear_pixel_buffer(data);
+	clear_pixel_buffer(data);
 	move_player(data);
 	raycast(data);
 	data->image = mlx_new_image(data->mlx, WIDTH, HEIGHT);
@@ -131,8 +131,8 @@ void render_game(void *param)
 		return;
 	}
 	//clear_pixel_buffer(data);
-	//draw_map(data, data->map_data->map_grid);
-	//draw_player(data);
+	draw_map(data, data->map_data->map_grid);
+	draw_player(data);
 	render_image(data);
 }
 

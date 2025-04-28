@@ -144,6 +144,8 @@ void	render_wall_pixels(t_data *data, t_ray *ray, int x);
 
 void	render_image(t_data *data);
 
+void	init_textures(t_data *data);
+
 void	init_data(t_data *data);
 void	init_game(t_data *data);
 void    exit_game(t_data *data, int exit_code);

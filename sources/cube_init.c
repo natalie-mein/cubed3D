@@ -37,23 +37,30 @@ void	initialise_map_data(t_data *data)
 void	init_render(t_data *data)
 {
 	int	i;
+	int	j;
 
 	i = 0;
-	data->render = malloc(sizeof(t_render));
+	j = 0;
+	data->render = ft_calloc(1, sizeof(t_render));
 	if (!data->render)
 	{
 		perror("Failed to allocate render");
 		exit(EXIT_FAILURE);
 	}
-	data->render->pixels = malloc(sizeof(uint32_t *) * HEIGHT + 1);
+	data->render->pixels = ft_calloc(HEIGHT, sizeof(uint32_t *));
 	if (!data->render->pixels)
 		exit_game(data, EXIT_FAILURE);
 	while (i < HEIGHT)
 	{
-		data->render->pixels[i] = malloc(sizeof(uint32_t) * WIDTH);
-		if (! data->render->pixels[i])
-		error_message_exit("Memory allocation failure for pixels", data);
+		data->render->pixels[i] = ft_calloc(WIDTH, sizeof(uint32_t));
+		if (!data->render->pixels[i])
+			error_message_exit("Memory allocation failure for pixels", data);
 		i++;
+	}
+	while (j < 4)
+	{
+		data->render->text_buf[j] = NULL;
+		j++;
 	}
 }
 

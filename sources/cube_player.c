@@ -46,6 +46,7 @@ void    player_direction(t_data *data)
 {
 	data->player->pos_x = data->player_x + 0.5; // center in the tile
 	data->player->pos_y = data->player_y + 0.5;
+	printf("Player initialized at position: %.2f, %.2f\n", data->player->pos_x, data->player->pos_y);
 	if (data->player_dir == 'N')
 	{
 		data->player->start_dir = NORTH;
