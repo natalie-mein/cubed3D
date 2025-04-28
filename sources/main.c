@@ -6,7 +6,7 @@
 /*   By: mdahlstr <mdahlstr@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/03 15:48:34 by nmeintje          #+#    #+#             */
-/*   Updated: 2025/04/25 14:33:03 by mdahlstr         ###   ########.fr       */
+/*   Updated: 2025/04/28 16:43:24 by mdahlstr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ int	main(int argc, char **argv)
 
 int	main(int argc, char **argv)
 {
-	t_data		data;
+	t_data	data;
 
 	validate_input(argc, argv[1]);
 	init_data(&data);
