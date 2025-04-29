@@ -22,7 +22,7 @@ int	main(int argc, char **argv)
 	filename = argv[1];
 	init_data(&data); 
 	parse_file(filename, &data); // this function closes the fd // frees data and exits in case of error
-	 init_textures(&data);
+	init_textures(&data);
 	init_game(&data);
 	//mlx_resize_hook(data.mlx, resize_game, &data) <- need to make this
 	mlx_loop(data.mlx);

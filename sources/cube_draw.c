@@ -64,36 +64,6 @@ void draw_map(t_data *data, char **map)
 	mlx_image_to_window(data->mlx, data->image, 0, 0);
 }
 
-/*void	render_image(t_data *data)
-{
-	uint32_t	*pixels;
-	int			x;
-	int			y;
-	uint32_t 	color;
-
-	pixels = (uint32_t *)data->image->pixels;
-	y = 0;
-	while (y < HEIGHT)
-	{
-		x = 0;
-		while (x < WIDTH)
-		{
-			color = data->render->pixels[y][x];
-			if (color == 0)
-			{
-				if  (y < HEIGHT / 2)
-					color = data->ceiling_color;
-				else if (y > HEIGHT / 2)
-					color = data->floor_color;
-			}
-			pixels[y * WIDTH + x] = color;
-			x++;
-		}
-		y++;
-	}
-	mlx_image_to_window(data->mlx, data->image, 0, 0);
-}*/
-
 void	clear_pixel_buffer(t_data *data)
 {
 	int	x;
@@ -130,9 +100,8 @@ void render_game(void *param)
 		printf("Failed to create image!\n");
 		return;
 	}
-	//clear_pixel_buffer(data);
-	draw_map(data, data->map_data->map_grid);
-	draw_player(data);
+	//draw_map(data, data->map_data->map_grid);
+	//draw_player(data);
 	render_image(data);
 }
 

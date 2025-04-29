@@ -13,14 +13,14 @@
 #include "../include/raycasting.h"
 #include <math.h>
 
+/*
+calculate ray position and direction
+*/
 void	calculate_ray_position(t_data *data, t_player *player, int x)
 {
-	// calculate ray position and direction
-	data->ray->camera_x = 2 * x / data->ray->screen_width - 1; // x- coordinate in camera space
+	data->ray->camera_x = 2 * x / data->ray->screen_width - 1; 
 	data->ray->r_dir_x = player->dir_x + player->plane_x * data->ray->camera_x;
 	data->ray->r_dir_y = player->dir_y + player->plane_y * data->ray->camera_x;	
-
-	//printf("camera_x: %f, r_dir_x: %f, r_dir_y: %f\n", data->ray->camera_x, data->ray->r_dir_x, data->ray->r_dir_y);
 }
 
 /*
@@ -55,7 +55,7 @@ void	calculate_ray_direction(t_player *player, t_ray *ray)
 	if (ray->r_dir_y >= 0)
 	{
 		ray->step_y = 1;
-		ray->side_y = ((int)ray->r_pos_y + 1.0 - player->pos_x) * ray->delta_y;
+		ray->side_y = ((int)ray->r_pos_y + 1.0 - player->pos_y) * ray->delta_y;
 	}
 	else
 	{
@@ -83,78 +83,20 @@ void	calculate_differential(t_data *data, t_ray *ray)
 			ray->r_pos_y += ray->step_y;
 			ray->boundary = 1;
 		}
-		//if (data->map_data->map_grid[(int)data->ray->r_pos_y][(int)data->ray->r_pos_x] == '1')
-		//	break ;
-		int map_x = (int)data->ray->r_pos_x;
-		int map_y = (int)data->ray->r_pos_y;
-
-// Assuming map_width and map_height are the dimensions of your map
-		if (map_x < 0 || map_x >= data->map_data->map_w || map_y < 0 || map_y >= data->map_data->map_h) {
-    // Handle error: ray has left the map
-    // You can break, return, or set a flag as appropriate
-    		break;
-			}
-
-		if (data->map_data->map_grid[map_y][map_x] == '1')
-    		break;
-		}
+		//printf("Ray stepping to (%.2f, %.2f) dir_y: %.2f step_y: %d\n",
+       		//ray->r_pos_x, ray->r_pos_y, ray->r_dir_y, ray->step_y);
+		if ((int)ray->r_pos_x < 0 || (int)ray->r_pos_x >= data->map_data->map_w 
+			|| (int)ray->r_pos_y < 0 || (int)ray->r_pos_y >= data->map_data->map_h)
+    		break ;
+		if ( data->map_data->map_grid[(int)ray->r_pos_y][(int)ray->r_pos_x] == '1')
+			break ;
+	}
 	if (ray->boundary == 0)
 		ray->wx_distance = ray->side_x - ray->delta_x;
 	else
 		ray->wx_distance = ray->side_y - ray->delta_y;
 	ray->wx_height = (int)(HEIGHT / ray->wx_distance);
 }
-
-/*void calculate_differential(t_data *data, t_ray *ray)
-{
-    int map_x;
-    int map_y;
-
-    while (1)
-    {
-        if (ray->side_x < ray->side_y)
-        {
-            ray->side_x += ray->delta_x;
-            ray->r_pos_x += ray->step_x;
-            ray->boundary = 0;
-        }
-        else
-        {
-            ray->side_y += ray->delta_y;
-            ray->r_pos_y += ray->step_y;
-            ray->boundary = 1;
-        }
-
-        // Convert ray position to integer grid coordinates
-        map_x = (int)ray->r_pos_x;
-        map_y = (int)ray->r_pos_y;
-
-        // Debugging print statements
-        //printf("r_pos_x: %.2f, r_pos_y: %.2f\n", ray->r_pos_x, ray->r_pos_y);
-        //printf("map_x: %d, map_y: %d\n", map_x, map_y);
-        //printf("map_h: %d, map_w: %d\n", data->map_data->map_h, data->map_data->map_w);
-
-        // Check bounds before accessing the grid
-        if (map_x < 0 || map_x < data->map_data->map_w || map_y < 0 || map_y < data->map_data->map_h)
-        {
-            // Safe access to map_grid
-            if (data->map_data->map_grid[map_y][map_x] == '1')
-                break ;  // Found wall
-        }
-        else
-        {
-            printf("Out of bounds access attempt: map_x: %d, map_y: %d\n", map_x, map_y);
-            break;  // Out of bounds, stop the loop or handle accordingly
-        }
-    }
-
-    if (ray->boundary == 0)
-        ray->wx_distance = ray->side_x - ray->delta_x;
-    else
-        ray->wx_distance = ray->side_y - ray->delta_y;
-
-    ray->wx_height = (int)(HEIGHT / ray->wx_distance);
-} */
 
 
 void raycast(t_data *data) 

@@ -83,6 +83,8 @@ typedef struct s_ray
 	double  side_y;
 	int     step_x;
 	int     step_y;
+	int		map_x;
+	int		map_y;
 	int		hit;
 	int		wx_top;
 	int		wx_bottom;

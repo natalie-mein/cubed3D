@@ -51,8 +51,6 @@ int	find_location(t_ray *ray, int texture)
 	int	x;
 
 	x = (int)(ray->wall_x * TEXTURE);
-	//if (x >= TEXTURE)
-	//	x = TEXTURE - 1;
 	if (texture == NORTH || texture == EAST)
 		return (x);
 	if (texture == SOUTH || texture == WEST)
@@ -60,7 +58,7 @@ int	find_location(t_ray *ray, int texture)
 	return (ERROR);
 }
 
-void	render_wall_pixels(t_data *data, t_ray *ray, int x) // mlx_texture_t
+void	render_wall_pixels(t_data *data, t_ray *ray, int x)
 {
 	int			i;
 	int			j;
@@ -75,48 +73,15 @@ void	render_wall_pixels(t_data *data, t_ray *ray, int x) // mlx_texture_t
 	while (ray->wx_top < ray->wx_bottom)
 	{
 		k += m;
-		//printf("i=%d, j=%d, k=%f\n", i, j, k);
 		color = data->render->text_buf[i][(TEXTURE * ((int)k % TEXTURE)) + j];
+		//if (i == SOUTH)
+    	//	printf("Rendering SOUTH wall: j = %d, k = %f\n", j, k);
 		//shading? color = apply_shading(color, ray, game->render);
 		if (color > 0)
 			data->render->pixels[ray->wx_top][x] = color;
 		ray->wx_top++;
 	}
 }
-
-/*void	render_wall_pixels(t_data *data, t_ray *ray, int x)
-{
-	int			i;
-	int			j;
-	double		k;
-	double		m;
-	uint32_t	color;
-
-	i = choose_wall_texture(ray);
-	j = find_location(ray, i) % 640; // make sure j is inside [0, 639]
-	m = (double)640 / fmax(ray->wx_height, 1.0);
-	k = (double)(ray->wx_top - HEIGHT / 2 + ray->wx_height / 2) * m;
-	while (ray->wx_top < ray->wx_bottom)
-	{
-		k += m;
-
-		int tex_y = ((int)k) % 640;
-		int tex_x = j; // already clamped
-		printf("Accessing texture: i = %d, tex_x = %d, tex_y = %d\n", i, tex_x, tex_y);
-		color = data->render->text_buf[i][(640 * tex_y) + tex_x];
-		if (tex_y < 0 || tex_y >= TEXTURE || tex_x < 0 || tex_x >= TEXTURE) {
-			printf("Invalid texture coordinates: tex_x = %d, tex_y = %d\n", tex_x, tex_y);
-		}
-		else
-			printf("valid textures \n");
-		// Optional shading: color = apply_shading(color, ray, game->render);
-		if (color > 0)
-			data->render->pixels[ray->wx_top][x] = color;
-
-		ray->wx_top++;
-	}
-}*/
-
 
 void	render_image(t_data *data)
 {
@@ -136,9 +101,9 @@ void	render_image(t_data *data)
 			if (data->render->pixels[y][x] > 0)
 				color = data->render->pixels[y][x];
 			else if (y < HEIGHT / 2)
-				color = data->ceiling_color;
-			else if (y > HEIGHT / 2)
-				color = data->floor_color;
+				color = 0xFF9ccccd; //data->ceiling_color;
+			else
+				color = 0xFFffff74;//data->floor_color;
 			pixels[y * WIDTH + x] = color;
 			x++;
 		}
