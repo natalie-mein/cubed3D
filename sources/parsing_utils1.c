@@ -46,8 +46,8 @@ int get_fd(char *file_name, t_data *data)
 	//fd = open("maps/simple_map.cub", O_RDONLY); /////////////////////////////////////////
 	//fd = open("maps/valid_maps/test2.cub", O_RDONLY);
 	//// invalid maps: /////////////////////////////////////////////////////////
-	//fd = open("maps/valid_maps/test.cub", O_RDONLY);
-	fd = open("maps/valid_maps/test_zeroes.cub", O_RDONLY);
+	fd = open("maps/valid_maps/test.cub", O_RDONLY);
+	//fd = open("maps/valid_maps/test_zeroes.cub", O_RDONLY);
 	//fd = open("maps/valid_maps/test_wrong_element_num.cub", O_RDONLY);
 	//fd = open("maps/valid_maps/too_many_elements.cub", O_RDONLY);
 	//fd = open("maps/invalid_maps/rgb_error.cub", O_RDONLY);

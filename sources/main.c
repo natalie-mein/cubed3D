@@ -28,5 +28,4 @@ int	main(int argc, char **argv)
 	mlx_loop(data.mlx);
 	exit_game(&data, SUCCESS);
 	//return (SUCCESS);
-	//
 }
