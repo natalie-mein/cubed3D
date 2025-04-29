@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-//#include "../include/raycasting.h"
+#include "../include/raycasting.h"
 //#include "../include/parsing.h"
 #include "cub3D.h"
 
@@ -48,8 +48,6 @@ void	free_map_data(t_map_data *map_data, int height)
 	free(map_data);
 }
 
-// free2darray
-
 void	free_data(t_data *data)
 {
 	int i;
@@ -63,8 +61,6 @@ void	free_data(t_data *data)
 		free(data->player);
 	if (data->ray)
 		free(data->ray);
-	// if (data)
-	//	free(data);
 }
 
 void	exit_game(t_data *data, int exit_code)

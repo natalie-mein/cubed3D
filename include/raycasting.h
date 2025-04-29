@@ -26,10 +26,17 @@
 # define TILE_SIZE 25
 # define MOVE_SPEED 0.05
 # define PADDING 0.1
+# define TEXTURE 640 // is this too small?
 
 extern int map[MAP_HEIGHT][MAP_WIDTH];
 
 typedef struct s_map_data t_map_data;
+
+typedef struct	s_render
+{
+	uint32_t	*text_buf[4];
+	uint32_t	**pixels;
+}	t_render;
 
 typedef enum s_dir
 {
@@ -65,6 +72,7 @@ typedef struct s_ray
 {
 	double  camera_x;
 	double  screen_width;
+	double	wall_x;
 	double  r_dir_x;
 	double  r_dir_y;
 	double  r_pos_x;
@@ -75,21 +83,41 @@ typedef struct s_ray
 	double  side_y;
 	int     step_x;
 	int     step_y;
+	int		map_x;
+	int		map_y;
 	int		hit;
-	int		side;
-	double	perp_wall_dist;
+	int		wx_top;
+	int		wx_bottom;
+	int		boundary;
+	double	wx_distance;
+	int		wx_height;
 }   t_ray;
+
+typedef struct s_text
+{
+	mlx_texture_t	*north;
+	mlx_texture_t	*south;
+	mlx_texture_t	*east;
+	mlx_texture_t	*west;
+	mlx_texture_t	*floor;
+	mlx_texture_t	*ceiling;
+}	t_text;
+
 
 typedef struct s_data
 {
-	t_map_data			*map_data;
-	mlx_t				*mlx; // MLX pointer
-	mlx_image_t			*image; // MLX window pointer
-	int					player_x; //starting position of player
-	int					player_y;
-	char				player_dir; // cardinal direction of player start 'N', 'S', 'E', 'W'
-	t_player			*player;
-	t_ray				*ray;
+	t_map_data	*map_data;
+	mlx_t		*mlx; // MLX pointer
+	mlx_image_t	*image; // MLX window pointer
+	int			player_x; //starting position of player
+	int			player_y;
+	char		player_dir; // cardinal direction of player start 'N', 'S', 'E', 'W'
+	uint32_t	ceiling_color;
+	uint32_t	floor_color;
+	t_player	*player;
+	t_ray		*ray;
+	t_render	*render;
+	t_text		*text;
 }	t_data;
 
 void	raycast(t_data *data);
@@ -109,6 +137,16 @@ void    rotate_right(t_data *data);
 void    render_game(void *param);
 
 void    player_direction(t_data *data);
+
+void    render_wall_slice(t_data *data, int x, int line_height, int draw_start);
+
+int 	texture_buffer(t_data *data, mlx_texture_t *texture, int direction);
+void	calculate_wall_pixels(t_player *player, t_ray *ray);
+void	render_wall_pixels(t_data *data, t_ray *ray, int x);
+
+void	render_image(t_data *data);
+
+void	init_textures(t_data *data);
 
 void	init_data(t_data *data);
 void	init_game(t_data *data);

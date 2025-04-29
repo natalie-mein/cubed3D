@@ -36,7 +36,7 @@ typedef struct s_map_data
 	char    **map_grid;
 	int		map_w;
 	int		map_h;
-} t_map_data;
+}	t_map_data;
 
 typedef struct s_colour {
 	int				r;

@@ -12,7 +12,7 @@
 
 #include "../include/cub3D.h"
 
-bool	allocate_map_grid(t_data *data)
+/*bool	allocate_map_grid(t_data *data)
 {
 	int	y;
 
@@ -27,7 +27,31 @@ bool	allocate_map_grid(t_data *data)
 		y++;
 	}
 	return (true);
+}*/
+
+bool allocate_map_grid(t_data *data)
+{
+    int y;
+
+    // Allocate memory for the array of row pointers (map_h + 1 rows)
+    data->map_data->map_grid = ft_calloc((data->map_data->map_h + 1), sizeof(char *));
+    if (!data->map_data->map_grid)
+        return (error_message("Memory allocation failure for map grid", false));
+
+    // Allocate memory for each row in the map grid
+    y = 0;
+    while (y < data->map_data->map_h)
+    {
+        data->map_data->map_grid[y] = malloc(sizeof(char) * (data->map_data->map_w + 1));  // map_w is the width of each row
+        if (!data->map_data->map_grid[y])
+            return (error_message("Memory allocation failure for map row", false));
+        y++;
+    }
+    data->map_data->map_grid[y] = NULL;  // Null-terminate the map grid (optional, depending on how you use it)
+
+    return (true);
 }
+
 
 int skip_whitespace(char *line)
 {

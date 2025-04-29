@@ -30,11 +30,37 @@ void	initialise_map_data(t_data *data)
 	data->map_data->config_count = 0;
 	data->map_data->map_h = 0;
 	data->map_data->map_w = 0;
+	data->floor_color = 0;
+	data->ceiling_color = 0;
+}
+
+void	init_render(t_data *data)
+{
+	int	i;
+	int	j;
+
+	i = 0;
+	j = 0;
+	data->render = ft_calloc(1, sizeof(t_render));
+	if (!data->render)
+	{
+		perror("Failed to allocate render");
+		exit(EXIT_FAILURE);
+	}
+	data->render->pixels = ft_calloc(HEIGHT, sizeof(uint32_t *));
+	if (!data->render->pixels)
+		exit_game(data, EXIT_FAILURE);
+	while (i < HEIGHT)
+	{
+		data->render->pixels[i] = ft_calloc(WIDTH, sizeof(uint32_t));
+		if (!data->render->pixels[i])
+			error_message_exit("Memory allocation failure for pixels", data);
+		i++;
+	}
 }
 
 void	init_data(t_data *data)
 {
-	//data->mlx = NULL;
 	data->player = malloc(sizeof(t_player));
 	if (!data->player)
 		exit_game(data, EXIT_FAILURE);
@@ -50,36 +76,39 @@ void	init_data(t_data *data)
 	data->player_dir = '0';
 	data->player_y = 0;
 	data->player_x = 0;
+	data->text = malloc(sizeof(t_text));
+	if (!data->text)
+		exit_game(data, EXIT_FAILURE);
+	init_render(data);
 	initialise_map_data(data);
 }
 
+void	init_textures(t_data *data)
+{
+	data->text->north = mlx_load_png(data->map_data->no_texture);
+	data->text->south = mlx_load_png(data->map_data->so_texture);
+	data->text->east = mlx_load_png(data->map_data->ea_texture);
+	data->text->west = mlx_load_png(data->map_data->we_texture);
+	if (!data->text->north || !data->text->south || !data->text->east
+		|| !data->text->west)
+		error_message_exit("Memory allocation failure for textures", data);
+	if (texture_buffer(data, data->text->north, 0) == 1)
+		exit_game(data, EXIT_FAILURE);
+	if (texture_buffer(data, data->text->south, 1) == 1)
+		exit_game(data, EXIT_FAILURE);
+	if (texture_buffer(data, data->text->east, 2) == 1)
+		exit_game(data, EXIT_FAILURE);
+	if (texture_buffer(data, data->text->west, 3) == 1)
+		exit_game(data, EXIT_FAILURE);
+}
+
+
 void init_game(t_data *data)
 {
-	data->mlx = mlx_init(WIDTH, HEIGHT, "Test Window", true);
+	data->mlx = mlx_init(WIDTH, HEIGHT, "cub3D", true);
 	if (!data->mlx)
 		exit_game(data, EXIT_FAILURE);
-	/*
-	static char *map[] = {
-		"111111111111111111111111",
-		"100000000000000000000001",
-		"101110011001110100010101",
-		"100000000000000000000001",
-		"100000000000000000000001",
-		"100000000000000000000001",
-		"111001100111010001100001",
-		"100000000000000000000001",
-		"100000000000000000000001",
-		"100011001100111010001001",
-		"100000000000000000000001",
-		"111111111111111111111111",
-		NULL
-	};
-	*/
-	//data->file_data->map = map;
-	//draw_map(data, data->map->matrix);
-	mlx_loop_hook(data->mlx, &render_game, data);
-	//init_player(data->player, 5, 5, 'N'); // this function is temporary until we merge
 	player_direction(data);
-	//draw_player(data);
 	mlx_key_hook(data->mlx, &key_hooks, data);
+	mlx_loop_hook(data->mlx, &render_game, data);
 }

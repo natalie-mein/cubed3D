@@ -83,20 +83,3 @@ void move_player(t_data *data)
 	else if (data->player->move->rotate_r)
 		rotate_right(data);
 }
-
-/*void    render_loop(void *param)
-{
-    t_data *data;
-
-    data = (t_data *)param;
-    move_player(data);
-
-	// Optional: clear image if you're using the same one
-	//mlx_delete_image(data->mlx, data->image);
-	//data->image = mlx_new_image(data->mlx, WIDTH, HEIGHT);
-	//mlx_image_to_window(data->mlx, data->image, 0, 0);
-
-	draw_map(data, data->map->matrix); // assuming you saved the map
-	draw_player(data);
-}*/
-
