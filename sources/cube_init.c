@@ -57,11 +57,6 @@ void	init_render(t_data *data)
 			error_message_exit("Memory allocation failure for pixels", data);
 		i++;
 	}
-	while (j < 4)
-	{
-		data->render->text_buf[j] = NULL;
-		j++;
-	}
 }
 
 void	init_data(t_data *data)
