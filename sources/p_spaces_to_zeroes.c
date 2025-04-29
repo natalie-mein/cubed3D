@@ -1,33 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parsing_load_textures.c                            :+:      :+:    :+:   */
+/*   p_spaces_to_zeroes.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mdahlstr <mdahlstr@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/25 15:50:49 by mdahlstr          #+#    #+#             */
-/*   Updated: 2025/04/25 17:59:39 by mdahlstr         ###   ########.fr       */
+/*   Created: 2025/04/29 12:05:43 by mdahlstr          #+#    #+#             */
+/*   Updated: 2025/04/29 12:05:55 by mdahlstr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/cub3D.h"
-#include "../include/parsing.h"
+#include "cub3D.h"
 
-
-// CHANGE NAMES TO -- path_to_xxxxxx for clarity
-
-// load textures
-void	parse_textures(t_data *data)
+// Turns all spaces in the map grid into zeroes
+// [ ] -> [0]
+void	spaces_to_zeroes(t_data *data)
 {
-	
+	int		y;
+	int		x;
+
+	y = 0;
+	while (y < data->map_data->map_h)
+	{
+		x = 0;
+		while (data->map_data->map_grid[y][x] != '\0')
+		{
+			if (data->map_data->map_grid[y][x] == ' ')
+				data->map_data->map_grid[y][x] = '0';
+			x++;
+		}
+		y++;
+	}
 }
-
-
-// Textures accessed through  ---- data->text->ceiling (mlx_texture_t)
-
-/*
-mlx_texture_t struct is:
-
-
-
-*/

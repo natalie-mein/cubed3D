@@ -6,12 +6,12 @@
 /*   By: mdahlstr <mdahlstr@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/25 13:03:24 by nmeintje          #+#    #+#             */
-/*   Updated: 2025/04/25 16:49:15 by mdahlstr         ###   ########.fr       */
+/*   Updated: 2025/04/29 13:49:08 by mdahlstr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 // Returns 1 if a space is found
-int ft_iswhitespace(int c)
+int	ft_iswhitespace(int c)
 {
 	if (c == 32 || (c >= 9 && c <= 13))
 		return (1);

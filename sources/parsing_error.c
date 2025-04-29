@@ -6,7 +6,7 @@
 /*   By: mdahlstr <mdahlstr@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/15 13:38:47 by mdahlstr          #+#    #+#             */
-/*   Updated: 2025/04/25 14:21:32 by mdahlstr         ###   ########.fr       */
+/*   Updated: 2025/04/29 12:44:09 by mdahlstr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,15 +36,4 @@ void	error_message_exit_no_free(char *error_message)
 	exit(EXIT_FAILURE);
 }
 
-void	free_map_grid(char **array, int up_to_index)
-{
-	int	i;
 
-	i = 0;
-	while (i < up_to_index)
-	{
-		free(array[i]);
-		i++;
-	}
-	free(array);
-}
