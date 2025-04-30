@@ -6,22 +6,15 @@
 /*   By: mdahlstr <mdahlstr@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/15 11:56:05 by mdahlstr          #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2025/04/25 13:37:29 by mdahlstr         ###   ########.fr       */
-=======
-/*   Updated: 2025/04/29 12:25:02 by mdahlstr         ###   ########.fr       */
->>>>>>> parsing
+/*   Updated: 2025/04/30 13:56:35 by mdahlstr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 
 #include "cub3D.h"
 
 // gets numbers from a string, separated by commas
-<<<<<<< HEAD
-int	get_next_number(const char *line, int *index, int colour)
-=======
 static int	get_next_number(const char *line, int *index, int colour)
->>>>>>> parsing
 {
 	int	start;
 	int	num;
@@ -32,10 +25,6 @@ static int	get_next_number(const char *line, int *index, int colour)
 	start = *index;
 	if (line[*index] == '-')
 		return (error_message("Invalid colour component: negative number", -1));
-<<<<<<< HEAD
-
-=======
->>>>>>> parsing
 	if (!ft_isdigit(line[*index]))
 		return (error_message("Invalid colour component: missing number", -1));
 	while (ft_isdigit(line[*index]))
@@ -85,7 +74,6 @@ int	create_rgb(t_colour *colour_s)
 {
 	return (0xFFFFFF & (colour_s->r << 16 | colour_s->g << 8 | colour_s->b));
 }
-<<<<<<< HEAD
 
 // get RGB values and converts them to hex colour.
 // through bitwise shift operations
@@ -116,5 +104,3 @@ int	get_colour(char *line, t_data *data)
 		data->map_data->floor_set = 1;
 	return (colour_s.colour);
 }
-=======
->>>>>>> parsing

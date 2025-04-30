@@ -6,13 +6,10 @@
 /*   By: mdahlstr <mdahlstr@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/15 13:38:47 by mdahlstr          #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2025/04/25 14:21:32 by mdahlstr         ###   ########.fr       */
-=======
-/*   Updated: 2025/04/29 12:44:09 by mdahlstr         ###   ########.fr       */
->>>>>>> parsing
+/*   Updated: 2025/04/30 14:01:33 by mdahlstr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 
 #include "../include/cub3D.h"
 
@@ -40,19 +37,3 @@ void	error_message_exit_no_free(char *error_message)
 	exit(EXIT_FAILURE);
 }
 
-<<<<<<< HEAD
-void	free_map_grid(char **array, int up_to_index)
-{
-	int	i;
-
-	i = 0;
-	while (i < up_to_index)
-	{
-		free(array[i]);
-		i++;
-	}
-	free(array);
-}
-=======
-
->>>>>>> parsing

@@ -55,52 +55,36 @@ void		parse_file(char *filename, t_data *data);
 void		initialise_map_data(t_data *data);
 // int 		get_next_number(const char *line, int *index, int colour); // static
 //char		*get_texture_path(char *line, t_data *data);
-<<<<<<< HEAD
-char		*get_texture_path(char **trimmed, t_data *data);
-bool		check_duplicated_element(t_data *data, char *trimmed);
+//bool		check_duplicated_element(t_data *data, char *trimmed);
 
-void		parse_textures(t_data *data);
+//void		parse_textures(t_data *data);
 
 
 int			get_fd(char *filename, t_data *data);
 void		validate_and_count_lines(char *filename, t_data *data);
 bool		is_map_line(const char *line);
-
-bool		parse_rgb(char *trimmed_line, t_colour *colour_s);
-int			create_rgb(t_colour *colour_s);
-int			get_colour(char *line, t_data *data);
-=======
-// char		*get_texture_path(char **trimmed, t_data *data); // STATIC 
-//bool		check_duplicated_element(t_data *data, char *trimmed); // STATIC
-
-void		validate_and_count_lines(char *filename, t_data *data);
-bool 		is_map_closed(t_data *data, int start_y, int start_x);
+bool		is_map_closed(t_data *data, int start_y, int start_x);
 
 
 bool		parse_rgb(char *trimmed_line, t_colour *colour_s);
 int			create_rgb(t_colour *colour_s);
-// int			get_colour(char *line, t_data *data);// STATIC
->>>>>>> parsing
+// int			get_colour(char *line, t_data *data);
 
 // bool		allocate_map_grid(t_data *data); // static
 
 // PARSING UTILS
 int			get_fd(char *filename, t_data *data);
 int			skip_whitespace(char *line);
-<<<<<<< HEAD
-bool		get_map_line(char *line, t_data *data, int y);
+//bool		get_map_line(char *line, t_data *data, int y);
 void		get_map(char *filename, t_data *data);
-bool		process_map_line(char *line, bool *in_map, int *y, t_data *data);
+//bool		process_map_line(char *line, bool *in_map, int *y, t_data *data);
 void		pad_map_lines(t_data *data);
 void		spaces_to_zeroes(t_data *data);
 
 void		free_map_grid(char **array, int up_to_index);
 
 
-void		process_config_line(char **trimmed, t_data *data);
-=======
-bool		is_map_line(const char *line);
->>>>>>> parsing
+//void		process_config_line(char **trimmed, t_data *data);
 
 // bool		only_spaces(char *str); // static
 

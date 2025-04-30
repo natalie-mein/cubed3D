@@ -6,7 +6,7 @@
 /*   By: mdahlstr <mdahlstr@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/02 15:16:04 by nmeintje          #+#    #+#             */
-/*   Updated: 2025/04/30 13:32:11 by mdahlstr         ###   ########.fr       */
+/*   Updated: 2025/04/30 13:48:35 by mdahlstr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,7 +103,6 @@ typedef struct s_text
 	mlx_texture_t	*ceiling;
 }	t_text;
 
-<<<<<<< HEAD
 
 typedef struct s_data
 {
@@ -119,20 +118,7 @@ typedef struct s_data
 	t_ray		*ray;
 	t_render	*render;
 	t_text		*text;
-=======
-typedef struct s_data
-{
-	t_map_data			*map_data;
-	mlx_t				*mlx; // MLX pointer
-	mlx_image_t			*image; // MLX window pointer
-	int					player_x; //starting position of player
-	int					player_y;
-	char				player_dir; // cardinal direction of player start 'N', 'S', 'E', 'W'
-	t_player			*player;
-	t_ray				*ray;
-	t_text				*text;
->>>>>>> 819690f (parsing improvements and a beginning of texture handling)
-}	t_data;
+} t_data;
 
 void	raycast(t_data *data);
 void	draw_map(t_data *data, char **map);

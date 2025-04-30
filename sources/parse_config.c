@@ -6,13 +6,10 @@
 /*   By: mdahlstr <mdahlstr@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/15 16:13:42 by mdahlstr          #+#    #+#             */
-<<<<<<< HEAD:sources/parsing_config.c
-/*   Updated: 2025/04/25 16:37:39 by mdahlstr         ###   ########.fr       */
-=======
-/*   Updated: 2025/04/29 16:42:38 by mdahlstr         ###   ########.fr       */
->>>>>>> parsing:sources/parse_config.c
+/*   Updated: 2025/04/30 13:57:44 by mdahlstr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 
 #include "cub3D.h"
 
