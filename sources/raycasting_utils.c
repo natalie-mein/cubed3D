@@ -6,7 +6,7 @@
 /*   By: mdahlstr <mdahlstr@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/21 13:52:14 by nmeintje          #+#    #+#             */
-/*   Updated: 2025/04/30 14:27:53 by mdahlstr         ###   ########.fr       */
+/*   Updated: 2025/04/30 16:48:24 by mdahlstr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,7 @@ void	render_image(t_data *data)
 	uint32_t	y;
 	uint32_t	color;
 	uint32_t	*pixels;
-
+	
 	color = 0;
 	pixels = (uint32_t *)data->image->pixels;
 	y = 0;
@@ -101,9 +101,9 @@ void	render_image(t_data *data)
 			if (data->render->pixels[y][x] > 0)
 				color = data->render->pixels[y][x];
 			else if (y < HEIGHT / 2)
-				color = 0xFF9ccccd; //data->ceiling_color;
+				color = data->map_data->ceiling_colour;//0xFF9ccccd; //data->ceiling_color;
 			else
-				color = 0xFFffff74;//data->floor_color;
+				color = data->map_data->floor_colour; //0xFFffff74;//data->floor_color;
 			pixels[y * WIDTH + x] = color;
 			x++;
 		}

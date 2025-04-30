@@ -6,7 +6,7 @@
 /*   By: mdahlstr <mdahlstr@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/30 14:00:32 by mdahlstr          #+#    #+#             */
-/*   Updated: 2025/04/30 14:03:21 by mdahlstr         ###   ########.fr       */
+/*   Updated: 2025/04/30 14:50:01 by mdahlstr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,25 +44,20 @@ bool is_map_closed(t_data *data, int start_y, int start_x)
 	visited = malloc(sizeof(bool *) * data->map_data->map_h);
 	if (!visited)
 		return (false);
-	y = 0;
-	while (y < data->map_data->map_h)
+	y = -1;
+	while (++y < data->map_data->map_h)
 	{
 		visited[y] = ft_calloc(data->map_data->map_w, sizeof(bool));
 		if (!visited[y])
 			return (false);
-		y++;
 	}
 	if (start_y < 0 || start_y >= data->map_data->map_h
 		|| start_x < 0 || start_x >= data->map_data->map_w)
 		return (false);
-		
 	result = is_map_closed_rec(data, visited, start_y, start_x);
-	y = 0;
-	while (y < data->map_data->map_h)
-	{
+	y = -1;
+	while (++y < data->map_data->map_h)
 		free(visited[y]);
-		y++;
-	}
 	free(visited);
 	return (result);
 }

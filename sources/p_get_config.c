@@ -6,7 +6,7 @@
 /*   By: mdahlstr <mdahlstr@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/29 11:49:02 by mdahlstr          #+#    #+#             */
-/*   Updated: 2025/04/29 16:42:15 by mdahlstr         ###   ########.fr       */
+/*   Updated: 2025/04/30 16:52:55 by mdahlstr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ static int	get_colour(char *line, t_data *data)
 		exit_game(data, EXIT_FAILURE);
 	}
 	free(trimmed_line);
-	colour_s.colour = create_rgb(&colour_s);
+	colour_s.colour = create_rgba(&colour_s);
 	data->map_data->config_count++;
 	if (type == 'C')
 		data->map_data->ceiling_set = 1;
@@ -138,7 +138,7 @@ void	get_config(char *filename, t_data *data)
 	printf("SO texture      --> [%s]\n", data->map_data->so_texture);
 	printf("WE texture      --> [%s]\n", data->map_data->we_texture);
 	printf("EA texture      --> [%s]\n", data->map_data->ea_texture);
-	printf("Floor colour    --> [0x%08X]\n", data->map_data->floor_colour);
-	printf("Ceiling colour  --> [0x%08X]\n", data->map_data->ceiling_colour);
+	printf("Floor colour    --> [%08x]\n", data->map_data->floor_colour);
+	printf("Ceiling colour  --> [%08x]\n", data->map_data->ceiling_colour);
 	#endif
 }

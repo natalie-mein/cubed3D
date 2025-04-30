@@ -6,7 +6,7 @@
 /*   By: mdahlstr <mdahlstr@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/02 15:16:04 by nmeintje          #+#    #+#             */
-/*   Updated: 2025/04/30 13:48:35 by mdahlstr         ###   ########.fr       */
+/*   Updated: 2025/04/30 16:14:15 by mdahlstr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,8 +112,8 @@ typedef struct s_data
 	int			player_x; //starting position of player
 	int			player_y;
 	char		player_dir; // cardinal direction of player start 'N', 'S', 'E', 'W'
-	uint32_t	ceiling_color;
-	uint32_t	floor_color;
+	//uint32_t	ceiling_color;
+	//uint32_t	floor_color;
 	t_player	*player;
 	t_ray		*ray;
 	t_render	*render;
