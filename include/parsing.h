@@ -93,8 +93,6 @@ void		free_map_grid(char **array, int up_to_index);
 void		get_map(char *filename, t_data *data);
 // bool		process_map_line(char *line, bool *in_map, int *y, t_data *data); // static
 void		pad_map_lines(t_data *data);
-void		spaces_to_zeroes(t_data *data);
-
 void		free_map_grid(char **array, int up_to_index);
 
 // PARSING ERROR

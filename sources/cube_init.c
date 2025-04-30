@@ -6,7 +6,7 @@
 /*   By: mdahlstr <mdahlstr@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/05 20:07:50 by nmeintje          #+#    #+#             */
-/*   Updated: 2025/04/30 13:30:40 by mdahlstr         ###   ########.fr       */
+/*   Updated: 2025/04/30 14:28:41 by mdahlstr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,6 @@ void	initialise_map_data(t_data *data)
 	data->map_data->ea_texture = NULL;
 	data->map_data->floor_colour = -1;
 	data->map_data->ceiling_colour = -1;
-	data->map_data->floor_set = 0;
-	data->map_data->ceiling_set = 0;
 	data->map_data->floor_set = 0;
 	data->map_data->ceiling_set = 0;
 	data->map_data->config_count = 0;
@@ -115,7 +113,7 @@ void init_game(t_data *data)
 	if (!data->mlx)
 		exit_game(data, EXIT_FAILURE);
 	//draw_map(data, data->map->matrix);
-	mlx_loop_hook(data->mlx, &render_game, data);
+	//mlx_loop_hook(data->mlx, &render_game, data);
 	player_direction(data);
 	mlx_key_hook(data->mlx, &key_hooks, data);
 	mlx_loop_hook(data->mlx, &render_game, data);

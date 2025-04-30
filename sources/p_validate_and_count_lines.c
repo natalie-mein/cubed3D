@@ -6,7 +6,7 @@
 /*   By: mdahlstr <mdahlstr@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/29 11:59:17 by mdahlstr          #+#    #+#             */
-/*   Updated: 2025/04/29 14:32:20 by mdahlstr         ###   ########.fr       */
+/*   Updated: 2025/04/30 14:10:49 by mdahlstr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ void	validate_and_count_lines(char *filename, t_data *data)
 		}
 		validate_line(line, fd, data);
 		i++;
-		free(line);
+		//free(line);
 		line = get_next_line(fd);
 	}
 	close(fd);
