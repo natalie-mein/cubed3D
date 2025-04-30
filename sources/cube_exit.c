@@ -6,7 +6,7 @@
 /*   By: mdahlstr <mdahlstr@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/08 13:45:55 by nmeintje          #+#    #+#             */
-/*   Updated: 2025/04/17 15:34:50 by mdahlstr         ###   ########.fr       */
+/*   Updated: 2025/04/22 16:20:00 by mdahlstr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,12 +65,13 @@ void	free_data(t_data *data)
 
 void	exit_game(t_data *data, int exit_code)
 {	
-	free_data(data);
 	if (data->mlx)
 	{
 		mlx_close_window(data->mlx);
 		mlx_terminate(data->mlx);
 	}
+	if (data)
+		free_data(data);
 	//free(data); // Why is this causing an Invalid Free error in Valgrind?
 	exit(exit_code);
 }

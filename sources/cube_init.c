@@ -6,7 +6,7 @@
 /*   By: mdahlstr <mdahlstr@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/05 20:07:50 by nmeintje          #+#    #+#             */
-/*   Updated: 2025/04/17 15:42:59 by mdahlstr         ###   ########.fr       */
+/*   Updated: 2025/04/30 13:12:48 by mdahlstr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,7 @@ void	init_render(t_data *data)
 
 void	init_data(t_data *data)
 {
+	data->mlx = NULL;
 	data->player = malloc(sizeof(t_player));
 	if (!data->player)
 		exit_game(data, EXIT_FAILURE);
@@ -108,6 +109,8 @@ void init_game(t_data *data)
 	data->mlx = mlx_init(WIDTH, HEIGHT, "cub3D", true);
 	if (!data->mlx)
 		exit_game(data, EXIT_FAILURE);
+	//draw_map(data, data->map->matrix);
+	mlx_loop_hook(data->mlx, &render_game, data);
 	player_direction(data);
 	mlx_key_hook(data->mlx, &key_hooks, data);
 	mlx_loop_hook(data->mlx, &render_game, data);

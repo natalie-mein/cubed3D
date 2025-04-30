@@ -6,12 +6,12 @@
 /*   By: mdahlstr <mdahlstr@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/16 16:37:50 by mdahlstr          #+#    #+#             */
-/*   Updated: 2025/04/17 15:27:37 by mdahlstr         ###   ########.fr       */
+/*   Updated: 2025/04/22 18:27:18 by mdahlstr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/cub3D.h"
-
+// recursive function to check for holes around the map.
 static bool	is_map_closed_rec(t_data *data, bool **visited, int y, int x)
 {
 	if (y < 0 || y >= data->map_data->map_h
@@ -94,6 +94,21 @@ static bool	check_tile(char tile, int *player_count)
 	return (true);
 }
 
+// returns true if all characters in a string are spaces
+bool	only_spaces(char *str)
+{
+	int	i;
+
+	i = 0;
+	while (str[i] != '\0')
+	{
+		if (str[i] != ' ')
+			return (false);
+		i++;
+	}
+	return (true);
+}
+
 // Checks for valid characters (P, E, C, 0, 1),
 // walls (the map should be completely enclosed),
 // number of players (should be 1),
@@ -108,7 +123,6 @@ void	validate_map(t_data *data)
 
 	if (!data || !data->map_data || !data->map_data->map_grid)
 		error_message_exit("Null pointer detected", data);
-	x = 0;
 	y = 0;
 	player_count = 0;
 	while (y < data->map_data->map_h)
@@ -117,14 +131,11 @@ void	validate_map(t_data *data)
 		while (data->map_data->map_grid[y][x])
 		{
 			if (!check_tile(data->map_data->map_grid[y][x], &player_count))
-			{
-				#if DEBUG
-				printf("Invalid character: [%c]\n", data->map_data->map_grid[y][x]);
-				#endif
 				error_message_exit("Invalid character detected.", data);
-			}
 			x++;
 		}
+		if (only_spaces(data->map_data->map_grid[y]))
+			error_message_exit("Empty line in map grid", data);
 		y++;
 	}
 	if (player_count != 1)

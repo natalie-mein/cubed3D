@@ -6,7 +6,7 @@
 /*   By: mdahlstr <mdahlstr@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/02 14:59:28 by mdahlstr          #+#    #+#             */
-/*   Updated: 2025/04/17 16:42:03 by mdahlstr         ###   ########.fr       */
+/*   Updated: 2025/04/22 19:20:21 by mdahlstr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,107 +53,36 @@ static void	get_config(char *filename, t_data *data)
 	int		y;
 	char	*line;
 	int		fd;
-	//int		config_count;
 	
 	fd = get_fd(filename, data);
 	y = 0;
-	//config_count = 0;
-	while (y < data->map_data->file_len  && (line = get_next_line(fd)) != NULL)
-	{
-		process_config_line(line, data);
-		free(line);
+	while (y < data->map_data->file_len)
+	{	
+		line = get_next_line(fd);
+		if (line != NULL)
+		{
+			process_config_line(line, data);
+			free(line);
+		}
 		y++;
 	}
 	close (fd);
-	//parse_config(data);
+	parse_config(data);
 	#if DEBUG
 	//printf("Map len in get_config function: %d\n", data->map_data->map_h);
-	if (data->map_data->no_texture)
+	//if (data->map_data->no_texture)
 		printf("NO texture      --> [%s]\n", data->map_data->no_texture);
-	if (data->map_data->so_texture)
+	//if (data->map_data->so_texture)
 		printf("SO texture      --> [%s]\n", data->map_data->so_texture);
-	if (data->map_data->we_texture)
+	//if (data->map_data->we_texture)
 		printf("WE texture      --> [%s]\n", data->map_data->we_texture);
-	if (data->map_data->ea_texture)
+	//if (data->map_data->ea_texture)
 		printf("EA texture      --> [%s]\n", data->map_data->ea_texture);
-	if (data->map_data->floor_colour > -1)
+	//if (data->map_data->floor_colour > -1)
 		printf("Floor colour    --> [0x%08X]\n", data->map_data->floor_colour);
-	if (data->map_data->ceiling_colour > -1)
+	//if (data->map_data->ceiling_colour > -1)
 		printf("Ceiling colour  --> [0x%08X]\n", data->map_data->ceiling_colour);
 	#endif
-}
-
-// Finds all lines shorter than map width and pads them with spaces.
-void	pad_map_lines(t_data *data)
-{
-	int		y;
-	char	*new_line;
-	int		max_len;
-	int		len;
-
-	y = 0;
-	max_len = data->map_data->map_w;
-	while (y < data->map_data->map_h)
-	{
-		len = ft_strlen(data->map_data->map_grid[y]);
-		if (len < max_len)
-		{
-			new_line = malloc(max_len + 1);
-			if (!new_line)
-			{	
-				/// free previous?
-				error_message_exit("Malloc failed in pad_map_lines", data);
-			}
-			ft_memcpy(new_line, data->map_data->map_grid[y], len);
-			while (len < max_len)
-				new_line[len++] = ' ';
-			new_line[max_len] = '\0';
-			free(data->map_data->map_grid[y]);
-			data->map_data->map_grid[y] = new_line;
-		}
-		else if (len > max_len)
-			error_message("Error in map padding", ERROR); // Maybe unnecessary
-		y++;
-	}
-}
-
-
-// Copy map WITHOUT checking for errors till the end of the file.
-// Once the first line starting with 1 is found, all next lines are copied
-// All lines are padded according to the longest
-void	get_map(char *filename, t_data *data)
-{
-	int		y;
-	char	*line;
-	bool	in_map;
-	int		fd;
-
-	in_map = false;
-	if (!(allocate_map_grid(data)))
-		exit_game(data, EXIT_FAILURE);
-	fd = get_fd(filename, data);
-	y = 0;
-	while ((line = get_next_line(fd)) != NULL)
-	{
-		if (process_line(line, &in_map, &y, data))
-			continue ;
-		free(line);
-		close(fd);
-		return ;
-	}
-	data->map_data->map_grid[y] = NULL;
-	#if DEBUG
-	printf("\n\n-----------EXTRACTED MAP--------------------------\n\n");
-	printf("\nMap heigh: %d\n", data->map_data->map_h);
-	printf("Map width: %d\n", data->map_data->map_w);
-	for (int i = 0; i < y; i++)
-	{
-		printf("%s", data->map_data->map_grid[i]);
-		printf(" ----- Length: %zu\n", ft_strlen(data->map_data->map_grid[i]));
-	}
-	#endif
-	pad_map_lines(data);
-	close(fd);
 }
 
 void	get_spawn_pos(t_data *data)
@@ -186,13 +115,13 @@ void	get_spawn_pos(t_data *data)
 	}
 	
 }
-
-void print_map(t_map_data *map_data)
+/// DELETE /////////////////////////////////////////////////////////////////////////////////////
+void print_map(t_map_data *map_data, char *message)
 {
 	int i;
 
 	i = 0;
-	printf("\n\nMap in map grid - after padding:\n");
+	printf("\n\nMap in map grid - %s\n", message);
 	while (i < map_data->map_h)
 	{
 		printf("%s", map_data->map_grid[i]);
@@ -212,11 +141,14 @@ void	parse_file(char *filename, t_data *data)
 	get_config(filename, data);
 	get_map(filename, data);
 	#if DEBUG
-	print_map(data->map_data); // after padding the lines, all will have the same length.
+	print_map(data->map_data, "after padding"); // after padding the lines, all will have the same length.
 	#endif
 	get_spawn_pos(data);
 	validate_map(data);
-	//close(fd); // fd is open and closed as needed
+	spaces_to_zeroes(data);
+	#if DEBUG
+	print_map(data->map_data, "after validation and turning spaces to zeroes"); // after map grid validation, all spaces are turned into zeroes
+	#endif
 }
 
 /*
