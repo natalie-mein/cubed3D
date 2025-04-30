@@ -6,7 +6,7 @@
 /*   By: mdahlstr <mdahlstr@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/05 20:07:50 by nmeintje          #+#    #+#             */
-/*   Updated: 2025/04/30 16:14:51 by mdahlstr         ###   ########.fr       */
+/*   Updated: 2025/04/30 17:35:56 by mdahlstr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,6 @@ void	initialise_map_data(t_data *data)
 	data->map_data->config_count = 0;
 	data->map_data->map_h = 0;
 	data->map_data->map_w = 0;
-	//data->floor_color = 0;
-	//data->ceiling_color = 0;
 }
 
 void	init_render(t_data *data)
