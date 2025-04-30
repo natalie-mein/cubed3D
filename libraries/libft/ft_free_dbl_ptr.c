@@ -13,19 +13,19 @@
 #include "libft.h"
 
 /*frees an array of chars*/
-void    ft_free_dbl_ptr (char **str)
+void	ft_free_dbl_ptr (char **str)
 {
-    int i;
+	int	i;
 
-    if (str == NULL)
-        return ;
-    i = 0;
-    while (str[i] != NULL)
-    {
-        free(str[i]);
-        str[i] = NULL;
-        i++;
-    }
-    free(str);
-    str = NULL;
+	if (str == NULL)
+		return ;
+	i = 0;
+	while (str[i] != NULL)
+	{
+		free(str[i]);
+		str[i] = NULL;
+		i++;
+	}
+	free(str);
+	str = NULL;
 }

@@ -6,7 +6,7 @@
 /*   By: mdahlstr <mdahlstr@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/15 16:13:42 by mdahlstr          #+#    #+#             */
-/*   Updated: 2025/04/22 19:03:34 by mdahlstr         ###   ########.fr       */
+/*   Updated: 2025/04/25 16:37:39 by mdahlstr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,4 +27,5 @@ void	parse_config(t_data *data)
 		|| data->map_data->floor_colour ==  -2
 		|| data->map_data->ceiling_colour == -2)
 		error_message_exit("Duplicated configuration element(s)", data);
+	//parse_textures(data);
 }
