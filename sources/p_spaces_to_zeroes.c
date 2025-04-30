@@ -1,27 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strcmp.c                                        :+:      :+:    :+:   */
+/*   p_spaces_to_zeroes.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mdahlstr <mdahlstr@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/25 15:57:08 by nmeintje          #+#    #+#             */
-/*   Updated: 2025/04/29 11:40:48 by mdahlstr         ###   ########.fr       */
+/*   Created: 2025/04/29 12:05:43 by mdahlstr          #+#    #+#             */
+/*   Updated: 2025/04/29 12:05:55 by mdahlstr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "cub3D.h"
 
-int	ft_strcmp(const char *s1, const char *s2)
+// Turns all spaces in the map grid into zeroes
+// [ ] -> [0]
+void	spaces_to_zeroes(t_data *data)
 {
-	size_t	i;
+	int		y;
+	int		x;
 
-	i = 0;
-	while (s1[i] != '\0' || s2[i] != '\0')
+	y = 0;
+	while (y < data->map_data->map_h)
 	{
-		if ((unsigned char)s1[i] != (unsigned char)s2[i])
-			return ((unsigned char)s1[i] - (unsigned char)s2[i]);
-		i++;
+		x = 0;
+		while (data->map_data->map_grid[y][x] != '\0')
+		{
+			if (data->map_data->map_grid[y][x] == ' ')
+				data->map_data->map_grid[y][x] = '0';
+			x++;
+		}
+		y++;
 	}
-	return (0);
 }

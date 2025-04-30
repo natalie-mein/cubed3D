@@ -62,6 +62,7 @@ int	main(int argc, char **argv)
 	t_data		data;
 
 	validate_input(argc, argv[1]);
+	validate_input(argc, argv[1]);
 	init_data(&data);
 <<<<<<< HEAD
 	parse_file(filename, &data); // this function closes the fd // frees data and exits in case of error

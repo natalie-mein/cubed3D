@@ -6,7 +6,7 @@
 #    By: mdahlstr <mdahlstr@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/03/03 11:27:05 by nmeintje          #+#    #+#              #
-#    Updated: 2025/04/16 16:40:29 by mdahlstr         ###   ########.fr        #
+#    Updated: 2025/04/29 14:27:08 by mdahlstr         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,16 +22,22 @@ OBJ_DIR = $(SRC_DIR)/objects
 
 #source and object files
 SOURCES = main.c \
+	parse_file.c \
+	p_get_config.c \
+	p_get_map.c \
+	p_get_spawn_pos.c \
+	p_spaces_to_zeroes.c \
+	p_validate_and_count_lines.c \
+	p_validate_map.c \
+	p_validate_input.c \
+	p_pad_map_lines.c \
+	parsing_utils.c \
+	parsing_colours.c \
+	parse_config.c \
+	parsing_map_grid.c \
+	parsing_error.c \
 	cube_errors.c \
 	cube_hooks.c \
-	validate_input.c \
-	parsing.c \
-	parsing_utils1.c \
-	parsing_colours.c \
-	parsing_config.c \
-	parsing_map_grid.c \
-	parsing_map_grid2.c \
-	parsing_error.c \
 	cube_draw.c \
 	cube_player.c \
 	cube_movement.c \

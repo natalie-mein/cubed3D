@@ -1,12 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   validate_input.c                                   :+:      :+:    :+:   */
+/*   p_validate_input.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mdahlstr <mdahlstr@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/06 17:05:50 by nmeintje          #+#    #+#             */
+<<<<<<< HEAD:sources/validate_input.c
 /*   Updated: 2025/04/25 16:36:33 by mdahlstr         ###   ########.fr       */
+=======
+/*   Updated: 2025/04/29 14:04:18 by mdahlstr         ###   ########.fr       */
+>>>>>>> parsing:sources/p_validate_input.c
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +49,11 @@ static void	validate_file_name(char *map_file_name)
 		i++;
 	}
 	if (dot == 0 || map_file_name[len - 1] == '.')
+<<<<<<< HEAD:sources/validate_input.c
 		error_message_exit_no_free("Missing file extension.");
+=======
+		error_message_exit_no_free("Missing file name or extension");
+>>>>>>> parsing:sources/p_validate_input.c
 	if (map_file_name[len - 4] != '.' || map_file_name[len - 3] != 'c'
 		|| map_file_name[len - 2] != 'u' || map_file_name[len - 1] != 'b')
 		error_message_exit_no_free("Wrong file extension.");

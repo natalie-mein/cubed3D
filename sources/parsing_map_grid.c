@@ -5,28 +5,72 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: mdahlstr <mdahlstr@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
+<<<<<<< HEAD
 /*   Created: 2025/04/15 12:00:03 by mdahlstr          #+#    #+#             */
 /*   Updated: 2025/04/25 13:38:36 by mdahlstr         ###   ########.fr       */
+=======
+/*   Created: 2025/04/16 16:37:50 by mdahlstr          #+#    #+#             */
+/*   Updated: 2025/04/29 14:02:14 by mdahlstr         ###   ########.fr       */
+>>>>>>> parsing
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/cub3D.h"
+#include "cub3D.h"
 
+<<<<<<< HEAD
 /*bool	allocate_map_grid(t_data *data)
+=======
+// recursive function to check for holes around the map.
+static bool	is_map_closed_rec(t_data *data, bool **visited, int y, int x)
+>>>>>>> parsing
 {
-	int	y;
+	if (y < 0 || y >= data->map_data->map_h
+		|| x < 0 || x >= data->map_data->map_w)
+		return (false);
+	if (data->map_data->map_grid[y][x] == ' ')
+		return (false);
+	if (data->map_data->map_grid[y][x] == '1' || visited[y][x])
+		return (true);
+	visited[y][x] = true;
+	if (!is_map_closed_rec(data, visited, y + 1, x))
+		return (false);
+	if (!is_map_closed_rec(data, visited, y - 1, x))
+		return (false);
+	if (!is_map_closed_rec(data, visited, y, x + 1))
+		return (false);
+	if (!is_map_closed_rec(data, visited, y, x - 1))
+		return (false);
+	return (true);
+}
 
+// Creates an array to keep track of visited tiles.
+bool is_map_closed(t_data *data, int start_y, int start_x)
+{
+	int		y;
+ 	bool	**visited;
+	bool	result;
+
+	visited = malloc(sizeof(bool *) * data->map_data->map_h);
+	if (!visited)
+		return (false);
 	y = 0;
+<<<<<<< HEAD
 	data->map_data->map_grid = malloc(sizeof(char *)
 		* (data->map_data->map_h + 1));
 	if (!data->map_data->map_grid)
 		return (error_message("Memory allocation failure for map grid", false));
 	y = 0;
 	while (y <= data->map_data->map_h)
+=======
+	while (y < data->map_data->map_h)
+>>>>>>> parsing
 	{
-		data->map_data->map_grid[y] = NULL;
+		visited[y] = ft_calloc(data->map_data->map_w, sizeof(bool));
+		if (!visited[y])
+			return (false);
 		y++;
 	}
+<<<<<<< HEAD
 	return (true);
 }*/
 
@@ -91,14 +135,21 @@ bool	process_map_line(char *line, bool *in_map, int *y, t_data *data)
 
 	x = skip_whitespace(line);
 	if (is_map_line(line + x) || *in_map)
+=======
+	if (start_y < 0 || start_y >= data->map_data->map_h
+		|| start_x < 0 || start_x >= data->map_data->map_w)
+		return (false);
+		
+	result = is_map_closed_rec(data, visited, start_y, start_x);
+	y = 0;
+	while (y < data->map_data->map_h)
+>>>>>>> parsing
 	{
-		*in_map = true;
-		if (!get_map_line(line, data, *y))
-			return (false);
-		(*y)++;
+		free(visited[y]);
+		y++;
 	}
-	free(line);
-	return (true);
+	free(visited);
+	return (result);
 }
 
 // Copy map WITHOUT checking for errors till the end of the file.
@@ -111,6 +162,7 @@ void	get_map(char *filename, t_data *data)
 	bool	in_map;
 	int		fd;
 
+<<<<<<< HEAD
 	in_map = false;
 	if (!(allocate_map_grid(data)))
 		exit_game(data, EXIT_FAILURE);
@@ -141,3 +193,6 @@ void	get_map(char *filename, t_data *data)
 	pad_map_lines(data);
 	close(fd);
 }
+=======
+
+>>>>>>> parsing

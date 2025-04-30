@@ -6,7 +6,11 @@
 /*   By: mdahlstr <mdahlstr@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/15 13:38:47 by mdahlstr          #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2025/04/25 14:21:32 by mdahlstr         ###   ########.fr       */
+=======
+/*   Updated: 2025/04/29 12:44:09 by mdahlstr         ###   ########.fr       */
+>>>>>>> parsing
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +40,7 @@ void	error_message_exit_no_free(char *error_message)
 	exit(EXIT_FAILURE);
 }
 
+<<<<<<< HEAD
 void	free_map_grid(char **array, int up_to_index)
 {
 	int	i;
@@ -48,3 +53,6 @@ void	free_map_grid(char **array, int up_to_index)
 	}
 	free(array);
 }
+=======
+
+>>>>>>> parsing
