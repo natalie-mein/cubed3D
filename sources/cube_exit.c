@@ -6,7 +6,7 @@
 /*   By: mdahlstr <mdahlstr@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/08 13:45:55 by nmeintje          #+#    #+#             */
-/*   Updated: 2025/04/22 16:20:00 by mdahlstr         ###   ########.fr       */
+/*   Updated: 2025/05/02 13:42:49 by nmeintje         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ void	free_map_data(t_map_data *map_data, int height)
 
 void	free_data(t_data *data)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	if (data->map_data)
@@ -75,6 +75,3 @@ void	exit_game(t_data *data, int exit_code)
 	//free(data); // Why is this causing an Invalid Free error in Valgrind?
 	exit(exit_code);
 }
-
-
-

@@ -6,14 +6,14 @@
 /*   By: mdahlstr <mdahlstr@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/11 17:43:56 by mdahlstr          #+#    #+#             */
-/*   Updated: 2025/04/30 14:26:09 by mdahlstr         ###   ########.fr       */
+/*   Updated: 2025/05/02 13:40:10 by nmeintje         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h"
 #include "raycasting.h"
 
-void draw_tile(t_data *data, int x, int y, uint32_t color)
+/*void draw_tile(t_data *data, int x, int y, uint32_t color)
 {
 	int i;
 	int j;
@@ -63,7 +63,7 @@ void draw_map(t_data *data, char **map)
 		y++;
 	}
 	mlx_image_to_window(data->mlx, data->image, 0, 0);
-}
+}*/
 
 void	clear_pixel_buffer(t_data *data)
 {
@@ -83,13 +83,11 @@ void	clear_pixel_buffer(t_data *data)
 	}
 }
 
-//Render function that includes raycasting
-void render_game(void *param)
+void	render_game(void *param)
 {
-	t_data *data; 
-	
-	data = (t_data *)param;
+	t_data	*data;
 
+	data = (t_data *)param;
 	if (data->image)
 		mlx_delete_image(data->mlx, data->image);
 	clear_pixel_buffer(data);
@@ -99,12 +97,7 @@ void render_game(void *param)
 	if (!data->image)
 	{
 		printf("Failed to create image!\n");
-		return;
+		return ;
 	}
-	//draw_map(data, data->map_data->map_grid);
-	//draw_player(data);
 	render_image(data);
 }
-
-
-

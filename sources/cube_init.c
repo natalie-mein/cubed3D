@@ -6,7 +6,7 @@
 /*   By: mdahlstr <mdahlstr@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/05 20:07:50 by nmeintje          #+#    #+#             */
-/*   Updated: 2025/04/30 17:35:56 by mdahlstr         ###   ########.fr       */
+/*   Updated: 2025/05/02 13:51:21 by nmeintje         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	initialise_map_data(t_data *data)
 {
 	data->map_data = ft_calloc(1, sizeof(t_map_data));
 	if (!data->map_data)
-		error_message_exit("Memory allocation failure for map_data struct", data);
+		error_message_exit(ERR_MAP_DATA, data);
 	data->map_data->file_len = 0;
 	data->map_data->map_grid = NULL;
 	data->map_data->no_texture = NULL;
@@ -54,7 +54,7 @@ void	init_render(t_data *data)
 	{
 		data->render->pixels[i] = ft_calloc(WIDTH, sizeof(uint32_t));
 		if (!data->render->pixels[i])
-			error_message_exit("Memory allocation failure for pixels", data);
+			error_message_exit(ERR_PIXELS, data);
 		i++;
 	}
 }
@@ -74,7 +74,7 @@ void	init_data(t_data *data)
 	data->ray = malloc(sizeof(t_ray));
 	if (!data->ray)
 		exit_game(data, EXIT_FAILURE);
-	data->ray->screen_width = WIDTH; // set screen width for raycast
+	data->ray->screen_width = WIDTH;
 	data->player_dir = '0';
 	data->player_y = 0;
 	data->player_x = 0;
@@ -93,7 +93,7 @@ void	init_textures(t_data *data)
 	data->text->west = mlx_load_png(data->map_data->we_texture);
 	if (!data->text->north || !data->text->south || !data->text->east
 		|| !data->text->west)
-		error_message_exit("Memory allocation failure for textures", data);
+		error_message_exit(ERR_TEXTURES, data);
 	if (texture_buffer(data, data->text->north, 0) == 1)
 		exit_game(data, EXIT_FAILURE);
 	if (texture_buffer(data, data->text->south, 1) == 1)
@@ -104,14 +104,11 @@ void	init_textures(t_data *data)
 		exit_game(data, EXIT_FAILURE);
 }
 
-
-void init_game(t_data *data)
+void	init_game(t_data *data)
 {
 	data->mlx = mlx_init(WIDTH, HEIGHT, "cub3D", true);
 	if (!data->mlx)
 		exit_game(data, EXIT_FAILURE);
-	//draw_map(data, data->map->matrix);
-	//mlx_loop_hook(data->mlx, &render_game, data);
 	player_direction(data);
 	mlx_key_hook(data->mlx, &key_hooks, data);
 	mlx_loop_hook(data->mlx, &render_game, data);

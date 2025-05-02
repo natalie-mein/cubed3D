@@ -6,7 +6,7 @@
 /*   By: mdahlstr <mdahlstr@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/07 11:44:37 by nmeintje          #+#    #+#             */
-/*   Updated: 2025/04/11 17:45:02 by mdahlstr         ###   ########.fr       */
+/*   Updated: 2025/05/02 13:31:12 by nmeintje         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ int	is_wall(t_data *data, double new_x, double new_y)
 	return (0);
 }
 
-void    move_forward(t_data *data)
+void	move_forward(t_data *data)
 {
 	double	new_x;
 	double	new_y;
@@ -50,7 +50,7 @@ void    move_forward(t_data *data)
 	}
 }
 
-void    move_back(t_data *data)
+void	move_back(t_data *data)
 {
 	double	new_x;
 	double	new_y;

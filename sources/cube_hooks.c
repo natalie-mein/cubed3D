@@ -6,25 +6,11 @@
 /*   By: mdahlstr <mdahlstr@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/04 10:51:23 by nmeintje          #+#    #+#             */
-/*   Updated: 2025/04/02 14:08:48 by mdahlstr         ###   ########.fr       */
+/*   Updated: 2025/05/02 15:06:44 by nmeintje         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "raycasting.h"
-
-void ft_hook(void* param)
-{
-	//const mlx_t* mlx = param;
-	(void)param;
-
-	int width;
-	int height;
-
-	width = 1024;
-	height = 512;
-
-	printf("WIDTH: %d | HEIGHT: %d\n", width, height);
-}
 
 void	no_key_hook(mlx_key_data_t keydata, t_data *data)
 {
@@ -68,7 +54,7 @@ void	key_hooks(mlx_key_data_t keydata, void *param)
 	no_key_hook(keydata, data);
 }
 
-void move_player(t_data *data)
+void	move_player(t_data *data)
 {
 	if (data->player->move->left)
 		move_left(data);

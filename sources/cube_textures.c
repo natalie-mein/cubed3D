@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cube_textures.c                                     :+:      :+:    :+:   */
+/*   cube_textures.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nmeintje <nmeintje@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/17 10:58:46 by nmeintje          #+#    #+#             */
-/*   Updated: 2025/04/17 10:58:48 by nmeintje         ###   ########.fr       */
+/*   Updated: 2025/05/02 13:56:46 by nmeintje         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,11 +18,11 @@ Returns the RGBA color calue of the pixels at row i, column j
 uint32_t	pixel_color(int i, int j, mlx_texture_t *texture)
 {
 	int		index;
-	uint8_t *p;
+	uint8_t	*p;
 
 	index = (i * texture->width + j) * 4;
 	p = &texture->pixels[index];
-	return (p[0]) | (p[1] << 8) | (p[2] << 16) | (p[3] << 24);
+	return ((p[0]) | (p[1] << 8) | (p[2] << 16) | (p[3] << 24));
 }
 
 /*
@@ -50,8 +50,6 @@ int	texture_buffer(t_data *data, mlx_texture_t *texture, int direction)
 	}
 	data->render->text_buf[direction] = pixels;
 	if (!data->render->text_buf[direction])
-		printf("Texture buffer not filled for direction %d\n", direction);
-	printf("First pixel: %08X -- for direction %d\n", data->render->text_buf[direction][0], direction);
+		error_message_exit(ERR_TEXT_BUF, data);
 	return (SUCCESS);
 }
-

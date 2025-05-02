@@ -22,7 +22,6 @@
 # include <sys/time.h> //gettimeofday
 # include <string.h> //strerror
 # include <fcntl.h>
-//# include <error.h> //perror
 # include <math.h> //math library
 # include "../MLX42/include/MLX42/MLX42.h"
 # include "../libraries/libft/libft.h"
@@ -32,6 +31,12 @@
 
 # define SUCCESS 0
 # define ERROR -1
+
+/*  error messages  */
+# define ERR_MAP_DATA "Memory allocation failure for map_data struct"
+# define ERR_PIXELS "Memory allocation failure for pixels"
+# define ERR_TEXTURES "Memory allocation failure for textures"
+# define ERR_TEXT_BUF "Texture buffer not filled for one direction"
 
 typedef struct s_data t_data;
 typedef struct s_map_data t_map_data;

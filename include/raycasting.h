@@ -19,8 +19,6 @@
 # include "parsing.h"
 # include <stdio.h> ////////////////////////////////////////////////////////////////
 
-//error.h is not a library. Must delete in the main later.
-// can delete later
 # define MAP_WIDTH 1000
 # define MAP_HEIGHT 600
 # define TILE_SIZE 25

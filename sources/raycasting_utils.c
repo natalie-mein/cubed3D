@@ -6,7 +6,7 @@
 /*   By: mdahlstr <mdahlstr@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/21 13:52:14 by nmeintje          #+#    #+#             */
-/*   Updated: 2025/04/30 18:14:31 by mdahlstr         ###   ########.fr       */
+/*   Updated: 2025/05/02 14:01:52 by nmeintje         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,11 +29,13 @@ void	calculate_wall_pixels(t_player *player, t_ray *ray)
 	if (ray->wx_bottom >= HEIGHT)
 		ray->wx_bottom = HEIGHT;
 	if (ray->boundary == 0)
+		ray->wall_x = player->pos_y + ray->wx_distance * ray->r_dir_y;
+	else
 		ray->wall_x = player->pos_x + ray->wx_distance * ray->r_dir_x;
 	ray->wall_x -= floor(ray->wall_x);
 }
 
-int  choose_wall_texture(t_ray *ray)
+int	choose_wall_texture(t_ray *ray)
 {
 	if (ray->r_dir_y < 0 && ray->boundary == 1)
 		return (NORTH);
@@ -43,7 +45,7 @@ int  choose_wall_texture(t_ray *ray)
 		return (WEST);
 	if (ray->r_dir_x > 0 && ray->boundary == 0)
 		return (EAST);
-	return (ERROR);	
+	return (ERROR);
 }
 
 int	find_location(t_ray *ray, int texture)
@@ -74,8 +76,6 @@ void	render_wall_pixels(t_data *data, t_ray *ray, int x)
 	{
 		k += m;
 		color = data->render->text_buf[i][(TEXTURE * ((int)k % TEXTURE)) + j];
-		//if (i == SOUTH)
-    	//	printf("Rendering SOUTH wall: j = %d, k = %f\n", j, k);
 		//shading? color = apply_shading(color, ray, game->render);
 		if (color > 0)
 			data->render->pixels[ray->wx_top][x] = color;
@@ -89,7 +89,7 @@ void	render_image(t_data *data)
 	uint32_t	y;
 	uint32_t	color;
 	uint32_t	*pixels;
-	
+
 	color = 0;
 	pixels = (uint32_t *)data->image->pixels;
 	y = 0;
@@ -101,9 +101,9 @@ void	render_image(t_data *data)
 			if (data->render->pixels[y][x] > 0)
 				color = data->render->pixels[y][x];
 			else if (y < HEIGHT / 2)
-				color = data->map_data->ceiling_colour;//0xFF9ccccd; //data->ceiling_color;
+				color = data->map_data->ceiling_colour;
 			else
-				color = data->map_data->floor_colour; //0xFFffff74;//data->floor_color;
+				color = data->map_data->floor_colour;
 			pixels[y * WIDTH + x] = color;
 			x++;
 		}
