@@ -1,19 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_free_dbl_ptr.c                              :+:      :+:    :+:   */
+/*   ft_free_dbl_ptr.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nmeintje <nmeintje@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: mdahlstr <mdahlstr@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/25 11:42:20 by nmeintje          #+#    #+#             */
-/*   Updated: 2025/02/25 11:42:22 by nmeintje         ###   ########.fr       */
+/*   Created: 2025/05/05 11:54:39 by mdahlstr          #+#    #+#             */
+/*   Updated: 2025/05/05 11:56:53 by mdahlstr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
 /*frees an array of chars*/
-void	ft_free_dbl_ptr (char **str)
+void	ft_free_dbl_ptr(char **str)
 {
 	int	i;
 

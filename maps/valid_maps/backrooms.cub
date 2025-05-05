@@ -1,7 +1,7 @@
 NO ./textures/frame-png-texture-2938280_640.png
 SO ./textures/frame-png-texture-2938280_640.png
 WE ./textures/neon_wall.png
-EA ./textures/neon_wall.png                  
+EA ./textures/neon_wall.xxx
 
 F 219, 188, 77
 C 156, 130, 61

@@ -6,7 +6,7 @@
 /*   By: mdahlstr <mdahlstr@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/29 11:59:17 by mdahlstr          #+#    #+#             */
-/*   Updated: 2025/04/30 14:10:49 by mdahlstr         ###   ########.fr       */
+/*   Updated: 2025/05/05 11:23:03 by mdahlstr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,8 @@ void	validate_and_count_lines(char *filename, t_data *data)
 		line = get_next_line(fd);
 	}
 	close(fd);
+	if (data->map_data->map_h < 3)
+		error_message_exit("Map empty or too small.", data);
 	data->map_data->file_len = i;
 	#if DEBUG
 	printf("File line count: %d\n", data->map_data->file_len);
