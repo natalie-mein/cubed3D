@@ -6,7 +6,7 @@
 /*   By: mdahlstr <mdahlstr@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/29 11:49:02 by mdahlstr          #+#    #+#             */
-/*   Updated: 2025/05/05 13:19:23 by mdahlstr         ###   ########.fr       */
+/*   Updated: 2025/05/05 16:58:34 by mdahlstr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,8 +59,12 @@ static char	*get_texture_path(char **trimmed, t_data *data)
 	if (!is_right_extension(only_path, ft_strlen(only_path), ".png"))
 	{
 		free(only_path);
-		only_path = NULL;
 		error_message_exit("Texture file has the wrong file extension.", data);
+	}
+	if (ft_strchr(only_path, ' ') != NULL || ft_strchr(only_path, ',') != NULL)
+	{
+		free(only_path);
+		error_message_exit("Path to texture file incorrect.", data);
 	}
 	data->map_data->config_count++;
 	return (only_path);

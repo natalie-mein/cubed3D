@@ -6,7 +6,7 @@
 #    By: mdahlstr <mdahlstr@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/03/03 11:27:05 by nmeintje          #+#    #+#              #
-#    Updated: 2025/04/29 14:27:08 by mdahlstr         ###   ########.fr        #
+#    Updated: 2025/05/05 17:06:13 by mdahlstr         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -32,6 +32,7 @@ SOURCES = main.c \
 	p_validate_input.c \
 	p_pad_map_lines.c \
 	parsing_utils.c \
+	parsing_utils2.c \
 	parsing_colours.c \
 	parse_config.c \
 	parsing_map_grid.c \

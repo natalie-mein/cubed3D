@@ -6,26 +6,43 @@
 /*   By: mdahlstr <mdahlstr@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/14 16:35:24 by mdahlstr          #+#    #+#             */
-/*   Updated: 2025/05/05 13:01:25 by mdahlstr         ###   ########.fr       */
+/*   Updated: 2025/05/05 17:29:34 by mdahlstr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h"
 
+// Checks for dot in the wrong position.
+// Compares extension to expected 4 characters.
 bool	is_right_extension(char *filename, size_t len, char *ext)
 {
+	if (has_invalid_dot_position(filename))
+		return (false);
 	if (filename[len - 4] != ext[0] || filename[len - 3] != ext[1]
 		|| filename[len - 2] != ext[2] || filename[len - 1] != ext[3])
 		return (false);
 	return (true);
 }
 
-// Returns true for all lines starting wwith '1'
+// Returns true for all lines starting and ending with '1'
 bool	is_map_line(const char *line)
 {
-	while (*line && ft_iswhitespace(*line))
-		line++;
-	return (*line == '1');
+	int	start;
+	int	end;
+	
+	start = 0;
+	if (!line)
+		return (false);
+	while (line[start] && ft_iswhitespace(line[start]))
+		start++;
+	if (line[start] != '1')
+		return (false);
+	end = ft_strlen(line) - 1;
+	while (end > start && ft_iswhitespace(line[end]))
+		end--;
+	if (line[end] != '1')
+		return (false);
+	return (true);
 }
 
 void	free_map_grid(char **array, int up_to_index)

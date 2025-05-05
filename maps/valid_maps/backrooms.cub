@@ -1,9 +1,9 @@
-NO ./textures/tiled_wall_mirror.png
+NO ./textures/tiled_wall_poster_.png
 SO ./textures/tiled_wall_mirror2.png
 WE ./textures/tiled_wall_camera.png
-EA ./textures/tiled_wall_camera2.png
+EA ./textures/tiled_wall.png
 
-F 176, 173, 165
+F 138, 47, 47
 C 163, 161, 155
 
 111111111111111111111111111111111111

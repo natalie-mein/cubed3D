@@ -1,3 +1,6 @@
 *.o
 *.txt
 cubed3D
+assets/
+README.md
+tester.sh
