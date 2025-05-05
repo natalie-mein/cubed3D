@@ -1,10 +1,10 @@
-NO ./textures/blue-3368023_640.png
-SO ./textures/geometric-8624642_640.png
-WE ./textures/grey-2696783_640.png
-EA ./textures/white-2484120_640.png
+NO ./textures/tiled_wall_mirror.png
+SO ./textures/tiled_wall_mirror2.png
+WE ./textures/tiled_wall_camera.png
+EA ./textures/tiled_wall_camera2.png
 
-F 77,92,53           
-C 163,208,230
+F 138, 47, 47
+C 163, 161, 155
 
 11111111111111111111111111
 11000000000000000000000001
