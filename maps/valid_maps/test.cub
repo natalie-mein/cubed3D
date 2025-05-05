@@ -1,10 +1,10 @@
-NO ./textures/tile-1892658_640.png
-SO ./textures/ai-generated-9278149_640.png
-WE ./textures/mandala-1511369_640.png
-EA ./textures/seamless-4718941_640.png
+NO ./textures/north_wall_space.png
+SO ./textures/south_wall_door.png
+WE ./textures/west_wall_grate.png
+EA ./textures/ring-7218706_640.png
 
-F 50,0,0
-C 139,0,0
+F 93,93,93
+C 232,220,202
 
         1111111111111111111111111
         1000000000110000000000001
