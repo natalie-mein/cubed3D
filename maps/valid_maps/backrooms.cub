@@ -1,10 +1,10 @@
-NO ./textures/frame-png-texture-2938280_640.png
-SO ./textures/frame-png-texture-2938280_640.png
-WE ./textures/neon_wall.png
-EA ./textures/neon_wall.xxx
+NO ./textures/tiled_wall_mirror.png
+SO ./textures/tiled_wall_mirror2.png
+WE ./textures/tiled_wall_camera.png
+EA ./textures/tiled_wall_camera2.png
 
-F 219, 188, 77
-C 156, 130, 61
+F 176, 173, 165
+C 163, 161, 155
 
 111111111111111111111111111111111111
 100010000000000000000100000000000001
