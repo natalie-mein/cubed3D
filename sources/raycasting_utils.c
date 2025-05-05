@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "raycasting.h"
+#include "cub3D.h"
 
 /*
 0,0 = top left, HEIGHT, WIDTH = bottom right

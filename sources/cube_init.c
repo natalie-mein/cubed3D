@@ -11,7 +11,6 @@
 /* ************************************************************************** */
 
 #include "cub3D.h"
-#include "raycasting.h"
 
 // initialise every field in map_data with zeros
 void	initialise_map_data(t_data *data)

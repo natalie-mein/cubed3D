@@ -10,7 +10,6 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "raycasting.h"
 #include "cub3D.h"
 
 void	rotate_left(t_data *data)

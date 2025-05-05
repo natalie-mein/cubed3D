@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "raycasting.h"
+#include "cub3D.h"
 
 void	face_north(t_player *player)
 {

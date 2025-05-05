@@ -10,8 +10,6 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/raycasting.h"
-//#include "../include/parsing.h"
 #include "cub3D.h"
 
 void	free_2d_array(char **array, int height)

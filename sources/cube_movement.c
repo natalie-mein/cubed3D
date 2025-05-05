@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "raycasting.h"
+#include "cub3D.h"
 
 int	is_wall(t_data *data, double new_x, double new_y)
 {

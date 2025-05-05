@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "raycasting.h"
+#include "cub3D.h"
 
 /*
 Returns the RGBA color calue of the pixels at row i, column j

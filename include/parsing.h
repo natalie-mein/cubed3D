@@ -23,31 +23,6 @@
 # include "raycasting.h"
 # include "cub3D.h"
 
-typedef struct s_map_data
-{
-	int			file_len;
-	char		*no_texture;
-	char		*so_texture;
-	char		*ea_texture;
-	char		*we_texture;
-	uint32_t	floor_colour;
-	uint32_t	ceiling_colour;
-	bool		floor_set;
-	bool		ceiling_set;
-	int			config_count;
-	char		**map_grid;
-	int			map_w;
-	int			map_h;
-}	t_map_data;
-
-typedef struct s_colour
-{
-	int				r;
-	int				g;
-	int				b;
-	uint32_t		colour;
-}	t_colour;
-
 void		get_config(char *filename, t_data *data);
 void		validate_input(int argc, char *filename);
 void		parse_file(char *filename, t_data *data);

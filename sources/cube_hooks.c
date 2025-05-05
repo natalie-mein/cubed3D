@@ -6,11 +6,11 @@
 /*   By: mdahlstr <mdahlstr@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/04 10:51:23 by nmeintje          #+#    #+#             */
-/*   Updated: 2025/05/02 15:06:44 by nmeintje         ###   ########.fr       */
+/*   Updated: 2025/05/05 16:02:59 by nmeintje         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "raycasting.h"
+#include "cub3D.h"
 
 void	no_key_hook(mlx_key_data_t keydata, t_data *data)
 {
@@ -46,10 +46,6 @@ void	key_hooks(mlx_key_data_t keydata, void *param)
 			data->player->move->rotate_l = true;
 		else if (keydata.key == MLX_KEY_RIGHT)
 			data->player->move->rotate_r = true;
-		//else if (keydata.key == MLX_KEY_UP)
-		// maybe color change floor and ceiling?
-		//else if (keydata.key == MLX_KEY_DOWN)
-		//do some other thing
 	}
 	no_key_hook(keydata, data);
 }

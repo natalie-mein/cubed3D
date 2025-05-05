@@ -10,8 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "raycasting.h"
-#include <math.h>
+#include "cub3D.h"
 
 /*
 calculate ray position and direction
