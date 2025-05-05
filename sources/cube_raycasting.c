@@ -6,7 +6,7 @@
 /*   By: mdahlstr <mdahlstr@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/02 12:05:43 by nmeintje          #+#    #+#             */
-/*   Updated: 2025/04/29 16:38:04 by nmeintje         ###   ########.fr       */
+/*   Updated: 2025/05/05 13:53:49 by nmeintje         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,9 @@ calculate ray position and direction
 */
 void	calculate_ray_position(t_data *data, t_player *player, int x)
 {
-	data->ray->camera_x = 2 * x / data->ray->screen_width - 1; 
+	data->ray->camera_x = 2 * x / data->ray->screen_width - 1;
 	data->ray->r_dir_x = player->dir_x + player->plane_x * data->ray->camera_x;
-	data->ray->r_dir_y = player->dir_y + player->plane_y * data->ray->camera_x;	
+	data->ray->r_dir_y = player->dir_y + player->plane_y * data->ray->camera_x;
 }
 
 /*
@@ -33,7 +33,6 @@ void	calculate_delta_distance(t_player *player, t_ray *ray)
 	ray->delta_y = fabs(1 / ray->r_dir_y);
 	ray->r_pos_x = player->pos_x;
 	ray->r_pos_y = player->pos_y;
-
 }
 
 /*
@@ -60,14 +59,14 @@ void	calculate_ray_direction(t_player *player, t_ray *ray)
 	else
 	{
 		ray->step_y = -1;
-		ray->side_y = (player->pos_y - (int)ray->r_pos_y) *	ray->delta_y;
+		ray->side_y = (player->pos_y - (int)ray->r_pos_y) * ray->delta_y;
 	}
 }
 
 /*
 perform DDA algorithm
 */
-void	calculate_differential(t_data *data, t_ray *ray)
+void	calculate_differential(t_data *d, t_ray *ray)
 {
 	while (1)
 	{
@@ -83,12 +82,7 @@ void	calculate_differential(t_data *data, t_ray *ray)
 			ray->r_pos_y += ray->step_y;
 			ray->boundary = 1;
 		}
-		//printf("Ray stepping to (%.2f, %.2f) dir_y: %.2f step_y: %d\n",
-       		//ray->r_pos_x, ray->r_pos_y, ray->r_dir_y, ray->step_y);
-		if ((int)ray->r_pos_x < 0 || (int)ray->r_pos_x >= data->map_data->map_w 
-			|| (int)ray->r_pos_y < 0 || (int)ray->r_pos_y >= data->map_data->map_h)
-    		break ;
-		if ( data->map_data->map_grid[(int)ray->r_pos_y][(int)ray->r_pos_x] == '1')
+		if (d->map_data->map_grid[(int)ray->r_pos_y][(int)ray->r_pos_x] == '1')
 			break ;
 	}
 	if (ray->boundary == 0)
@@ -98,19 +92,19 @@ void	calculate_differential(t_data *data, t_ray *ray)
 	ray->wx_height = (int)(HEIGHT / ray->wx_distance);
 }
 
-void raycast(t_data *data) 
+void	raycast(t_data *data)
 {
 	t_ray	*ray;
 	int		x;
-	
+
 	x = 0;
 	ray = data->ray;
 	while (x < ray->screen_width)
 	{
-		calculate_ray_position(data, data->player, x); // done
-		calculate_delta_distance(data->player, ray); // done
-		calculate_ray_direction(data->player, ray); // done
-		calculate_differential(data, ray); // done
+		calculate_ray_position(data, data->player, x);
+		calculate_delta_distance(data->player, ray);
+		calculate_ray_direction(data->player, ray);
+		calculate_differential(data, ray);
 		calculate_wall_pixels(data->player, ray);
 		render_wall_pixels(data, ray, x);
 		x++;

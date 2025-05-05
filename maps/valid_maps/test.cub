@@ -1,10 +1,10 @@
-NO ./textures/frame-png-texture-2938280_640.png
-SO ./textures/computers-1762996_640.png
-WE ./textures/neon-7503668_640.png
-EA ./textures/cat-7635983_640.png
+NO ./textures/tile-1892658_640.png
+SO ./textures/ai-generated-9278149_640.png
+WE ./textures/mandala-1511369_640.png
+EA ./textures/seamless-4718941_640.png
 
-F 77,92,53
-C 163,208,230
+F 50,0,0
+C 139,0,0
 
         1111111111111111111111111
         1000000000110000000000001

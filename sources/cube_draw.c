@@ -65,6 +65,31 @@ void draw_map(t_data *data, char **map)
 	mlx_image_to_window(data->mlx, data->image, 0, 0);
 }*/
 
+void	draw_player(t_data *data)
+{
+	int	pixel_x;
+	int	pixel_y;
+	int	x;
+	int	y;
+	int	size;
+
+	pixel_x = data->player->pos_x * TILE_SIZE;
+	pixel_y = data->player->pos_y * TILE_SIZE;
+	size = 6;
+	x = -size / 2;
+	y = -size / 2;
+	while (y < size)
+	{
+		x = -size / 2;
+		while (x < size)
+		{
+			mlx_put_pixel(data->image, pixel_x + x, pixel_y + y, 0xFFFF00FF);
+			x++;
+		}
+		y++;
+	}
+}
+
 void	clear_pixel_buffer(t_data *data)
 {
 	int	x;

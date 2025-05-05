@@ -1,7 +1,7 @@
-NO ./textures/frame-png-texture-2938280_640.png
-SO ./textures/cat-7635983_640.png
-WE ./textures/blue-background-2369875_640.png
-EA ./textures/blue-background-2369875_640.png
+NO ./textures/blue-3368023_640.png
+SO ./textures/geometric-8624642_640.png
+WE ./textures/grey-2696783_640.png
+EA ./textures/white-2484120_640.png
 
 F 77,92,53           
 C 163,208,230

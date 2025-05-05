@@ -6,7 +6,7 @@
 /*   By: mdahlstr <mdahlstr@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/21 13:52:14 by nmeintje          #+#    #+#             */
-/*   Updated: 2025/05/02 14:01:52 by nmeintje         ###   ########.fr       */
+/*   Updated: 2025/05/05 13:56:02 by nmeintje         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,6 @@ void	render_wall_pixels(t_data *data, t_ray *ray, int x)
 	{
 		k += m;
 		color = data->render->text_buf[i][(TEXTURE * ((int)k % TEXTURE)) + j];
-		//shading? color = apply_shading(color, ray, game->render);
 		if (color > 0)
 			data->render->pixels[ray->wx_top][x] = color;
 		ray->wx_top++;
