@@ -6,7 +6,7 @@
 /*   By: mdahlstr <mdahlstr@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/30 14:52:37 by mdahlstr          #+#    #+#             */
-/*   Updated: 2025/04/30 16:48:06 by mdahlstr         ###   ########.fr       */
+/*   Updated: 2025/05/05 11:34:08 by mdahlstr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,8 @@ int			skip_whitespace(char *line);
 void		get_map(char *filename, t_data *data);
 void		pad_map_lines(t_data *data);
 void		spaces_to_zeroes(t_data *data);
+bool		is_right_extension(char *filename, size_t len, char *ext);
+
 
 void		free_map_grid(char **array, int up_to_index);
 

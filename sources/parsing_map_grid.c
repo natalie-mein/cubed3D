@@ -6,7 +6,7 @@
 /*   By: mdahlstr <mdahlstr@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/30 14:00:32 by mdahlstr          #+#    #+#             */
-/*   Updated: 2025/04/30 14:50:01 by mdahlstr         ###   ########.fr       */
+/*   Updated: 2025/05/05 13:19:48 by mdahlstr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,10 +35,10 @@ static bool	is_map_closed_rec(t_data *data, bool **visited, int y, int x)
 }
 
 // Creates an array to keep track of visited tiles.
-bool is_map_closed(t_data *data, int start_y, int start_x)
+bool	is_map_closed(t_data *data, int start_y, int start_x)
 {
 	int		y;
- 	bool	**visited;
+	bool	**visited;
 	bool	result;
 
 	visited = malloc(sizeof(bool *) * data->map_data->map_h);
@@ -61,4 +61,3 @@ bool is_map_closed(t_data *data, int start_y, int start_x)
 	free(visited);
 	return (result);
 }
-	

@@ -6,7 +6,7 @@
 /*   By: mdahlstr <mdahlstr@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/29 11:59:17 by mdahlstr          #+#    #+#             */
-/*   Updated: 2025/04/30 14:10:49 by mdahlstr         ###   ########.fr       */
+/*   Updated: 2025/05/05 13:17:30 by mdahlstr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,13 +19,13 @@
 // Returns FALSE if the character is as expected
 static bool	wrong_char_in_line(char *line)
 {
-	int	i;
-	char c;
-	
+	int		i;
+	char	c;
+
 	i = skip_whitespace(line);
 	c = line[i];
 	if (c != 'N' && c != 'S' && c != 'E' && c != 'W' && c != 'F' && c != 'C'
-		&& c != '1'&& !ft_iswhitespace(c) && c != '\n' && c != '\0')
+		&& c != '1' && !ft_iswhitespace(c) && c != '\n' && c != '\0')
 		return (true);
 	return (false);
 }
@@ -34,9 +34,6 @@ static void	validate_line(char *line, int fd, t_data *data)
 {
 	if (wrong_char_in_line(line))
 	{
-		#if DEBUG
-		printf("in line: %s\n", line);
-		#endif
 		if (line)
 			free(line);
 		line = NULL;
@@ -55,7 +52,7 @@ void	validate_and_count_lines(char *filename, t_data *data)
 	int		i;
 	char	*line;
 	int		fd;
-	
+
 	fd = get_fd(filename, data);
 	line = get_next_line(fd);
 	i = 0;
@@ -71,13 +68,10 @@ void	validate_and_count_lines(char *filename, t_data *data)
 		}
 		validate_line(line, fd, data);
 		i++;
-		//free(line);
 		line = get_next_line(fd);
 	}
 	close(fd);
+	if (data->map_data->map_h < 3)
+		error_message_exit("Map empty or too small.", data);
 	data->map_data->file_len = i;
-	#if DEBUG
-	printf("File line count: %d\n", data->map_data->file_len);
-	printf("Map height: %d\n", data->map_data->map_h);
-	#endif
 }

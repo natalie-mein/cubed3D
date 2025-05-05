@@ -6,7 +6,7 @@
 /*   By: mdahlstr <mdahlstr@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/08 13:45:55 by nmeintje          #+#    #+#             */
-/*   Updated: 2025/05/02 13:42:49 by nmeintje         ###   ########.fr       */
+/*   Updated: 2025/05/05 13:21:57 by mdahlstr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,5 @@ void	exit_game(t_data *data, int exit_code)
 	}
 	if (data)
 		free_data(data);
-	//free(data); // Why is this causing an Invalid Free error in Valgrind?
 	exit(exit_code);
 }

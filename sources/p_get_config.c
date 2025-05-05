@@ -6,7 +6,7 @@
 /*   By: mdahlstr <mdahlstr@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/29 11:49:02 by mdahlstr          #+#    #+#             */
-/*   Updated: 2025/04/30 16:52:55 by mdahlstr         ###   ########.fr       */
+/*   Updated: 2025/05/05 13:19:23 by mdahlstr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,12 @@ static char	*get_texture_path(char **trimmed, t_data *data)
 	}
 	free(*trimmed);
 	*trimmed = NULL;
+	if (!is_right_extension(only_path, ft_strlen(only_path), ".png"))
+	{
+		free(only_path);
+		only_path = NULL;
+		error_message_exit("Texture file has the wrong file extension.", data);
+	}
 	data->map_data->config_count++;
 	return (only_path);
 }
@@ -80,11 +86,8 @@ static void	process_config_line(char **trimmed, t_data *data)
 {
 	if (check_duplicated_element(data, *trimmed) == true)
 	{
-		#if DEBUG
-		printf("DUPLICATED: [%s]\n", *trimmed);
-		#endif
 		free(*trimmed);
-		error_message_exit("Found duplicated elements (parsing_utils1 - process_config_line)", data);
+		error_message_exit("Found duplicated configuration elements", data);
 	}
 	else
 	{
@@ -112,11 +115,11 @@ void	get_config(char *filename, t_data *data)
 	char	*line;
 	char	*trimmed;
 	int		fd;
-	
+
 	fd = get_fd(filename, data);
 	y = 0;
 	while (y < (data->map_data->file_len - data->map_data->map_h))
-	{	
+	{
 		line = get_next_line(fd);
 		if (line != NULL)
 		{
@@ -133,12 +136,4 @@ void	get_config(char *filename, t_data *data)
 	}
 	close (fd);
 	parse_config(data);
-	#if DEBUG
-	printf("NO texture      --> [%s]\n", data->map_data->no_texture);
-	printf("SO texture      --> [%s]\n", data->map_data->so_texture);
-	printf("WE texture      --> [%s]\n", data->map_data->we_texture);
-	printf("EA texture      --> [%s]\n", data->map_data->ea_texture);
-	printf("Floor colour    --> [%08x]\n", data->map_data->floor_colour);
-	printf("Ceiling colour  --> [%08x]\n", data->map_data->ceiling_colour);
-	#endif
 }

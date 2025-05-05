@@ -6,10 +6,9 @@
 /*   By: mdahlstr <mdahlstr@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/15 13:38:47 by mdahlstr          #+#    #+#             */
-/*   Updated: 2025/04/30 14:01:33 by mdahlstr         ###   ########.fr       */
+/*   Updated: 2025/05/05 13:20:12 by mdahlstr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 
 #include "../include/cub3D.h"
 
@@ -36,4 +35,3 @@ void	error_message_exit_no_free(char *error_message)
 	ft_putendl_fd(error_message, 2);
 	exit(EXIT_FAILURE);
 }
-

@@ -6,10 +6,9 @@
 /*   By: mdahlstr <mdahlstr@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/15 11:56:05 by mdahlstr          #+#    #+#             */
-/*   Updated: 2025/04/30 17:00:33 by mdahlstr         ###   ########.fr       */
+/*   Updated: 2025/05/05 13:20:36 by mdahlstr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 
 #include "cub3D.h"
 
@@ -72,9 +71,5 @@ bool	parse_rgb(char *trimmed_line, t_colour *colour_s)
 
 uint32_t	create_rgba(t_colour *colour_s)
 {
-	#if DEBUG
-	printf("CREATE RGB: %08x\n", colour_s->r | colour_s->g << 8 | colour_s->b << 16 | 0xFF << 24);
-	#endif
 	return (colour_s->r | colour_s->g << 8 | colour_s->b << 16 | 0xFF << 24);
 }
-

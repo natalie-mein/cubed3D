@@ -6,11 +6,19 @@
 /*   By: mdahlstr <mdahlstr@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/14 16:35:24 by mdahlstr          #+#    #+#             */
-/*   Updated: 2025/04/29 14:27:15 by mdahlstr         ###   ########.fr       */
+/*   Updated: 2025/05/05 13:01:25 by mdahlstr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/cub3D.h"
+
+bool	is_right_extension(char *filename, size_t len, char *ext)
+{
+	if (filename[len - 4] != ext[0] || filename[len - 3] != ext[1]
+		|| filename[len - 2] != ext[2] || filename[len - 1] != ext[3])
+		return (false);
+	return (true);
+}
 
 // Returns true for all lines starting wwith '1'
 bool	is_map_line(const char *line)
@@ -43,7 +51,7 @@ int	skip_whitespace(char *line)
 	return (x);
 }
 
-int get_fd(char *filename, t_data *data)
+int	get_fd(char *filename, t_data *data)
 {
 	int	fd;
 
@@ -52,9 +60,3 @@ int get_fd(char *filename, t_data *data)
 		error_message_exit("Failed to open file", data);
 	return (fd);
 }
-
-
-
-
-
-

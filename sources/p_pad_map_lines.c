@@ -6,7 +6,7 @@
 /*   By: mdahlstr <mdahlstr@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/29 12:23:03 by mdahlstr          #+#    #+#             */
-/*   Updated: 2025/04/29 12:23:46 by mdahlstr         ###   ########.fr       */
+/*   Updated: 2025/05/05 13:18:13 by mdahlstr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void	pad_map_lines(t_data *data)
 		{
 			new_line = malloc(data->map_data->map_w + 1);
 			if (!new_line)
-			{	
+			{
 				free_map_grid(data->map_data->map_grid, y);
 				error_message_exit("Malloc failed in pad_map_lines", data);
 			}
