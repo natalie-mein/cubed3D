@@ -6,7 +6,7 @@
 /*   By: mdahlstr <mdahlstr@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/14 16:35:24 by mdahlstr          #+#    #+#             */
-/*   Updated: 2025/05/05 11:46:57 by mdahlstr         ###   ########.fr       */
+/*   Updated: 2025/05/05 13:01:25 by mdahlstr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ int	skip_whitespace(char *line)
 	return (x);
 }
 
-int get_fd(char *filename, t_data *data)
+int	get_fd(char *filename, t_data *data)
 {
 	int	fd;
 
@@ -60,9 +60,3 @@ int get_fd(char *filename, t_data *data)
 		error_message_exit("Failed to open file", data);
 	return (fd);
 }
-
-
-
-
-
-

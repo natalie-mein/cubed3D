@@ -6,7 +6,7 @@
 /*   By: mdahlstr <mdahlstr@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/29 12:02:51 by mdahlstr          #+#    #+#             */
-/*   Updated: 2025/04/29 12:46:43 by mdahlstr         ###   ########.fr       */
+/*   Updated: 2025/05/05 13:18:44 by mdahlstr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,6 @@ static bool	get_map_line(char *line, t_data *data, int y)
 		data->map_data->map_w = len;
 	return (true);
 }
-
-
 
 static bool	process_map_line(char *line, bool *in_map, int *y, t_data *data)
 {
@@ -92,16 +90,6 @@ void	get_map(char *filename, t_data *data)
 		return ;
 	}
 	data->map_data->map_grid[data->map_data->map_h] = NULL;
-	#if DEBUG
-	printf("\n\n-----------EXTRACTED MAP--------------------------\n\n");
-	printf("\nMap heigh: %d\n", data->map_data->map_h);
-	printf("Map width: %d\n", data->map_data->map_w);
-	for (int i = 0; i < y; i++)
-	{
-		printf("%s", data->map_data->map_grid[i]);
-		printf(" ----- Length: %zu\n", ft_strlen(data->map_data->map_grid[i]));
-	}
-	#endif
 	pad_map_lines(data);
 	close(fd);
 }

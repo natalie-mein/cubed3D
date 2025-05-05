@@ -6,7 +6,7 @@
 /*   By: mdahlstr <mdahlstr@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/29 12:03:47 by mdahlstr          #+#    #+#             */
-/*   Updated: 2025/04/29 12:04:11 by mdahlstr         ###   ########.fr       */
+/*   Updated: 2025/05/05 13:18:26 by mdahlstr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,14 +31,10 @@ void	get_spawn_pos(t_data *data)
 				data->player_dir = c;
 				data->player_y = y;
 				data->player_x = x;
-				#if DEBUG
-				printf("Player first position: y=%d, x=%d, direction=%c\n", data->player_y, data->player_x, data->player_dir);  // problems here
-				#endif
 				return ;
 			}
 			x++;
 		}
 		y++;
 	}
-	
 }
