@@ -6,7 +6,7 @@
 /*   By: mdahlstr <mdahlstr@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/29 12:04:41 by mdahlstr          #+#    #+#             */
-/*   Updated: 2025/05/06 12:19:47 by mdahlstr         ###   ########.fr       */
+/*   Updated: 2025/05/06 15:58:19 by mdahlstr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ void	validate_map(t_data *data)
 		while (data->map_data->map_grid[y][x])
 		{
 			if (!check_tile(data->map_data->map_grid[y][x], &player_count))
-				error_message_exit("Invalid character detected.", data);
+				error_message_exit("Invalid char detected in map grid.", data);
 			x++;
 		}
 		if (only_spaces(data->map_data->map_grid[y]))

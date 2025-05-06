@@ -6,3 +6,4 @@ README.md
 tester.sh
 .vscode
 invalid_maps/
+valgrind.supp

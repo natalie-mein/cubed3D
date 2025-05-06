@@ -6,7 +6,7 @@
 /*   By: mdahlstr <mdahlstr@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/29 11:49:02 by mdahlstr          #+#    #+#             */
-/*   Updated: 2025/05/06 13:41:15 by mdahlstr         ###   ########.fr       */
+/*   Updated: 2025/05/06 15:40:40 by mdahlstr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,11 +44,15 @@ static int	get_colour(char *line, t_data *data)
 
 static char	*get_texture_path(char **trimmed, t_data *data)
 {
+	char	*start;
 	char	*only_path;
 
 	if (!trimmed || !*trimmed)
 		return (NULL);
-	only_path = ft_strdup(*trimmed + 3);
+	start = *trimmed + 3;
+	while (*start == ' ')
+		start++;
+	only_path = ft_strdup(start);
 	if (!only_path)
 	{
 		free(*trimmed);

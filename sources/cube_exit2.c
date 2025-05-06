@@ -6,7 +6,7 @@
 /*   By: mdahlstr <mdahlstr@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/06 13:55:50 by mdahlstr          #+#    #+#             */
-/*   Updated: 2025/05/06 14:52:41 by mdahlstr         ###   ########.fr       */
+/*   Updated: 2025/05/06 15:53:08 by mdahlstr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,8 @@ void	free_render(t_render *render)
 
 void	free_texture(t_data *data)
 {
+	if (!data || !data->text)
+		return ;
 	if (data->text->north)
 		mlx_delete_texture(data->text->north);
 	if (data->text->south)

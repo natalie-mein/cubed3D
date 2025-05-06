@@ -6,7 +6,7 @@
 /*   By: mdahlstr <mdahlstr@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/05 20:07:50 by nmeintje          #+#    #+#             */
-/*   Updated: 2025/05/06 14:25:11 by mdahlstr         ###   ########.fr       */
+/*   Updated: 2025/05/06 16:09:00 by mdahlstr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,6 @@ void	init_render(t_data *data)
 void	init_data(t_data *data)
 {
 	data->mlx = NULL;
-	data->mlx = NULL;
 	data->player = malloc(sizeof(t_player));
 	if (!data->player)
 		exit_game(data, EXIT_FAILURE);
@@ -80,7 +79,7 @@ void	init_data(t_data *data)
 	data->player_dir = '0';
 	data->player_y = 0;
 	data->player_x = 0;
-	data->text = malloc(sizeof(t_text));
+	data->text = ft_calloc(4, sizeof(t_text));
 	if (!data->text)
 		exit_game(data, EXIT_FAILURE);
 	init_render(data);

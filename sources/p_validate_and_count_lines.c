@@ -6,7 +6,7 @@
 /*   By: mdahlstr <mdahlstr@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/29 11:59:17 by mdahlstr          #+#    #+#             */
-/*   Updated: 2025/05/06 12:19:40 by mdahlstr         ###   ########.fr       */
+/*   Updated: 2025/05/06 16:01:08 by mdahlstr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ static void	validate_line(char *line, int fd, t_data *data)
 			free(line);
 		line = NULL;
 		close(fd);
-		error_message_exit("Wrong character found in file.", data);
+		error_message_exit("Wrong character found in map file.", data);
 	}
 	if (is_map_line(line))
 		data->map_data->map_h++;

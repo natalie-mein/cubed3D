@@ -1,11 +1,11 @@
-NO ./textures/north.png
-  C    225,30,0
-            SO ./textures/south.png
-WE ./textures/west.png
-    EA ./textures/east.png
+NO       ./textures/tiled_wall_poster_.png
+SO ./textures/tiled_wall_mirror2.png
+       WE   ./textures/tiled_  wall_camera.png
+EA ./textures/tiled_wall.png
+
+C 163, 161, 155
 
 F 220,100,0
-
 
 111111
 100101
