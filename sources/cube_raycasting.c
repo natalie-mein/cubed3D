@@ -13,7 +13,10 @@
 #include "cub3D.h"
 
 /*
-calculate ray position and direction
+Calculates ray position and direction by: setting the ray direction for the
+curent screen column and converting it into a number from -1 to 1 (l - r).
+And then calculating the direcction of the ray by adjusting it based on
+where the player is looking and their field of view (plane)
 */
 void	calculate_ray_position(t_data *data, t_player *player, int x)
 {
@@ -23,8 +26,10 @@ void	calculate_ray_position(t_data *data, t_player *player, int x)
 }
 
 /*
-calcuate step and side distances
-initialize ray position and direction in world space
+Calculates how far a ray has to go in x and y before crossing a gridline
+Delta_x and Delta_y are used to walk through the grid evenly and step through 
+squares.
+The ray starts at the players position.
 */
 void	calculate_delta_distance(t_player *player, t_ray *ray)
 {
@@ -35,8 +40,10 @@ void	calculate_delta_distance(t_player *player, t_ray *ray)
 }
 
 /*
-calculate which direction to step and initialize side distances
+Calculates which direction to step and initialize side distances
 based on player position
+Side_x and Side_y are the initial distances to the first X and Y sides
+of the next grid cell
 */
 void	calculate_ray_direction(t_player *player, t_ray *ray)
 {
@@ -63,7 +70,12 @@ void	calculate_ray_direction(t_player *player, t_ray *ray)
 }
 
 /*
-perform DDA algorithm
+Performs DDA algorithm
+Wals the ray forward through the grid until the ray hits a '1' on the map
+at each step, it checks whcish direction is closer X or Y and moves the cell
+in that direction.
+if the new position hits a wall, it breaks out of the loop
+The close the wall the taller it appears. 
 */
 void	calculate_differential(t_data *d, t_ray *ray)
 {
@@ -91,6 +103,11 @@ void	calculate_differential(t_data *d, t_ray *ray)
 	ray->wx_height = (int)(HEIGHT / ray->wx_distance);
 }
 
+/*
+Starts from left most column of the screen and loops across the screen
+Casts one ray per screen column. For each column is calculates where the
+ray goes, how far it travels and what to draw
+*/
 void	raycast(t_data *data)
 {
 	t_ray	*ray;

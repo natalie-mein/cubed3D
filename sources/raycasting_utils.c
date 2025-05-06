@@ -14,6 +14,10 @@
 
 /*
 0,0 = top left, HEIGHT, WIDTH = bottom right
+Prepares info for drawing the vertical slice. 
+wall_x = where exactly the ray hits the wall. floor() is subtracted to keep
+only the fractional part. which tells you where along the wall the hit 
+occured
 */
 void	calculate_wall_pixels(t_player *player, t_ray *ray)
 {
@@ -35,6 +39,10 @@ void	calculate_wall_pixels(t_player *player, t_ray *ray)
 	ray->wall_x -= floor(ray->wall_x);
 }
 
+/*
+Chooses a wall texture based on ray direction (y = N/S, x = E/W) and if 
+wall is vertical (boundary = 0) or horizontal (Boundary = 1)
+*/
 int	choose_wall_texture(t_ray *ray)
 {
 	if (ray->r_dir_y < 0 && ray->boundary == 1)
@@ -48,6 +56,12 @@ int	choose_wall_texture(t_ray *ray)
 	return (ERROR);
 }
 
+/*
+Finds the X position insde the texture to sample the correct vertical strip
+Multiplies wall_x by texture width to convert fractional position int texture
+coordinate
+Flips horizontal coord (S/W) walls to make the texture orientation correct
+*/
 int	find_location(t_ray *ray, int texture)
 {
 	int	x;
