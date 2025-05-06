@@ -42,10 +42,7 @@ void	init_render(t_data *data)
 	j = 0;
 	data->render = ft_calloc(1, sizeof(t_render));
 	if (!data->render)
-	{
-		perror("Failed to allocate render");
-		exit(EXIT_FAILURE);
-	}
+		error_message_exit(ERR_RENDER, data);
 	data->render->pixels = ft_calloc(HEIGHT, sizeof(uint32_t *));
 	if (!data->render->pixels)
 		exit_game(data, EXIT_FAILURE);
@@ -80,7 +77,7 @@ void	init_data(t_data *data)
 	data->player_dir = '0';
 	data->player_y = 0;
 	data->player_x = 0;
-	data->text = malloc(sizeof(t_text));
+	data->text = ft_calloc(4, sizeof(t_text));
 	if (!data->text)
 		exit_game(data, EXIT_FAILURE);
 	init_render(data);

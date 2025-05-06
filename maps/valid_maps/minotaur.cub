@@ -1,10 +1,10 @@
-NO ./textures/frame-png-texture-2938280_640.png
-SO ./textures/cat-7635983_640.png
-WE ./textures/blue-background-2369875_640.png
-EA ./textures/blue-background-2369875_640.png                  
+NO ./textures/north_wall_space_640.png
+SO ./textures/south_wall_door_640.png
+WE ./textures/west_wall_grate_640.png
+EA ./textures/east_wall_alien_640.png                  
 
-F 219, 188, 77
-C 156, 130, 61
+C 82,76,66
+F 97,91,87
 
 111111111111111111111111111111111111
 100010000000000000000100000000000001

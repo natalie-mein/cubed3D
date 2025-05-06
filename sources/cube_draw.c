@@ -67,9 +67,6 @@ void	render_game(void *param)
 	raycast(data);
 	data->image = mlx_new_image(data->mlx, WIDTH, HEIGHT);
 	if (!data->image)
-	{
-		printf("Failed to create image!\n");
-		return ;
-	}
+		error_message_exit(ERR_IMAGE, data);
 	render_image(data);
 }
