@@ -27,7 +27,7 @@
 # include "../libraries/libft/libft.h"
 
 # define WIDTH 2048
-# define HEIGHT 1024
+# define HEIGHT 1536
 
 # define SUCCESS 0
 # define ERROR -1

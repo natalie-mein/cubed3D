@@ -16,9 +16,8 @@ NAME = cub3D
 MLX_DIR = ./libraries/MLX42
 LIBFT_DIR = ./libraries/libft
 SRC_DIR = ./sources
-###BONUS_DIR = ./bonus
 OBJ_DIR = $(SRC_DIR)/objects
-###BONUS_OBJ_DIR = $(BONUS_DIR)/bonus_objects
+
 
 #source and object files
 SOURCES = main.c \
@@ -49,22 +48,16 @@ SOURCES = main.c \
 	raycasting_utils.c \
 	cube_textures.c
 
-###BONUS = ./_bonus.c 
-
 SRCS = $(addprefix $(SRC_DIR)/,$(SOURCES))
-###BONUS_SRC = $(addprefix $(BONUS_DIR)/,$(BONUS))
 
 OBJS = $(patsubst %.c,$(OBJ_DIR)/%.o,$(notdir $(SRCS)))
-###BONUS_OBJS = $(patsubst %.c,$(BONUS_OBJ_DIR)/%.o,$(notdir $(BONUS)))
 
 HEADERS = -I ./include -I $(MLX_DIR)/include -I $(LIBFT_DIR)
-###BONUS_HEADERS = -I ./include_bonus -I $(MLX_DIR)
 
 MLXLIB = $(MLX_DIR)/build/libmlx42.a
 LIBFT = $(LIBFT_DIR)/libft.a
 
 # MLX42 dependencies - dl dynamically loaded lib, glfw graphics library framework m math library
-
 MLXLIB_FLAGS = $(MLX_DIR)/build/libmlx42.a -ldl -lglfw -lm
 # MLXLIB_FLAGS = $(MLX_DIR)/build/libmlx42.a -lglfw -framework Cocoa -framework OpenGL -framework IOKit
 LIBFT_FLAGS = -L $(LIBFT_DIR) -lft
@@ -93,25 +86,13 @@ $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c | $(OBJ_DIR)
 $(OBJ_DIR):
 	mkdir -p $(OBJ_DIR)
 
-###bonus: $(MLXLIB) $(BONUS_OBJS)
-###	$(CC) $(BONUS_OBJS) $(MLXLIB) $(MLXLIB_FLAGS) $(BONUS_HEADERS) -o $(NAME)_bonus
-###	@echo "$(NAME) bonus compiled successfully"
-
-###(BONUS_OBJ_DIR)/%.o: $(BONUS_DIR)/%.c | $(BONUS_OBJ_DIR)
-###        @$(CC) $(CFLAGS) $(BONUS_HEADERS) -c $< -o $@
-
-###$(BONUS_OBJ_DIR):
-###	@mkdir -p $(BONUS_OBJ_DIR)
-
 clean:
 	@$(RM) $(OBJ_DIR)
-###	@$(RM) $(BONUS_OBJ_DIR)
 	@$(RM) $(MLX_DIR)/build
 	@make -C $(LIBFT_DIR) clean
 		
 fclean: clean
 	@$(RM) $(NAME)
-###     @$(RM) $(NAME)_bonus
 	@$(RM) $(MLX_DIR)
 	@make -C $(LIBFT_DIR) fclean
 				
