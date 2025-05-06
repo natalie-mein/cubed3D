@@ -6,7 +6,7 @@
 /*   By: mdahlstr <mdahlstr@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/05 20:07:50 by nmeintje          #+#    #+#             */
-/*   Updated: 2025/05/06 16:09:00 by mdahlstr         ###   ########.fr       */
+/*   Updated: 2025/05/06 16:26:10 by mdahlstr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	initialise_map_data(t_data *data)
 {
 	data->map_data = ft_calloc(1, sizeof(t_map_data));
 	if (!data->map_data)
-		error_message_exit(ERR_MAP_DATA, data);
+		error_message_exit(ERR_MAP_DATA, data, NULL);
 	data->map_data->file_len = 0;
 	data->map_data->map_grid = NULL;
 	data->map_data->no_texture = NULL;
@@ -42,7 +42,7 @@ void	init_render(t_data *data)
 	j = 0;
 	data->render = ft_calloc(1, sizeof(t_render));
 	if (!data->render)
-		error_message_exit(ERR_RENDER, data);
+		error_message_exit(ERR_RENDER, data, NULL);
 	data->render->pixels = ft_calloc(HEIGHT, sizeof(uint32_t *));
 	if (!data->render->pixels)
 		exit_game(data, EXIT_FAILURE);
@@ -52,7 +52,7 @@ void	init_render(t_data *data)
 		if (!data->render->pixels[i])
 		{
 			free_pixels_array(data->render->pixels, i);
-			error_message_exit(ERR_PIXELS, data);
+			error_message_exit(ERR_PIXELS, data, NULL);
 		}
 		i++;
 	}
@@ -91,7 +91,7 @@ void	init_textures(t_data *data)
 	data->text->west = mlx_load_png(data->map_data->we_texture);
 	if (!data->text->north || !data->text->south || !data->text->east
 		|| !data->text->west)
-		error_message_exit(ERR_TEXTURES, data);
+		error_message_exit(ERR_TEXTURES, data, NULL);
 	if (texture_buffer(data, data->text->north, 0) == 1)
 		exit_game(data, EXIT_FAILURE);
 	if (texture_buffer(data, data->text->south, 1) == 1)

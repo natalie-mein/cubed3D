@@ -6,7 +6,7 @@
 /*   By: mdahlstr <mdahlstr@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/29 11:59:17 by mdahlstr          #+#    #+#             */
-/*   Updated: 2025/05/06 16:01:08 by mdahlstr         ###   ########.fr       */
+/*   Updated: 2025/05/06 20:02:08 by mdahlstr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,48 +30,78 @@ static bool	wrong_char_in_line(char *line)
 	return (false);
 }
 
-static void	validate_line(char *line, int fd, t_data *data)
+static bool	is_line_empty_or_whitespace(char *line)
 {
-	if (wrong_char_in_line(line))
+	int	i;
+
+	i = 0;
+	while (line && line[i])
 	{
-		if (line)
-			free(line);
-		line = NULL;
-		close(fd);
-		error_message_exit("Wrong character found in map file.", data);
+		if (!ft_iswhitespace(line[i]) && line[i] != '\n')
+			return (false);
+		i++;
 	}
-	if (is_map_line(line))
-		data->map_data->map_h++;
-	free(line);
+	return (true);
 }
 
-/* Checks the entire file for lines starting with strange characters */
-/* Counts file lines and map lines (map_h) */
+// also change validate_line to bool + errmsg
+static bool	validate_line(char *line, t_data *data)
+{
+	if (wrong_char_in_line(line))
+		return (false);
+	if (is_map_line(line))
+		data->map_data->map_h++;
+	return (true);
+}
+
+// change signature to return success/failure + error message
+static char	*process_map_line(t_data *data, char *line, bool *map_started,
+	bool *map_ended)
+{
+	if (++data->map_data->file_len >= MAX_LINES)
+		return ("File has too many lines");
+	if (is_map_line(line))
+	{
+		if (*map_ended)
+			return ("Extraneous content after map.");
+		*map_started = true;
+		data->map_data->map_h++;
+	}
+	else if (*map_started && !is_line_empty_or_whitespace(line))
+	{
+		*map_ended = true;
+		return ("Extraneous content after map.");
+	}
+	else if (!*map_started && !validate_line(line, data))
+		return ("Wrong character found in map file.");
+	return (NULL);
+}
+
 void	validate_and_count_lines(char *filename, t_data *data)
 {
-	int		i;
-	char	*line;
 	int		fd;
+	char	*line;
+	char	*errmsg;
+	bool	map_started;
+	bool	map_ended;
 
 	fd = get_fd(filename, data);
-	line = get_next_line(fd);
-	i = 0;
-	while (line != NULL)
+	map_started = false;
+	map_ended = false;
+	while (1)
 	{
-		if (i >= MAX_LINES - 1)
-		{
-			if (line)
-				free(line);
-			line = NULL;
-			close(fd);
-			error_message_exit("File has too many lines", data);
-		}
-		validate_line(line, fd, data);
-		i++;
 		line = get_next_line(fd);
+		if (line == NULL)
+			break ;
+		errmsg = process_map_line(data, line, &map_started, &map_ended);
+		free(line);
+		if (errmsg)
+		{
+			close(fd);
+			error_message_exit(errmsg, data, NULL);
+		}
 	}
 	close(fd);
 	if (data->map_data->map_h < 3)
-		error_message_exit("Map empty or too small.", data);
-	data->map_data->file_len = i;
+		error_message_exit("Map empty or too small.", data, NULL);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cube_textures.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nmeintje <nmeintje@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: mdahlstr <mdahlstr@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/17 10:58:46 by nmeintje          #+#    #+#             */
-/*   Updated: 2025/05/02 13:56:46 by nmeintje         ###   ########.fr       */
+/*   Updated: 2025/05/06 16:19:21 by mdahlstr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ int	texture_buffer(t_data *data, mlx_texture_t *texture, int direction)
 	pixels = ft_calloc((texture->height * texture->width), sizeof(uint32_t));
 	if (!pixels)
 	{
-		error_message_exit(ERR_PIXELS, data);
+		error_message_exit(ERR_PIXELS, data, NULL);
 		return (ERROR);
 	}
 	while (i < texture->height)
@@ -53,6 +53,6 @@ int	texture_buffer(t_data *data, mlx_texture_t *texture, int direction)
 	}
 	data->render->text_buf[direction] = pixels;
 	if (!data->render->text_buf[direction])
-		error_message_exit(ERR_TEXT_BUF, data);
+		error_message_exit(ERR_TEXT_BUF, data, NULL);
 	return (SUCCESS);
 }

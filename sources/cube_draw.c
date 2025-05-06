@@ -6,7 +6,7 @@
 /*   By: mdahlstr <mdahlstr@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/11 17:43:56 by mdahlstr          #+#    #+#             */
-/*   Updated: 2025/05/02 13:40:10 by nmeintje         ###   ########.fr       */
+/*   Updated: 2025/05/06 16:18:47 by mdahlstr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,6 @@ void	render_game(void *param)
 	raycast(data);
 	data->image = mlx_new_image(data->mlx, WIDTH, HEIGHT);
 	if (!data->image)
-		error_message_exit(ERR_IMAGE, data);
+		error_message_exit(ERR_IMAGE, data, NULL);
 	render_image(data);
 }

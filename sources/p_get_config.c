@@ -6,7 +6,7 @@
 /*   By: mdahlstr <mdahlstr@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/29 11:49:02 by mdahlstr          #+#    #+#             */
-/*   Updated: 2025/05/06 15:40:40 by mdahlstr         ###   ########.fr       */
+/*   Updated: 2025/05/06 16:32:26 by mdahlstr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,23 +54,15 @@ static char	*get_texture_path(char **trimmed, t_data *data)
 		start++;
 	only_path = ft_strdup(start);
 	if (!only_path)
-	{
-		free(*trimmed);
-		error_message_exit("Memory allocation failed: get_texture_path", data);
-	}
+		error_message_exit("Memory allocation failed: get_texture_path",
+			data, *trimmed);
 	free(*trimmed);
 	*trimmed = NULL;
 	if (!is_right_extension(only_path, ft_strlen(only_path), ".png"))
-	{
-		printf("HERE: %s\n", only_path);
-		free(only_path);
-		error_message_exit("Texture file has the wrong file extension.", data);
-	}
+		error_message_exit("Texture file has the wrong file extension.",
+			data, only_path);
 	if (ft_strchr(only_path, ' ') != NULL || ft_strchr(only_path, ',') != NULL)
-	{
-		free(only_path);
-		error_message_exit("Path to texture file incorrect.", data);
-	}
+		error_message_exit("Path to texture file incorrect.", data, only_path);
 	data->map_data->config_count++;
 	return (only_path);
 }
@@ -96,7 +88,8 @@ static void	process_config_line(char **trimmed, t_data *data)
 	if (check_duplicated_element(data, *trimmed) == true)
 	{
 		free(*trimmed);
-		error_message_exit("Found duplicated configuration elements", data);
+		error_message_exit("Found duplicated configuration elements",
+			data, NULL);
 	}
 	else
 	{
@@ -137,7 +130,7 @@ void	get_config(char *filename, t_data *data)
 			if (!trimmed)
 			{
 				close(fd);
-				error_message_exit("Failed trimming line from file", data);
+				error_message_exit("Failed trimming config line.", data, NULL);
 			}
 			process_config_line(&trimmed, data);
 		}

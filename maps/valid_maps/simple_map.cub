@@ -1,14 +1,20 @@
-NO       ./textures/tiled_wall_poster_.png
+NO ./textures/tiled_wall_poster_.png
 SO ./textures/tiled_wall_mirror2.png
-       WE   ./textures/tiled_  wall_camera.png
-EA ./textures/tiled_wall.png
-
-C 163, 161, 155
+      
+       WE              ./textures/tiled_wall_camera.png
+                 
+EA ./textures/tiled_wall.png        
 
 F 220,100,0
 
-111111
-100101
-101001
-1100N1
-111111
+C 163, 161, 155
+
+
+111
+101
+101
+1N1
+111
+
+
+N

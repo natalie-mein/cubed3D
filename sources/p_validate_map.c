@@ -6,14 +6,14 @@
 /*   By: mdahlstr <mdahlstr@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/29 12:04:41 by mdahlstr          #+#    #+#             */
-/*   Updated: 2025/05/06 15:58:19 by mdahlstr         ###   ########.fr       */
+/*   Updated: 2025/05/06 19:48:39 by mdahlstr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parsing.h"
 
 // returns true if all characters in a string are spaces
-static bool	only_spaces(char *str)
+bool	only_spaces(char *str)
 {
 	int	i;
 
@@ -57,24 +57,24 @@ void	validate_map(t_data *data)
 	int	player_count;
 
 	if (!data || !data->map_data || !data->map_data->map_grid)
-		error_message_exit("Null pointer detected", data);
-	y = 0;
+		error_message_exit("Null pointer detected", data, NULL);
 	player_count = 0;
-	while (y < data->map_data->map_h)
+	y = -1;
+	while (++y < data->map_data->map_h)
 	{
 		x = 0;
 		while (data->map_data->map_grid[y][x])
 		{
 			if (!check_tile(data->map_data->map_grid[y][x], &player_count))
-				error_message_exit("Invalid char detected in map grid.", data);
+				error_message_exit("Invalid char in map grid.", data, NULL);
 			x++;
 		}
-		if (only_spaces(data->map_data->map_grid[y]))
-			error_message_exit("Empty line in map grid", data);
-		y++;
+		if (only_spaces(data->map_data->map_grid[y])
+			|| !is_map_line(data->map_data->map_grid[y]))
+			error_message_exit("Invalid line in map grid", data, NULL);
 	}
 	if (player_count != 1)
-		error_message_exit("Player count different than one.", data);
+		error_message_exit("Player count different than one.", data, NULL);
 	if (!is_map_closed(data, data->player_y, data->player_x))
-		error_message_exit("Map is not properly enclosed by walls.", data);
+		error_message_exit("Map is not wholly enclosed by walls.", data, NULL);
 }

@@ -6,7 +6,7 @@
 /*   By: mdahlstr <mdahlstr@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/30 14:52:37 by mdahlstr          #+#    #+#             */
-/*   Updated: 2025/05/06 12:36:51 by mdahlstr         ###   ########.fr       */
+/*   Updated: 2025/05/06 19:48:55 by mdahlstr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,10 +51,11 @@ void		get_map(char *filename, t_data *data);
 void		pad_map_lines(t_data *data);
 void		free_map_grid(char **array, int up_to_index);
 int			error_message(char *error_message, int code);
-void		error_message_exit(char *error_message, t_data *data);
+void		error_message_exit(char *error_message, t_data *data, char *str);
 void		error_message_exit_no_free(char *error_message);
 void		parse_config(t_data *data);
 void		get_spawn_pos(t_data *data);
 void		validate_map(t_data *data);
+bool		only_spaces(char *str);
 
 #endif

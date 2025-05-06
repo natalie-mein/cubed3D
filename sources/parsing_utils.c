@@ -6,7 +6,7 @@
 /*   By: mdahlstr <mdahlstr@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/14 16:35:24 by mdahlstr          #+#    #+#             */
-/*   Updated: 2025/05/06 12:19:05 by mdahlstr         ###   ########.fr       */
+/*   Updated: 2025/05/06 16:24:05 by mdahlstr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,6 @@ int	get_fd(char *filename, t_data *data)
 
 	fd = open(filename, O_RDONLY);
 	if (fd == -1)
-		error_message_exit("Failed to open file", data);
+		error_message_exit("Failed to open file", data, NULL);
 	return (fd);
 }
