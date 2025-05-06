@@ -6,11 +6,11 @@
 /*   By: mdahlstr <mdahlstr@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/15 16:13:42 by mdahlstr          #+#    #+#             */
-/*   Updated: 2025/05/05 13:21:23 by mdahlstr         ###   ########.fr       */
+/*   Updated: 2025/05/06 12:19:49 by mdahlstr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3D.h"
+#include "parsing.h"
 
 void	parse_config(t_data *data)
 {

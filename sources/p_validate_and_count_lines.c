@@ -6,11 +6,11 @@
 /*   By: mdahlstr <mdahlstr@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/29 11:59:17 by mdahlstr          #+#    #+#             */
-/*   Updated: 2025/05/05 13:17:30 by mdahlstr         ###   ########.fr       */
+/*   Updated: 2025/05/06 12:19:40 by mdahlstr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3D.h"
+#include "parsing.h"
 
 // Skips spaces and checks the first character of every line
 // Accepted chars: N S E W F C 1, all types of spaces, newline

@@ -6,7 +6,7 @@
 /*   By: mdahlstr <mdahlstr@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/30 14:52:37 by mdahlstr          #+#    #+#             */
-/*   Updated: 2025/05/05 17:12:28 by mdahlstr         ###   ########.fr       */
+/*   Updated: 2025/05/06 12:36:51 by mdahlstr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,14 @@
 # define GREEN 1
 # define BLUE 2
 
-# include "raycasting.h"
+# include <stdbool.h>
+# include <stddef.h>
+# include <stdint.h>
+# include "../libraries/libft/libft.h"
 # include "cub3D.h"
+
+typedef struct s_colour	t_colour;
+typedef struct s_data	t_data;
 
 void		get_config(char *filename, t_data *data);
 void		validate_input(int argc, char *filename);

@@ -6,11 +6,11 @@
 /*   By: mdahlstr <mdahlstr@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/29 12:02:51 by mdahlstr          #+#    #+#             */
-/*   Updated: 2025/05/05 13:18:44 by mdahlstr         ###   ########.fr       */
+/*   Updated: 2025/05/06 12:19:28 by mdahlstr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3D.h"
+#include "parsing.h"
 
 // Copy map line into 2d grid
 // Gets the longest line and sets it as map width.

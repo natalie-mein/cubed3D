@@ -6,11 +6,11 @@
 /*   By: mdahlstr <mdahlstr@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/29 12:05:43 by mdahlstr          #+#    #+#             */
-/*   Updated: 2025/05/05 13:17:53 by mdahlstr         ###   ########.fr       */
+/*   Updated: 2025/05/06 12:19:38 by mdahlstr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3D.h"
+#include "parsing.h"
 
 // Turns all spaces in the map grid into zeroes
 // [ ] -> [0]

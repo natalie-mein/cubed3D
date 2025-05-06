@@ -6,11 +6,10 @@
 /*   By: mdahlstr <mdahlstr@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/02 14:59:28 by mdahlstr          #+#    #+#             */
-/*   Updated: 2025/05/05 13:16:05 by mdahlstr         ###   ########.fr       */
+/*   Updated: 2025/05/06 12:19:52 by mdahlstr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/cub3D.h"
 #include "parsing.h"
 
 // 1. count file and map lines

@@ -6,11 +6,11 @@
 /*   By: mdahlstr <mdahlstr@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/15 11:56:05 by mdahlstr          #+#    #+#             */
-/*   Updated: 2025/05/05 13:20:36 by mdahlstr         ###   ########.fr       */
+/*   Updated: 2025/05/06 12:19:54 by mdahlstr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3D.h"
+#include "parsing.h"
 
 // gets numbers from a string, separated by commas
 static int	get_next_number(const char *line, int *index, int colour)

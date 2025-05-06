@@ -6,11 +6,11 @@
 /*   By: mdahlstr <mdahlstr@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/29 12:23:03 by mdahlstr          #+#    #+#             */
-/*   Updated: 2025/05/05 13:18:13 by mdahlstr         ###   ########.fr       */
+/*   Updated: 2025/05/06 12:19:34 by mdahlstr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3D.h"
+#include "parsing.h"
 
 // Finds all lines shorter than map width and pads them with spaces.
 void	pad_map_lines(t_data *data)

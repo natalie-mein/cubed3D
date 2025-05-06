@@ -6,11 +6,11 @@
 /*   By: mdahlstr <mdahlstr@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/05 17:06:22 by mdahlstr          #+#    #+#             */
-/*   Updated: 2025/05/05 17:31:34 by mdahlstr         ###   ########.fr       */
+/*   Updated: 2025/05/06 12:19:12 by mdahlstr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3D.h"
+#include "parsing.h"
 
 bool	has_invalid_dot_position(char *path)
 {
@@ -21,7 +21,7 @@ bool	has_invalid_dot_position(char *path)
 	if (!path || len < 5)
 		return (true);
 	i = 0;
-	while(path[i])
+	while (path[i])
 	{
 		if (path[i] == '.')
 		{

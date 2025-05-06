@@ -11,6 +11,7 @@
         "chrono": "c",
         "variant": "c",
         "raycasting.h": "c",
-        "libft.h": "c"
+        "libft.h": "c",
+        "parsing.h": "c"
     }
 }

@@ -6,11 +6,11 @@
 /*   By: mdahlstr <mdahlstr@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/06 17:05:50 by nmeintje          #+#    #+#             */
-/*   Updated: 2025/05/05 11:45:56 by mdahlstr         ###   ########.fr       */
+/*   Updated: 2025/05/06 12:19:44 by mdahlstr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3D.h"
+#include "parsing.h"
 
 static void	validate_argc(int argc)
 {

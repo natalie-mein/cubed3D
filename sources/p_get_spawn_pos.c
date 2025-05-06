@@ -6,11 +6,11 @@
 /*   By: mdahlstr <mdahlstr@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/29 12:03:47 by mdahlstr          #+#    #+#             */
-/*   Updated: 2025/05/05 13:18:26 by mdahlstr         ###   ########.fr       */
+/*   Updated: 2025/05/06 12:19:31 by mdahlstr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3D.h"
+#include "parsing.h"
 
 void	get_spawn_pos(t_data *data)
 {

@@ -6,7 +6,7 @@
 /*   By: mdahlstr <mdahlstr@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/07 10:09:36 by nmeintje          #+#    #+#             */
-/*   Updated: 2025/05/05 11:13:58 by nmeintje         ###   ########.fr       */
+/*   Updated: 2025/05/06 14:55:48 by mdahlstr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,5 +67,5 @@ void	player_direction(t_data *data)
 	{
 		data->player->start_dir = WEST;
 		face_west(data->player);
-	}	
+	}
 }

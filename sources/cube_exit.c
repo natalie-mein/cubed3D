@@ -6,7 +6,7 @@
 /*   By: mdahlstr <mdahlstr@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/08 13:45:55 by nmeintje          #+#    #+#             */
-/*   Updated: 2025/05/05 13:21:57 by mdahlstr         ###   ########.fr       */
+/*   Updated: 2025/05/06 14:55:40 by mdahlstr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,10 +59,14 @@ void	free_data(t_data *data)
 		free(data->player);
 	if (data->ray)
 		free(data->ray);
+	if (data->render)
+		free_render(data->render);
+	if (data->text)
+		free_texture(data);
 }
 
 void	exit_game(t_data *data, int exit_code)
-{	
+{
 	if (data->mlx)
 	{
 		mlx_close_window(data->mlx);

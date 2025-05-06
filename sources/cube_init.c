@@ -6,7 +6,7 @@
 /*   By: mdahlstr <mdahlstr@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/05 20:07:50 by nmeintje          #+#    #+#             */
-/*   Updated: 2025/05/02 13:51:21 by nmeintje         ###   ########.fr       */
+/*   Updated: 2025/05/06 14:25:11 by mdahlstr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,10 @@ void	init_render(t_data *data)
 	{
 		data->render->pixels[i] = ft_calloc(WIDTH, sizeof(uint32_t));
 		if (!data->render->pixels[i])
+		{
+			free_pixels_array(data->render->pixels, i);
 			error_message_exit(ERR_PIXELS, data);
+		}
 		i++;
 	}
 }

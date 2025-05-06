@@ -6,7 +6,7 @@
 /*   By: mdahlstr <mdahlstr@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/03 15:42:09 by nmeintje          #+#    #+#             */
-/*   Updated: 2025/05/05 16:02:15 by nmeintje         ###   ########.fr       */
+/*   Updated: 2025/05/06 14:55:30 by mdahlstr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,13 +16,13 @@
 # include "parsing.h"
 # include "raycasting.h"
 
-# include <unistd.h> //open close read write
-# include <stdlib.h> //malloc free etc
-# include <stdio.h> //printf
-# include <sys/time.h> //gettimeofday
-# include <string.h> //strerror
+# include <unistd.h>
+# include <stdlib.h>
+# include <stdio.h>
+# include <sys/time.h>
+# include <string.h>
 # include <fcntl.h>
-# include <math.h> //math library
+# include <math.h>
 # include "../MLX42/include/MLX42/MLX42.h"
 # include "../libraries/libft/libft.h"
 
@@ -130,8 +130,6 @@ typedef struct s_text
 	mlx_texture_t	*south;
 	mlx_texture_t	*east;
 	mlx_texture_t	*west;
-	mlx_texture_t	*floor;
-	mlx_texture_t	*ceiling;
 }	t_text;
 
 typedef struct s_data
@@ -156,5 +154,8 @@ void		free_data(t_data *data);
 void		free_map_data(t_map_data *map_data, int height);
 void		free_if_allocated(void *ptr);
 void		free_2d_array(char **array, int height);
+void		free_render(t_render *render);
+void		free_texture(t_data *data);
+void		free_pixels_array(uint32_t **pixels, int height);
 
 #endif

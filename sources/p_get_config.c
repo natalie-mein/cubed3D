@@ -6,11 +6,11 @@
 /*   By: mdahlstr <mdahlstr@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/29 11:49:02 by mdahlstr          #+#    #+#             */
-/*   Updated: 2025/05/05 16:58:34 by mdahlstr         ###   ########.fr       */
+/*   Updated: 2025/05/06 13:41:15 by mdahlstr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3D.h"
+#include "parsing.h"
 
 // get RGB values and converts them to hex colour.
 // through bitwise shift operations
@@ -58,6 +58,7 @@ static char	*get_texture_path(char **trimmed, t_data *data)
 	*trimmed = NULL;
 	if (!is_right_extension(only_path, ft_strlen(only_path), ".png"))
 	{
+		printf("HERE: %s\n", only_path);
 		free(only_path);
 		error_message_exit("Texture file has the wrong file extension.", data);
 	}

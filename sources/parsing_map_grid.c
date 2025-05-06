@@ -6,11 +6,11 @@
 /*   By: mdahlstr <mdahlstr@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/30 14:00:32 by mdahlstr          #+#    #+#             */
-/*   Updated: 2025/05/05 13:19:48 by mdahlstr         ###   ########.fr       */
+/*   Updated: 2025/05/06 12:20:01 by mdahlstr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3D.h"
+#include "parsing.h"
 
 // recursive function to check for holes around the map.
 static bool	is_map_closed_rec(t_data *data, bool **visited, int y, int x)

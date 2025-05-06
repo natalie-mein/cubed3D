@@ -6,7 +6,7 @@
 #    By: mdahlstr <mdahlstr@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/03/03 11:27:05 by nmeintje          #+#    #+#              #
-#    Updated: 2025/05/05 17:06:13 by mdahlstr         ###   ########.fr        #
+#    Updated: 2025/05/06 13:55:39 by mdahlstr         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -44,6 +44,7 @@ SOURCES = main.c \
 	cube_rotation.c \
 	cube_init.c \
 	cube_exit.c \
+	cube_exit2.c \
 	cube_raycasting.c \
 	raycasting_utils.c \
 	cube_textures.c

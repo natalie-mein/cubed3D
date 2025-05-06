@@ -6,11 +6,11 @@
 /*   By: mdahlstr <mdahlstr@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/29 12:04:41 by mdahlstr          #+#    #+#             */
-/*   Updated: 2025/04/29 12:31:10 by mdahlstr         ###   ########.fr       */
+/*   Updated: 2025/05/06 12:19:47 by mdahlstr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3D.h"
+#include "parsing.h"
 
 // returns true if all characters in a string are spaces
 static bool	only_spaces(char *str)

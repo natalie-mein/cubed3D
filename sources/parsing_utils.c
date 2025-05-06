@@ -6,11 +6,11 @@
 /*   By: mdahlstr <mdahlstr@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/14 16:35:24 by mdahlstr          #+#    #+#             */
-/*   Updated: 2025/05/05 17:29:34 by mdahlstr         ###   ########.fr       */
+/*   Updated: 2025/05/06 12:19:05 by mdahlstr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3D.h"
+#include "parsing.h"
 
 // Checks for dot in the wrong position.
 // Compares extension to expected 4 characters.
@@ -29,7 +29,7 @@ bool	is_map_line(const char *line)
 {
 	int	start;
 	int	end;
-	
+
 	start = 0;
 	if (!line)
 		return (false);
