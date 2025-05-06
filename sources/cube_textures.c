@@ -37,7 +37,10 @@ int	texture_buffer(t_data *data, mlx_texture_t *texture, int direction)
 	i = 0;
 	pixels = ft_calloc((texture->height * texture->width), sizeof(uint32_t));
 	if (!pixels)
+	{
+		error_message_exit(ERR_PIXELS, data);
 		return (ERROR);
+	}
 	while (i < texture->height)
 	{
 		j = 0;

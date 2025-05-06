@@ -37,6 +37,8 @@
 # define ERR_PIXELS "Memory allocation failure for pixels"
 # define ERR_TEXTURES "Memory allocation failure for textures"
 # define ERR_TEXT_BUF "Texture buffer not filled for one direction"
+# define ERR_IMAGE "Failed to create image"
+# define ERR_RENDER "Failed to allocate render"
 
 typedef struct s_map_data
 {
@@ -146,9 +148,6 @@ typedef struct s_data
 	t_text		*text;
 }	t_data;
 
-void		help_msg(void);
-void		ft_error(void);
-void		ft_hook(void *param);
 void		validate_input(int argc, char *file_name);
 void		free_data(t_data *data);
 void		free_map_data(t_map_data *map_data, int height);

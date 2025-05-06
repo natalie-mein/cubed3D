@@ -36,7 +36,6 @@ SOURCES = main.c \
 	parse_config.c \
 	parsing_map_grid.c \
 	parsing_error.c \
-	cube_errors.c \
 	cube_hooks.c \
 	cube_draw.c \
 	cube_player.c \
