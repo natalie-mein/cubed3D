@@ -6,7 +6,7 @@
 /*   By: mdahlstr <mdahlstr@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/29 12:04:41 by mdahlstr          #+#    #+#             */
-/*   Updated: 2025/05/06 19:48:39 by mdahlstr         ###   ########.fr       */
+/*   Updated: 2025/05/08 15:27:59 by mdahlstr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,5 +76,5 @@ void	validate_map(t_data *data)
 	if (player_count != 1)
 		error_message_exit("Player count different than one.", data, NULL);
 	if (!is_map_closed(data, data->player_y, data->player_x))
-		error_message_exit("Map is not wholly enclosed by walls.", data, NULL);
+		error_message_exit("Map structure shows discrepancies.", data, NULL);
 }
