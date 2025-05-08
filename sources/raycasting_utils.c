@@ -74,6 +74,12 @@ int	find_location(t_ray *ray, int texture)
 	return (ERROR);
 }
 
+/*
+identifies the direction and chooses the texture
+identifies the cooordinate within the wall
+renders the colour of the particular pixel based on location 
+within the texture
+*/
 void	render_wall_pixels(t_data *data, t_ray *ray, int x)
 {
 	int			i;
