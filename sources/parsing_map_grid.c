@@ -6,7 +6,7 @@
 /*   By: mdahlstr <mdahlstr@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/30 14:00:32 by mdahlstr          #+#    #+#             */
-/*   Updated: 2025/05/07 21:34:53 by mdahlstr         ###   ########.fr       */
+/*   Updated: 2025/05/08 14:51:21 by mdahlstr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,8 +75,9 @@ bool	is_map_closed(t_data *data, int start_y, int start_x)
 	if (start_y < 0 || start_y >= data->map_data->map_h
 		|| start_x < 0 || start_x >= data->map_data->map_w)
 		return (false);
-	result = is_map_closed_rec(data, visited, start_y, start_x)
-		&& no_island(data, visited);
+	if (is_map_closed_rec(data, visited, start_y, start_x)
+		&& no_island(data, visited))
+		result = true;
 	y = -1;
 	while (++y < data->map_data->map_h)
 		free(visited[y]);
