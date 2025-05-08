@@ -1,7 +1,7 @@
 NO ./textures/north_wall_space_640.png
 SO ./textures/south_wall_door_640.png
 WE ./textures/west_wall_grate_640.png
-EA ./textures/grey-2696783_640.png
+EA ./textures/east_wall_alien_640.png
 
 C 140,132,119
 F 93,93,93
