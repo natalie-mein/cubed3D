@@ -1,8 +1,6 @@
 NO ./textures/tiled_wall_poster_.png
 SO ./textures/tiled_wall_mirror2.png
-      
-       WE              ./textures/tiled_wall_camera.png
-                 
+WE ./textures/tiled_wall_camera.png
 EA ./textures/tiled_wall.png
 
 F 138 , 47,47                  

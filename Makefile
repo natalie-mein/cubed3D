@@ -63,7 +63,7 @@ MLXLIB_FLAGS = $(MLX_DIR)/build/libmlx42.a -ldl -lglfw -lm
 LIBFT_FLAGS = -L $(LIBFT_DIR) -lft
 
 CC = cc
-CFLAGS = -Wall -Wextra -Werror -g 
+CFLAGS = -Wall -Wextra -Werror
 
 RM = rm -rf
 
