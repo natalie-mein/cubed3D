@@ -6,7 +6,7 @@
 /*   By: mdahlstr <mdahlstr@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/30 14:52:37 by mdahlstr          #+#    #+#             */
-/*   Updated: 2025/05/06 19:48:55 by mdahlstr         ###   ########.fr       */
+/*   Updated: 2025/05/12 12:37:48 by mdahlstr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 # define DEBUG 1
 # define MAX_LINES 100
+# define MAX_WIDTH 200
 
 # define RED 0
 # define GREEN 1

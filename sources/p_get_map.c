@@ -6,7 +6,7 @@
 /*   By: mdahlstr <mdahlstr@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/29 12:02:51 by mdahlstr          #+#    #+#             */
-/*   Updated: 2025/05/06 12:19:28 by mdahlstr         ###   ########.fr       */
+/*   Updated: 2025/05/12 12:48:40 by mdahlstr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@ static bool	get_map_line(char *line, t_data *data, int y)
 	int	len;
 
 	len = ft_strlen(line);
+	if (len > MAX_WIDTH)
+		error_message_exit("Map width exceeds maximum", data, line);
 	if (len > 0 && line[len - 1] == '\n')
 		len--;
 	data->map_data->map_grid[y] = ft_substr(line, 0, len);

@@ -6,7 +6,7 @@
 /*   By: mdahlstr <mdahlstr@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/30 14:00:32 by mdahlstr          #+#    #+#             */
-/*   Updated: 2025/05/08 15:52:43 by mdahlstr         ###   ########.fr       */
+/*   Updated: 2025/05/08 16:45:13 by mdahlstr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,27 +25,6 @@ static void	free_visited(bool **array, int height)
 		i++;
 	}
 	free(array);
-}
-
-// checks for parts of the map that are not connected to the main part.
-static bool	no_island(t_data *data, bool **visited)
-{
-	int	y;
-	int	x;
-
-	y = 0;
-	while (y < data->map_data->map_h)
-	{
-		x = 0;
-		while (x < data->map_data->map_w)
-		{
-			if (data->map_data->map_grid[y][x] == '0' && visited[y][x] == false)
-				return (false);
-			x++;
-		}
-		y++;
-	}
-	return (true);
 }
 
 // recursive function to check for holes around the map.
@@ -95,8 +74,6 @@ bool	is_map_closed(t_data *data, int start_y, int start_x)
 		|| start_x < 0 || start_x >= data->map_data->map_w)
 		return (false);
 	if (!is_map_closed_rec(data, visited, start_y, start_x))
-		result = false;
-	if (!no_island(data, visited))
 		result = false;
 	free_visited(visited, data->map_data->map_h);
 	return (result);
