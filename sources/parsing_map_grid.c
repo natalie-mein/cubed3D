@@ -6,7 +6,7 @@
 /*   By: mdahlstr <mdahlstr@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/30 14:00:32 by mdahlstr          #+#    #+#             */
-/*   Updated: 2025/05/12 13:52:01 by mdahlstr         ###   ########.fr       */
+/*   Updated: 2025/05/12 15:12:16 by mdahlstr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,7 @@ bool	is_map_closed(t_data *data, int start_y, int start_x)
 	int		y;
 	bool	**visited;
 	bool	result;
+
 	if (start_y < 0 || start_y >= data->map_data->map_h
 		|| start_x < 0 || start_x >= data->map_data->map_w)
 		return (false);
