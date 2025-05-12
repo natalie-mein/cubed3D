@@ -6,7 +6,7 @@
 /*   By: mdahlstr <mdahlstr@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/30 14:00:32 by mdahlstr          #+#    #+#             */
-/*   Updated: 2025/05/08 16:45:13 by mdahlstr         ###   ########.fr       */
+/*   Updated: 2025/05/12 13:52:01 by mdahlstr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,18 +36,17 @@ static bool	is_map_closed_rec(t_data *data, bool **visited, int y, int x)
 		|| x < 0 || x >= data->map_data->map_w)
 		return (false);
 	c = data->map_data->map_grid[y][x];
-	if (c == '1' || c == ' ')
+	if (c == '1')
 		return (true);
+	if (c == ' ' || c == '\0')
+		return (false);
 	if (visited[y][x])
 		return (true);
 	visited[y][x] = true;
-	if (!is_map_closed_rec(data, visited, y + 1, x))
-		return (false);
-	if (!is_map_closed_rec(data, visited, y - 1, x))
-		return (false);
-	if (!is_map_closed_rec(data, visited, y, x + 1))
-		return (false);
-	if (!is_map_closed_rec(data, visited, y, x - 1))
+	if (!is_map_closed_rec(data, visited, y + 1, x)
+		|| !is_map_closed_rec(data, visited, y - 1, x)
+		|| !is_map_closed_rec(data, visited, y, x + 1)
+		|| !is_map_closed_rec(data, visited, y, x - 1))
 		return (false);
 	return (true);
 }
@@ -58,8 +57,9 @@ bool	is_map_closed(t_data *data, int start_y, int start_x)
 	int		y;
 	bool	**visited;
 	bool	result;
-
-	result = true;
+	if (start_y < 0 || start_y >= data->map_data->map_h
+		|| start_x < 0 || start_x >= data->map_data->map_w)
+		return (false);
 	visited = malloc(sizeof(bool *) * data->map_data->map_h);
 	if (!visited)
 		return (false);
@@ -68,13 +68,12 @@ bool	is_map_closed(t_data *data, int start_y, int start_x)
 	{
 		visited[y] = ft_calloc(data->map_data->map_w, sizeof(bool));
 		if (!visited[y])
+		{
+			free_visited(visited, y);
 			return (false);
+		}
 	}
-	if (start_y < 0 || start_y >= data->map_data->map_h
-		|| start_x < 0 || start_x >= data->map_data->map_w)
-		return (false);
-	if (!is_map_closed_rec(data, visited, start_y, start_x))
-		result = false;
+	result = is_map_closed_rec(data, visited, start_y, start_x);
 	free_visited(visited, data->map_data->map_h);
 	return (result);
 }
